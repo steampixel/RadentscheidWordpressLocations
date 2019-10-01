@@ -1,4 +1,4 @@
-# Radentscheid Orte 🚲🗺📌
+# Radentscheid Locations 🚲🗺📌
 Dieses Wordpress-Plugin soll den Radaktivismus in Deutschland unterstützen und Radentscheide voran bringen. Ziel ist es, interessierten Bürgern ein Bild der Radinfrastruktur vor Ort zu vermitteln. Über ein Melden-Formular können Aktivist*innen ganz einfach problematische Stellen mit Koordinaten und Bild melden. Administrator*innen können diese dann auf einer interaktiven Karte für alle Menschen sichtbar freischalten. Zudem ist es möglich Unterschriftenstellen auf einer separaten Karte darzustellen.
 
 Benutzt dieses PLugin einfach als Grundlage, verändert es und passt es euren Bedürfnissen an.
