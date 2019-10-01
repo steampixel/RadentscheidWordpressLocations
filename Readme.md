@@ -6,14 +6,14 @@ Benutzt dieses PLugin einfach als Grundlage, verändert es und passt es euren Be
 In Aktion kannst du das Plugin hier sehen: https://www.radentscheid-wuerzburg.de/problemstellen/
 
 ## Features
-* Jeder kann Problemstellen melden
+* Jede*r kann Problemstellen melden
 * Problemstellen werden auf einer Karte dargestellt
-* Jeder kann Unterschriftenstellen registrieren
+* Jede*r kann Unterschriftenstellen registrieren
 * Unterschriftenstellen auf einer Karte darstellen
 * Alle eingereichten Orte müssen vorher im Backend freigeschaltet werden, bevor diese auf der Karte sichtbar sind
 * Die Bilder liegen nicht im Medienmanager von Wordpress um diesen nicht zu "verstopfen".
 * Bilder können im Backend einfach gedreht werden, da meldende Menschen oft nicht auf die Orientierung achten.
-* Die Bilder können im Backend leicht getauscht werden.
+* Die Bilder können im Backend leicht getauscht werden, um beispielsweise Nummernschilder oder Gesichter schnell verdecken zu können.
 * Im Backend gibt es einen neuen Menupunkt "Locations"
 
 ## Installation
@@ -45,6 +45,8 @@ Parameter:
 * lng: Start-Longitude des Kartenfeldes zum Beispiel "9.94"
 * zoom: Start-Zoom des Kartenfeldes zum Beispiel "13"
 
+Bitte denke daran, dass derzeit immer nur ein Shortcode pro Seite eingebunden werden kann. Es ist noch nicht möglich den selben Shortcode auf einer Seite mehrfach zu benutzen.
+
 ### Interaktive Karte einbinden
 Mit diesem Shortcode erstellst du eine interaktive Karte:
 ```
@@ -53,7 +55,7 @@ Mit diesem Shortcode erstellst du eine interaktive Karte:
 Auf dieser interaktiven Karte kannst du dich über die Situation der Radinfrastruktur in Würzburg informieren. Wir haben zahlreiche Problemstellen dokumentiert. Wenn du selbst problematische Orte melden möchtest, kannst du das <a href="https://verkehrswende-wuerzburg.de/radentscheid/mitmachen/problemstellen-melden/">auf dieser Seite</a> tun.
 [/steampixel-marker-map]
 ```
-Der Inhalt dieses SHortcodes wird, wenn vorhanden in einem Begrüßungspopup angezeigt.
+Der Inhalt dieses Shortcodes wird, wenn vorhanden in einem Begrüßungspopup angezeigt.
 
 Parameter:
 * lat: Start-Latitude zum Beispiel "49.78"
@@ -62,6 +64,8 @@ Parameter:
 * type: "problem" oder "sign"
 * button-label: Die Aufschrift des Buttons, der über der Karte schwebt
 * button-link: Die Link-URL des Buttons, der über der Karte schwebt
+
+Bitte denke daran, dass derzeit immer nur ein Shortcode pro Seite eingebunden werden kann. Es ist noch nicht möglich den selben Shortcode auf einer Seite mehrfach zu benutzen.
 
 ## Informationen für Entwickler&#42;innen
 Dieses Plugin entstand in einer Nacht- und Nebelaktion und wurde zwischen Tür und Angel weiterentwickelt. Dementsprechend sehen auch einige Stellen im Code aus. Bitte schreckt nicht davor zurück Dinge zu korrigieren, Verbesserungen einzubauen und Pull-Requests zu senden. Es gibt bisher noch keine wirkliche Dokumentation. Daher hier erstmal ein paar grobe Zeilen:
