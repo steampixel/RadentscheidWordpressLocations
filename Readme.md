@@ -32,13 +32,18 @@ Mit diesem Shortcode bindest du das Melden-Formular ein:
 Parameter:
 * selected-type: "problem" oder "sign" Definiert, ob eine Problemstelle oder eine Unterschriftenstelle gemeldet werden soll
 * require-address: "true" oder "false" Ist die Angabe einer Adresse erforderlich?
+* show-description: "true" oder "false" Ist das Beschreibungsfeld sichtbar?
 * show-opening-hours: "true" oder "false" Öffnungszeiten-Feld anzeigen?
 * require-image: "true" oder "false" Ist das Bild ein Pflichtfeld?
 * name-label: Das Label des Namensfeldes
 * name-placeholder: Der Placeholder des Namensfeldes
+* file-label: Das Label für das Bild
 * file-placeholder: Der Placeholder für das Bild
 * submit-value: Der Wert des Absenden-Buttons
 * require-personal-data: "true" oder "false" Ist die Angabe von persönlichen Informationen Pflicht?
+* lat: Start-Latitude des Kartenfeldes zum Beispiel "49.78"
+* lng: Start-Longitude des Kartenfeldes zum Beispiel "9.94"
+* zoom: Start-Zoom des Kartenfeldes zum Beispiel "13"
 
 ### Interaktive Karte einbinden
 Mit diesem Shortcode erstellst du eine interaktive Karte:
@@ -51,6 +56,9 @@ Auf dieser interaktiven Karte kannst du dich über die Situation der Radinfrastr
 Der Inhalt dieses SHortcodes wird, wenn vorhanden in einem Begrüßungspopup angezeigt.
 
 Parameter:
+* lat: Start-Latitude zum Beispiel "49.78"
+* lng: Start-Longitude zum Beispiel "9.94"
+* zoom: Start-Zoom zum Beispiel "13"
 * type: "problem" oder "sign"
 * button-label: Die Aufschrift des Buttons, der über der Karte schwebt
 * button-link: Die Link-URL des Buttons, der über der Karte schwebt
