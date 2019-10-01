@@ -68,7 +68,7 @@ Dieses Plugin entstand in einer Nacht- und Nebelaktion und wurde zwischen Tür u
 
 Um die Entwicklung des Plugins einer breiten Masse zu öffnen wurden die Standards sehr weit runtergeschraubt. Es gibt keine Abhängigkeiten bis auf Leaflet. Alles andere ist selbst gebaut. Kein jQuery, kein ES6, kein Bootstrap, keine fancy Frameworks.
 
-Je nach dem, wie es erforderlich ist, kann ich die Doku hier noch etwas "aufhübschen".
+Je nach dem, wie es erforderlich ist, kann ich die Doku hier noch etwas "aufhübschen". Fragen bitte einfach in die Issues.
 
 ## Grenzen des Plugins
 Momentan werden immer alle relevanten Punkte für eine Karte direkt geladen. Das macht natürlich nur dann Sinn, solange die Meldungen in einem gewissen Rahmen bleiben. Diese Karte unterstützt zur Zeit nicht das dynamische Laden von Koordinaten, je nach gezeigtem Kartenausschnitt. Für wirklich große Städte mit tausenden von Koordinaten ist das Plugin in der jetzigen Form daher noch ungeeignet und müsste etwas umgebaut werden.
