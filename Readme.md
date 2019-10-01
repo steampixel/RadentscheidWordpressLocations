@@ -17,6 +17,8 @@ In Aktion kannst du das Plugin hier sehen: https://www.radentscheid-wuerzburg.de
 * Im Backend gibt es einen neuen Menupunkt "Locations"
 
 ## Installation
+Das Plugin befindet sich (noch) nicht in der offiziellen Plugin-Datenabnk von Wordpress. Bis dahin muss es manuell installiert werden.
+
 * Lade dieses Plugin herunter und kopiere es nach ```wp-content/plugins/sp-locations```
 * Aktiviere das Plugin im Backend deiner Wordpress-Installation
 * Binde die Shortcodes für Formulare und Karten auf deinen Seiten ein
