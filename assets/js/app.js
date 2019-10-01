@@ -1,6 +1,6 @@
 
 /*
-  requestJSON
+  Request Json from Server
 */
 function requestJSON(url, data, success, error, method){
 
@@ -35,7 +35,7 @@ function requestJSON(url, data, success, error, method){
 }
 
 /*
-  getGeolocation
+  Get location from browser
 */
 function getGeolocation (success, error) {
   if (navigator.geolocation) {
@@ -164,5 +164,19 @@ function toggleDisplay(selector){
     $elements.forEach( function ($element) {
       $element.classList.toggle('sp-hidden');
     })
+  }
+}
+
+/*
+  Validate form element
+*/
+function validateFormElement(id){
+  var $formElement = document.getElementById(id);
+  var $hintElement = document.getElementById(id+'_hint');
+  $formElement.classList.remove('sp-is-invalid');
+  $hintElement.classList.add('sp-hidden');
+  if(!$formElement.checkValidity()){
+    $formElement.classList.add('sp-is-invalid');
+    $hintElement.classList.remove('sp-hidden');
   }
 }

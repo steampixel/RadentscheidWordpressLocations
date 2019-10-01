@@ -5,7 +5,7 @@
     <div class="sp-column is-full">
 
       <div class="sp-has-margin-bottom-2">
-        <label for="title"><?=$name_label ?>*</label>
+        <label for="title"><?=$name_label ?></label>
         <input required minlength="1" maxlength="200" placeholder="<?=$name_placeholder ?>" class="sp-form-input" type="text" name="title" id="title">
         <div class="sp-hint sp-has-text-red sp-hidden" id="title_hint">Bitte gib einen Titel ein!</div>
       </div>
@@ -17,9 +17,9 @@
         $memory_limit = (int)(ini_get('memory_limit'));
         $upload_mb = min($max_upload, $max_post, $memory_limit);
         ?>
-        <label for="upload_file"><?=$file_label ?>* (max <?=$upload_mb ?>MB)</label>
+        <label for="upload_file"><?=$file_label ?> (<?=($require_image?'':'optional ') ?>max <?=$upload_mb ?>MB)</label>
         <label class="file-upload" id="file" ondragover="dragOver(event)" ondragleave="dragLeave(event)" ondrop="dropFiles(event);">
-          <input <?=($require_image?'required':'') ?> id="upload_file" class="file-upload-input" type="file" accept="image/*" onChange="handleFileUpload()">
+          <input id="upload_file" class="file-upload-input" type="file" accept="image/*" onChange="handleFileUpload()">
           <span id="upload_file_label" class="file-upload-label">
             <?=$file_placeholder ?>
           </span>
@@ -42,13 +42,18 @@
       </div>
 
       <div class="sp-column is-full is-half-tablet sp-has-padding-left-1-tablet">
+
+        <?PHP
+        // This is a simple honeypot
+        // The form will only simulate the success if this field gets filled
+        ?>
         <label class="sp-fg56bn67">
           Email
           <input placeholder="Deine Mail" class="sp-form-input" type="email" name="mail" id="mail">
         </label>
 
         <div class="sp-has-margin-bottom-2">
-          <label for="street">Straße und Hausnummer<?=($require_address?'*':'') ?></label>
+          <label for="street">Straße und Hausnummer<?=($require_address?'':' (optional)') ?></label>
           <div class="sp-columns">
             <div class="sp-column is-two-third">
               <input <?=($require_address?'required':'') ?> minlength="1" maxlength="200" placeholder="Straße" class="sp-form-input" type="text" name="street" id="street" onblur="updateCoordinatesFromAddress()">
@@ -62,7 +67,7 @@
         </div>
 
         <div class="sp-has-margin-bottom-2">
-          <label for="postcode">Postleitzahl und Ort<?=($require_address?'*':'') ?></label>
+          <label for="postcode">Postleitzahl und Ort<?=($require_address?'':' (optional)') ?></label>
           <div class="sp-columns">
             <div class="sp-column is-one-third">
               <input <?=($require_address?'required':'') ?> placeholder="Postleitzahl" class="sp-form-input" type="number" name="postcode" id="postcode" onblur="updateCoordinatesFromAddress()">
@@ -85,7 +90,7 @@
       <div class="sp-column is-full">
 
         <div class="sp-has-margin-bottom-2">
-          <label for="opening_hours">Öffnungszeiten*</label>
+          <label for="opening_hours">Öffnungszeiten</label>
           <textarea required minlength="1" maxlength="200" placeholder="Montag - Freitag 9.00-16.00" class="sp-form-input" name="opening_hours" id="opening_hours"></textarea>
           <div class="sp-hint sp-has-text-red sp-hidden" id="opening_hours_hint">Bitte gib an, wann man vorbeischauen kann!</div>
         </div>
@@ -103,13 +108,13 @@
       <div class="sp-column is-full">
 
         <div class="sp-has-margin-bottom-2">
-          <label for="description">Beschreibe kurz, was dich stört</label>
+          <label for="description">Beschreibe kurz, was dich stört (optional)</label>
           <textarea minlength="1" maxlength="2000" placeholder="Mich stört, dass..." class="sp-form-input" name="description" id="description"></textarea>
           <div class="sp-hint sp-has-text-red sp-hidden" id="description_hint">Bitte beschreibe kurz, was dich stört!</div>
         </div>
 
         <div class="sp-has-margin-bottom-2">
-          <label for="solution">Wie könnte das Problem gelöst werden?</label>
+          <label for="solution">Wie könnte das Problem gelöst werden? (optional)</label>
           <textarea minlength="1" maxlength="2000" placeholder="Ich denke, dass..." class="sp-form-input" name="solution" id="solution"></textarea>
           <div class="sp-hint sp-has-text-red sp-hidden" id="solution_hint">Beschreibe, wie man das Problem lösen könnte!</div>
         </div>
@@ -126,7 +131,7 @@
       </div>
 
       <div class="sp-has-margin-bottom-2">
-        <label for="contact_person">Name<?=($require_personal_data?'*':'') ?></label>
+        <label for="contact_person">Name<?=($require_personal_data?'':' (optional)') ?></label>
         <input <?=($require_personal_data?'required':'') ?> minlength="1" maxlength="200" placeholder="Name und Nachname" class="sp-form-input" type="text" name="contact_person" id="contact_person">
         <div class="sp-hint sp-has-text-red sp-hidden" id="contact_person_hint">Bitte gib den Namen einer Kontaktperson an!</div>
       </div>
@@ -138,7 +143,7 @@
 
     <div class="sp-column is-full is-half-tablet sp-has-padding-right-1-tablet">
       <div class="sp-has-margin-bottom-2">
-        <label for="email">Email<?=($require_personal_data?'*':'') ?></label>
+        <label for="email">Email<?=($require_personal_data?'':' (optional)') ?></label>
         <input <?=($require_personal_data?'required':'') ?> minlength="1" maxlength="200" placeholder="Email" class="sp-form-input" type="email" name="email" id="email">
         <div class="sp-hint sp-has-text-red sp-hidden" id="email_hint">Bitte gib eine Mail für die Kontaktperson an!</div>
       </div>
@@ -146,7 +151,7 @@
 
     <div class="sp-column is-full is-half-tablet sp-has-padding-left-1-tablet">
       <div class="sp-has-margin-bottom-2">
-        <label for="telephone">Telefonnummer<?=($require_personal_data?'*':'') ?></label>
+        <label for="telephone">Telefonnummer<?=($require_personal_data?'':' (optional)') ?></label>
         <input <?=($require_personal_data?'required':'') ?> minlength="1" maxlength="200" placeholder="Telefonnummer" class="sp-form-input" type="text" name="telephone" id="telephone">
         <div class="sp-hint sp-has-text-red sp-hidden" id="telephone_hint">Bitte gib an, wie wir die Kontaktperson telefonisch erreichen können!</div>
       </div>
@@ -218,7 +223,12 @@ function updateAddressFromCoordinates () {
             document.getElementById('place').value = data.address.village;
           }
           else{
-            document.getElementById('place').value = '';
+            if(data.address.town != undefined) {
+              document.getElementById('place').value = data.address.town;
+            }
+            else{
+              document.getElementById('place').value = '';
+            }
           }
         }
 
@@ -340,84 +350,26 @@ function submitForm () {
 
     validationError = true;
 
-    document.getElementById('title').classList.remove('sp-is-invalid');
-    document.getElementById('title_hint').classList.add('sp-hidden');
-    if(!document.getElementById('title').checkValidity()){
-      document.getElementById('title').classList.add('sp-is-invalid');
-      document.getElementById('title_hint').classList.remove('sp-hidden');
-    }
-
-    document.getElementById('place').classList.remove('sp-is-invalid');
-    document.getElementById('place_hint').classList.add('sp-hidden');
-    if(!document.getElementById('place').checkValidity()){
-      document.getElementById('place').classList.add('sp-is-invalid');
-      document.getElementById('place_hint').classList.remove('sp-hidden');
-    }
-
-    document.getElementById('house_number').classList.remove('sp-is-invalid');
-    document.getElementById('house_number_hint').classList.add('sp-hidden');
-    if(!document.getElementById('house_number').checkValidity()){
-      document.getElementById('house_number').classList.add('sp-is-invalid');
-      document.getElementById('house_number_hint').classList.remove('sp-hidden');
-    }
-
-    document.getElementById('street').classList.remove('sp-is-invalid');
-    document.getElementById('street_hint').classList.add('sp-hidden');
-    if(!document.getElementById('street').checkValidity()){
-      document.getElementById('street').classList.add('sp-is-invalid');
-      document.getElementById('street_hint').classList.remove('sp-hidden');
-    }
-
-    document.getElementById('postcode').classList.remove('sp-is-invalid');
-    document.getElementById('postcode_hint').classList.add('sp-hidden');
-    if(!document.getElementById('postcode').checkValidity()){
-      document.getElementById('postcode').classList.add('sp-is-invalid');
-      document.getElementById('postcode_hint').classList.remove('sp-hidden');
-    }
+    validateFormElement('title');
+    validateFormElement('place');
+    validateFormElement('house_number');
+    validateFormElement('street');
+    validateFormElement('postcode');
+    validateFormElement('privacy');
 
     <?PHP if($show_opening_hours){ ?>
-      document.getElementById('opening_hours').classList.remove('sp-is-invalid');
-      document.getElementById('opening_hours_hint').classList.add('sp-hidden');
-      if(!document.getElementById('opening_hours').checkValidity()){
-        document.getElementById('opening_hours').classList.add('sp-is-invalid');
-        document.getElementById('opening_hours_hint').classList.remove('sp-hidden');
-      }
+      validateFormElement('opening_hours');
     <?PHP } ?>
 
     <?PHP if($require_personal_data) { ?>
-      document.getElementById('contact_person').classList.remove('sp-is-invalid');
-      document.getElementById('contact_person_hint').classList.add('sp-hidden');
-      if(!document.getElementById('contact_person').checkValidity()){
-        document.getElementById('contact_person').classList.add('sp-is-invalid');
-        document.getElementById('contact_person_hint').classList.remove('sp-hidden');
-      }
-
-      document.getElementById('telephone').classList.remove('sp-is-invalid');
-      document.getElementById('telephone_hint').classList.add('sp-hidden');
-      if(!document.getElementById('telephone').checkValidity()){
-        document.getElementById('telephone').classList.add('sp-is-invalid');
-        document.getElementById('telephone_hint').classList.remove('sp-hidden');
-      }
-
-      document.getElementById('email').classList.remove('sp-is-invalid');
-      document.getElementById('email_hint').classList.add('sp-hidden');
-      if(!document.getElementById('email').checkValidity()){
-        document.getElementById('email').classList.add('sp-is-invalid');
-        document.getElementById('email_hint').classList.remove('sp-hidden');
-      }
-
+      validateFormElement('contact_person');
+      validateFormElement('telephone');
+      validateFormElement('email');
     <?PHP } ?>
-
-    document.getElementById('privacy').classList.remove('sp-is-invalid');
-    document.getElementById('privacy_hint').classList.add('sp-hidden');
-    if(!document.getElementById('privacy').checkValidity()){
-      document.getElementById('privacy').classList.add('sp-is-invalid');
-      document.getElementById('privacy_hint').classList.remove('sp-hidden');
-    }
-
 
   }
 
+  // Check image
   <?PHP if($require_image) { ?>
     document.getElementById('file_hint').classList.add('sp-hidden');
     document.getElementById('file').classList.remove('sp-is-invalid');
