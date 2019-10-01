@@ -1,5 +1,5 @@
 # Radentscheid Locations 🚲🗺📌
-Dieses Wordpress-Plugin soll den Radaktivismus in Deutschland unterstützen und Radentscheide voran bringen. Ziel ist es, interessierten Bürgern ein Bild der Radinfrastruktur vor Ort zu vermitteln. Über ein Melden-Formular können Aktivist*innen ganz einfach problematische Stellen mit Koordinaten und Bild melden. Administrator*innen können diese dann auf einer interaktiven Karte für alle Menschen sichtbar freischalten. Zudem ist es möglich Unterschriftenstellen auf einer separaten Karte darzustellen.
+Dieses Wordpress-Plugin soll den Radaktivismus in Deutschland unterstützen und Radentscheide voran bringen. Ziel ist es, interessierten Bürgern ein Bild der Radinfrastruktur vor Ort zu vermitteln. Über ein Melden-Formular können Aktivist&#42;innen ganz einfach problematische Stellen mit Koordinaten und Bild melden. Administrator&#42;innen können diese dann auf einer interaktiven Karte für alle Menschen sichtbar freischalten. Zudem ist es möglich Unterschriftenstellen auf einer separaten Karte darzustellen.
 
 Benutzt dieses PLugin einfach als Grundlage, verändert es und passt es euren Bedürfnissen an.
 
@@ -55,7 +55,7 @@ Parameter:
 * button-label: Die Aufschrift des Buttons, der über der Karte schwebt
 * button-link: Die Link-URL des Buttons, der über der Karte schwebt
 
-## Informationen für Entwickler*innen
+## Informationen für Entwickler&#42;innen
 Dieses Plugin entstand in einer Nacht- und Nebelaktion und wurde zwischen Tür und Angel weiterentwickelt. Dementsprechend sehen auch einige Stellen im Code aus. Bitte schreckt nicht davor zurück Dinge zu korrigieren, Verbesserungen einzubauen und Pull-Requests zu senden. Es gibt bisher noch keine wirklcihe Dokumentation. Daher hier erstmal ein paar grobe Zeilen:
 
 Um die Entwicklung des Plugins einer breiten Masse zu öffnen wurden die Standards sehr weit runtergeschraubt. Es gibt keine Abhängigkeiten bis auf Leaflet. Alles andere ist selbst gebaut. Kein jQuery, kein ES6, kein Bootstrap, keine fancy Frameworks.
@@ -63,7 +63,7 @@ Um die Entwicklung des Plugins einer breiten Masse zu öffnen wurden die Standar
 Je nach dem, wie es erforderlich ist, kann ich die Doku hier noch etwas "aufhübschen".
 
 ## Grenzen des Plugins
-Momentan werden immer alle relevanten Punkte für eine Karte direkt geladen. Das macht natürlich nur dann Sinn, solange die Meldungen in einem gewissen Rahmen bleiben. Diese Karte unterstützt zur Zeit nicht das dynamische Laden von Koordinaten, je nach gezeigtem Kartenausschnitt. Für wirklich große Städte mit tausenden von Koordinaten ist das Plugin in der jetzigen Form daher noch ungeeignet.
+Momentan werden immer alle relevanten Punkte für eine Karte direkt geladen. Das macht natürlich nur dann Sinn, solange die Meldungen in einem gewissen Rahmen bleiben. Diese Karte unterstützt zur Zeit nicht das dynamische Laden von Koordinaten, je nach gezeigtem Kartenausschnitt. Für wirklich große Städte mit tausenden von Koordinaten ist das Plugin in der jetzigen Form daher noch ungeeignet und müsste etwas umgebaut werden.
 
 ## License
 This project is licensed under the MIT License. See LICENSE for further information.
