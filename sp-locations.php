@@ -202,7 +202,11 @@ add_action( 'manage_location_posts_custom_column', function ( $column, $post_id 
   // Image column
   if ( 'image' === $column ) {
     // Append random value to uncache the image in case of rotation
-    echo '<img style="max-width:100%;height:auto;" src="'.spGetUploadUrl().'/sp-locations/thumbs/300/'.get_post_meta( $post_id, 'image', true ).'?rand='.rand( 0 , 9999 ).'">';
+    if(get_post_meta( $post_id, 'image', true )){
+      echo '<img style="max-width:100%;height:auto;" src="'.spGetUploadUrl().'/sp-locations/thumbs/300/'.get_post_meta( $post_id, 'image', true ).'?rand='.rand( 0 , 9999 ).'">';
+    } else {
+      echo 'Kein Bild';
+    }
   }
   if ( 'type' === $column ) {
     $type = get_post_meta($post_id, 'type', true);
@@ -407,7 +411,8 @@ add_action( 'add_meta_boxes', function () {
       global $post;
       echo Sp\View::render('backend_image', [
         // Add a random number to the url to uncache the image in case of rotaion
-        'src' => spGetUploadUrl().'/sp-locations/'.get_post_meta( $post->ID, 'image', true ).'?rand='.rand( 0 , 9999 )
+        'src' => spGetUploadUrl().'/sp-locations/'.get_post_meta( $post->ID, 'image', true ).'?rand='.rand( 0 , 9999 ),
+        'hasImage' => (get_post_meta( $post->ID, 'image', true ) ? true:false)
       ]);
     },
 		'location',

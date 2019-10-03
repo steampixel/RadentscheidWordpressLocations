@@ -1,5 +1,15 @@
 
-<img src="<?=$src ?>" style="width:100%;">
+<?PHP
+if($hasImage){
+  ?>
+  <img src="<?=$src ?>" style="width:100%;">
+  <?PHP
+}else{
+  ?>
+  <div>Kein Bild</div>
+  <?PHP
+}
+?>
 
 <label>
   Bild austauschen:

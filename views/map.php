@@ -61,7 +61,14 @@ foreach($locations as $location){
         <?PHP /*<img style="height:40px;width:auto;margin-right:16px;" src="<?=plugins_url().'/sp-locations/assets/img/marker.svg' ?>"> */ ?>
         <?=$location->post_title ?>
       </h2>
-      <img class="sp-has-margin-bottom-2" data-src='<?=spGetUploadUrl().'/sp-locations/thumbs/600/'.get_post_meta( $location->ID, 'image', true ) ?>'>
+
+      <?PHP
+        if(get_post_meta( $location->ID, 'image', true )){
+          ?>
+          <img class="sp-has-margin-bottom-2" data-src='<?=spGetUploadUrl().'/sp-locations/thumbs/600/'.get_post_meta( $location->ID, 'image', true ) ?>'>
+          <?PHP
+        }
+      ?>
 
       <?PHP
 
