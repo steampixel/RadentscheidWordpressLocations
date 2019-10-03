@@ -1,22 +1,24 @@
-# Radentscheid Locations 🚲🗺📌
-Dieses Wordpress-Plugin soll den Radaktivismus in Deutschland unterstützen und Radentscheide voran bringen. Ziel ist es, interessierten Bürgern ein Bild der Radinfrastruktur vor Ort zu vermitteln. Über ein Melden-Formular können Aktivist*innen ganz einfach problematische Stellen mit Koordinaten und Bild melden. Administrator*innen können diese dann auf einer interaktiven Karte für alle Menschen sichtbar freischalten. Zudem ist es möglich Unterschriftenstellen auf einer separaten Karte darzustellen.
+# Radentscheid Wordpress Locations 🚲🗺📌
+Dieses Wordpress-Plugin soll den Radaktivismus in Deutschland unterstützen und Radentscheide voran bringen. Ziel ist es, interessierten Bürger*innen ein Bild der Radinfrastruktur vor Ort zu vermitteln. Über ein Melden-Formular können Aktivist&#42;innen ganz einfach problematische Stellen mit Koordinaten und Bild melden. Administrator&#42;innen können diese dann auf einer interaktiven Karte für alle Menschen sichtbar freischalten. Zudem ist es möglich Unterschriftenstellen auf einer separaten Karte darzustellen.
 
-Benutzt dieses PLugin einfach als Grundlage, verändert es und passt es euren Bedürfnissen an.
+Benutzt dieses Plugin einfach als Grundlage, verändert es und passt es euren Bedürfnissen an.
 
 In Aktion kannst du das Plugin hier sehen: https://www.radentscheid-wuerzburg.de/problemstellen/
 
 ## Features
-* Jeder kann Problemstellen melden
+* Jede*r kann Problemstellen melden
 * Problemstellen werden auf einer Karte dargestellt
-* Jeder kann Unterschriftenstellen registrieren
+* Jede*r kann Unterschriftenstellen registrieren
 * Unterschriftenstellen auf einer Karte darstellen
 * Alle eingereichten Orte müssen vorher im Backend freigeschaltet werden, bevor diese auf der Karte sichtbar sind
 * Die Bilder liegen nicht im Medienmanager von Wordpress um diesen nicht zu "verstopfen".
 * Bilder können im Backend einfach gedreht werden, da meldende Menschen oft nicht auf die Orientierung achten.
-* Die Bilder können im Backend leicht getauscht werden.
+* Die Bilder können im Backend leicht getauscht werden, um beispielsweise Nummernschilder oder Gesichter schnell verdecken zu können.
 * Im Backend gibt es einen neuen Menupunkt "Locations"
 
 ## Installation
+Das Plugin befindet sich (noch) nicht in der offiziellen Plugin-Datenbank von Wordpress. Bis dahin muss es manuell installiert werden.
+
 * Lade dieses Plugin herunter und kopiere es nach ```wp-content/plugins/sp-locations```
 * Aktiviere das Plugin im Backend deiner Wordpress-Installation
 * Binde die Shortcodes für Formulare und Karten auf deinen Seiten ein
@@ -32,13 +34,20 @@ Mit diesem Shortcode bindest du das Melden-Formular ein:
 Parameter:
 * selected-type: "problem" oder "sign" Definiert, ob eine Problemstelle oder eine Unterschriftenstelle gemeldet werden soll
 * require-address: "true" oder "false" Ist die Angabe einer Adresse erforderlich?
+* show-description: "true" oder "false" Ist das Beschreibungsfeld sichtbar?
 * show-opening-hours: "true" oder "false" Öffnungszeiten-Feld anzeigen?
 * require-image: "true" oder "false" Ist das Bild ein Pflichtfeld?
 * name-label: Das Label des Namensfeldes
 * name-placeholder: Der Placeholder des Namensfeldes
+* file-label: Das Label für das Bild
 * file-placeholder: Der Placeholder für das Bild
 * submit-value: Der Wert des Absenden-Buttons
 * require-personal-data: "true" oder "false" Ist die Angabe von persönlichen Informationen Pflicht?
+* lat: Start-Latitude des Kartenfeldes zum Beispiel "49.78"
+* lng: Start-Longitude des Kartenfeldes zum Beispiel "9.94"
+* zoom: Start-Zoom des Kartenfeldes zum Beispiel "13"
+
+Bitte denke daran, dass derzeit immer nur ein Shortcode pro Seite eingebunden werden kann. Es ist noch nicht möglich den selben Shortcode auf einer Seite mehrfach zu benutzen.
 
 ### Interaktive Karte einbinden
 Mit diesem Shortcode erstellst du eine interaktive Karte:
@@ -48,22 +57,27 @@ Mit diesem Shortcode erstellst du eine interaktive Karte:
 Auf dieser interaktiven Karte kannst du dich über die Situation der Radinfrastruktur in Würzburg informieren. Wir haben zahlreiche Problemstellen dokumentiert. Wenn du selbst problematische Orte melden möchtest, kannst du das <a href="https://verkehrswende-wuerzburg.de/radentscheid/mitmachen/problemstellen-melden/">auf dieser Seite</a> tun.
 [/steampixel-marker-map]
 ```
-Der Inhalt dieses SHortcodes wird, wenn vorhanden in einem Begrüßungspopup angezeigt.
+Der Inhalt dieses Shortcodes wird, wenn vorhanden in einem Begrüßungspopup angezeigt.
 
 Parameter:
+* lat: Start-Latitude zum Beispiel "49.78"
+* lng: Start-Longitude zum Beispiel "9.94"
+* zoom: Start-Zoom zum Beispiel "13"
 * type: "problem" oder "sign"
 * button-label: Die Aufschrift des Buttons, der über der Karte schwebt
 * button-link: Die Link-URL des Buttons, der über der Karte schwebt
 
-## Informationen für Entwickler*innen
-Dieses Plugin entstand in einer Nacht- und Nebelaktion und wurde zwischen Tür und Angel weiterentwickelt. Dementsprechend sehen auch einige Stellen im Code aus. Bitte schreckt nicht davor zurück Dinge zu korrigieren, Verbesserungen einzubauen und Pull-Requests zu senden. Es gibt bisher noch keine wirklcihe Dokumentation. Daher hier erstmal ein paar grobe Zeilen:
+Bitte denke daran, dass derzeit immer nur ein Shortcode pro Seite eingebunden werden kann. Es ist noch nicht möglich den selben Shortcode auf einer Seite mehrfach zu benutzen.
+
+## Informationen für Entwickler&#42;innen
+Dieses Plugin entstand in einer Nacht- und Nebelaktion und wurde zwischen Tür und Angel weiterentwickelt. Dementsprechend sehen auch einige Stellen im Code aus. Bitte schreckt nicht davor zurück Dinge zu korrigieren, Verbesserungen einzubauen und Pull-Requests zu senden. Es gibt bisher noch keine wirkliche Dokumentation. Daher hier erstmal ein paar grobe Zeilen:
 
 Um die Entwicklung des Plugins einer breiten Masse zu öffnen wurden die Standards sehr weit runtergeschraubt. Es gibt keine Abhängigkeiten bis auf Leaflet. Alles andere ist selbst gebaut. Kein jQuery, kein ES6, kein Bootstrap, keine fancy Frameworks.
 
-Je nach dem, wie es erforderlich ist, kann ich die Doku hier noch etwas "aufhübschen".
+Je nach dem, wie es erforderlich ist, kann ich die Doku hier noch etwas "aufhübschen". Fragen bitte einfach in die Issues.
 
 ## Grenzen des Plugins
-Momentan werden immer alle relevanten Punkte für eine Karte direkt geladen. Das macht natürlich nur dann Sinn, solange die Meldungen in einem gewissen Rahmen bleiben. Diese Karte unterstützt zur Zeit nicht das dynamische Laden von Koordinaten, je nach gezeigtem Kartenausschnitt. Für wirklich große Städte mit tausenden von Koordinaten ist das Plugin in der jetzigen Form daher noch ungeeignet.
+Momentan werden immer alle relevanten Punkte für eine Karte direkt geladen. Das macht natürlich nur dann Sinn, solange die Meldungen in einem gewissen Rahmen bleiben. Diese Karte unterstützt zur Zeit nicht das dynamische Laden von Koordinaten, je nach gezeigtem Kartenausschnitt. Für wirklich große Städte mit tausenden von Koordinaten ist das Plugin in der jetzigen Form daher noch ungeeignet und müsste etwas umgebaut werden.
 
 ## License
 This project is licensed under the MIT License. See LICENSE for further information.
