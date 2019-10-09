@@ -43,7 +43,8 @@ function sp_location_add () {
   // Check nonce
   if ( ! wp_verify_nonce( $_POST['_wpnonce'], 'sp_location_add' ) ) {
     echo json_encode([
-      "status"  =>  "error"
+      "status"  =>  "error",
+      "message" => "Der Token für dieses Formular ist abgelaufen. Bitte lade die Seite neu."
     ]);
     wp_die();
   }
