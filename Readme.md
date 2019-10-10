@@ -60,6 +60,7 @@ Auf dieser interaktiven Karte kannst du dich über die Situation der Radinfrastr
 Der Inhalt dieses Shortcodes wird, wenn vorhanden in einem Begrüßungspopup angezeigt.
 
 Parameter:
+* height: Höhe der Karte in px, %, vh, etc. zum Beispiel "400px"
 * lat: Start-Latitude zum Beispiel "49.78"
 * lng: Start-Longitude zum Beispiel "9.94"
 * zoom: Start-Zoom zum Beispiel "13"
