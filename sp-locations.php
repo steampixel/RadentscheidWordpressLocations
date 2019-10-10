@@ -2,7 +2,7 @@
 /**
 * Plugin Name: Radentscheid Locations
 * Description: Wuhu! Dieses Plugin hilft uns verschiedene Locations für den Radentscheid zu tracken.
-* Version: 1.0.2
+* Version: 1.0.3
 * Author: Christoph Stitz
 * Author URI: https://steampixel.de
 **/
@@ -202,7 +202,7 @@ add_action( 'manage_location_posts_custom_column', function ( $column, $post_id 
   // Image column
   if ( 'image' === $column ) {
     // Append random value to uncache the image in case of rotation
-    if(get_post_meta( $post_id, 'image', true )){
+    if(!empty(get_post_meta( $post_id, 'image', true ))){
       echo '<img style="max-width:100%;height:auto;" src="'.spGetUploadUrl().'/sp-locations/thumbs/300/'.get_post_meta( $post_id, 'image', true ).'?rand='.rand( 0 , 9999 ).'">';
     } else {
       echo 'Kein Bild';
@@ -412,7 +412,7 @@ add_action( 'add_meta_boxes', function () {
       echo Sp\View::render('backend_image', [
         // Add a random number to the url to uncache the image in case of rotaion
         'src' => spGetUploadUrl().'/sp-locations/'.get_post_meta( $post->ID, 'image', true ).'?rand='.rand( 0 , 9999 ),
-        'hasImage' => (get_post_meta( $post->ID, 'image', true ) ? true:false)
+        'hasImage' => !empty(get_post_meta( $post->ID, 'image', true ))
       ]);
     },
 		'location',
