@@ -2,7 +2,7 @@
 /**
 * Plugin Name: Radentscheid Locations
 * Description: Wuhu! Dieses Plugin hilft uns verschiedene Locations für den Radentscheid zu tracken.
-* Version: 1.0.4
+* Version: 1.1.0
 * Author: Christoph Stitz
 * Author URI: https://steampixel.de
 **/
@@ -67,10 +67,46 @@ add_shortcode( 'steampixel-marker-map', function($atts = [], $content = null, $t
     'lng' => $attributes['lng'],
     'zoom' => $attributes['zoom'],
     'height' => $attributes['height'],
-    'content' => $content,
+    'content' => do_shortcode($content),
     'button_label' => $attributes['button-label'],
     'button_link' => $attributes['button-link'],
   ]);
+
+} );
+
+/*
+  Shortcode for counting the markers
+*/
+add_shortcode( 'steampixel-marker-count', function($atts = [], $content = null, $tag = '') {
+
+  // normalize attribute keys, lowercase
+  $atts = array_change_key_case((array)$atts, CASE_LOWER);
+
+  // override default attributes with user attributes
+  $attributes = shortcode_atts([
+    'type' => null
+  ], $atts, $tag);
+
+  if($attributes['type']){
+    $locations = get_posts( [
+      'numberposts' => -1,
+      'post_type' => 'location',
+      'meta_query' => array(
+         array(
+             'key' => 'type',
+             'value' => $attributes['type'],
+             'compare' => '='
+         )
+     )
+    ] );
+  }else{
+    $locations = get_posts( [
+      'numberposts' => -1,
+      'post_type' => 'location'
+    ] );
+  }
+
+  return count($locations);
 
 } );
 

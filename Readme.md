@@ -70,6 +70,14 @@ Parameter:
 
 Bitte denke daran, dass derzeit immer nur ein Shortcode pro Seite eingebunden werden kann. Es ist noch nicht möglich den selben Shortcode auf einer Seite mehrfach zu benutzen.
 
+### Anzahl der aktiven Meldungen ausgeben
+Mit diesem Shortcode kannst du die Anzahl der aktiven Meldungen ausgeben. So kannst du die Zahl direkt in einem Text verwenden.
+```
+[steampixel-marker-count type="problem"]
+```
+Parameter:
+* type: "problem" oder "sign"
+
 ## Informationen für Entwickler&#42;innen
 Dieses Plugin entstand in einer Nacht- und Nebelaktion und wurde zwischen Tür und Angel weiterentwickelt. Dementsprechend sehen auch einige Stellen im Code aus. Bitte schreckt nicht davor zurück Dinge zu korrigieren, Verbesserungen einzubauen und Pull-Requests zu senden. Es gibt bisher noch keine wirkliche Dokumentation. Daher hier erstmal ein paar grobe Zeilen:
 
