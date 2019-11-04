@@ -86,14 +86,7 @@ add_action( 'manage_location_posts_custom_column', function ( $column, $post_id 
   }
   if ( 'type' === $column ) {
     $type = get_post_meta($post_id, 'type', true);
-    switch($type){
-      case 'sign':
-        echo 'Unterschreiben';
-        break;
-      case 'problem':
-        echo 'Problemstelle';
-        break;
-    }
+    echo $type;
   }
   if ( 'place' === $column ) {
     echo get_post_meta($post_id, 'place', true);
@@ -147,21 +140,24 @@ add_action( 'pre_get_posts', function ( $query ) {
 add_action( 'restrict_manage_posts', function () {
   global $typenow;
   global $wp_query;
-    if ( $typenow == 'location' ) { // Your custom post type
-      $values = array(
-        'sign' => 'Unterschreiben',
-        'problem' => 'Problemstelle'
-      ); // Options for the filter select field
-      $current_value = '';
-      if( isset( $_GET['type'] ) ) {
-        $current_value = $_GET['type']; // Check if option has been selected
-      } ?>
-      <select name="type" id="type">
-        <option value="all" <?php selected( 'all', $current_value ); ?>>Alle Orte</option>
-        <?php foreach( $values as $key=>$value ) { ?>
-          <option value="<?php echo esc_attr( $key ); ?>" <?php selected( $key, $current_value ); ?>><?php echo esc_attr( $value ); ?></option>
-        <?php } ?>
-      </select>
+
+  $markers = get_posts( [
+    'numberposts' => -1,
+    'post_type' => 'marker'
+  ] );
+
+  if ( $typenow == 'location' ) { // Your custom post type
+
+    $current_value = '';
+    if( isset( $_GET['type'] ) ) {
+      $current_value = $_GET['type']; // Check if option has been selected
+    } ?>
+    <select name="type" id="type">
+      <option value="all" <?php selected( 'all', $current_value ); ?>>Alle Orte</option>
+      <?php foreach($markers as $marker){ ?>
+        <option value="<?=get_post_meta( $marker->ID, 'key', true ) ?>" <?=($type==get_post_meta( $marker->ID, 'key', true )? 'selected=':'') ?>><?=$marker->post_title ?></option>
+      <?php } ?>
+    </select>
   <?php }
 } );
 
