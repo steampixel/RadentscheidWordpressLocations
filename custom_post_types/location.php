@@ -223,7 +223,7 @@ add_action( 'save_post_location', function ( $post_id, $post, $update ) {
         Sp\Thumbnail::create($uploads_dir.'/'.$post_id.'.'.$ext, $uploads_dir.'/thumbs/600/'.$post_id.'.'.$ext, 600);
         Sp\Thumbnail::create($uploads_dir.'/'.$post_id.'.'.$ext, $uploads_dir.'/thumbs/300/'.$post_id.'.'.$ext, 300);
         // Create meta
-        add_post_meta($post_id, 'image', $post_id.'.'.$ext);
+        update_post_meta($post_id, 'image', $post_id.'.'.$ext);
       }
     }
 
