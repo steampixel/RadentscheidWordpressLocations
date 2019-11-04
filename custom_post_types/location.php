@@ -233,6 +233,23 @@ add_action( 'save_post_location', function ( $post_id, $post, $update ) {
 }, 10, 3 );
 
 /*
+  Save options on save
+*/
+add_action( 'save_post_location', function ( $post_id, $post, $update ) {
+  if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
+    return;
+  }
+
+  if(isset($_POST['sp_change_type'])) {
+
+    update_post_meta($post_id, 'type', $_POST['sp_change_type']);
+
+  }
+
+   // return $mydata;
+}, 10, 3 );
+
+/*
   Disable single view for custom post type in the frontend
 */
 add_action( 'template_redirect', function () {
@@ -281,6 +298,20 @@ add_action( 'add_meta_boxes', function () {
       echo Sp\View::render('backend_map', [
         'lat' => get_post_meta( $post->ID, 'lat', true ),
         'lng' => get_post_meta( $post->ID, 'lng', true )
+      ]);
+    },
+		'location',
+		'normal',
+		'high'
+	);
+
+  add_meta_box(
+		'sp_marker',
+		'Options',
+		function () {
+      global $post;
+      echo Sp\View::render('backend_location_options', [
+        'type' => get_post_meta( $post->ID, 'type', true )
       ]);
     },
 		'location',
