@@ -64,7 +64,7 @@ Parameter:
 * lat: Start-Latitude zum Beispiel "49.78"
 * lng: Start-Longitude zum Beispiel "9.94"
 * zoom: Start-Zoom zum Beispiel "13"
-* type: "problem" oder "sign"
+* type: Die Schlüssel der Marker, die auf der Karte dargestellt werden sollen. Beispiel: "problem", "sign" oder multiple Marker mit Komma getrennt: "sign, problem"
 * button-label: Die Aufschrift des Buttons, der über der Karte schwebt
 * button-link: Die Link-URL des Buttons, der über der Karte schwebt
 

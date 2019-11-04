@@ -24,17 +24,31 @@ add_shortcode( 'steampixel-marker-map', function($atts = [], $content = null, $t
   wp_enqueue_style( 'steampixel-map-marker', plugins_url( 'assets/css/app.css', dirname(__FILE__ )) );
 
   if($attributes['type']){
-    $locations = get_posts( [
-      'numberposts' => -1,
-      'post_type' => 'location',
-      'meta_query' => array(
-         array(
+
+    $types = explode(',', $attributes['type']);
+
+    $locations = [];
+
+    foreach($types as $type){
+      $_locations = get_posts( [
+        'numberposts' => -1,
+        'post_type' => 'location',
+        'meta_query' => array(
+           array(
              'key' => 'type',
-             'value' => $attributes['type'],
+             'value' => trim($type),
              'compare' => '='
-         )
-     )
-    ] );
+           )
+       )
+      ] );
+
+      if($_locations) {
+        $locations = array_merge($locations, $_locations);
+      }
+
+    }
+
+
   }else{
     $locations = get_posts( [
       'numberposts' => -1,

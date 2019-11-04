@@ -124,21 +124,38 @@ foreach($locations as $location){
 
       $type = get_post_meta($location->ID, 'type', true);
 
-      ?>
+      $markers = get_posts( [
+        'post_type' => 'marker',
+        'meta_query' => array(
+           array(
+             'key' => 'key',
+             'value' => trim($type),
+             'compare' => '='
+           )
+       )
+      ] );
 
-      var icon = L.divIcon({
-         className: 'map-marker',
-         iconSize:null,
-         html:'<div class="sp-map-marker marker-<?=$type ?>" title="<?=$location->post_title ?>"><img style="height:100%;width:auto;" src="<?=plugins_url().'/sp-locations/assets/img/marker.svg' ?>"></div>'
-       });
+      if($markers){
 
-      L.marker([<?=get_post_meta($location->ID, 'lat', true) ?>, <?=get_post_meta($location->ID, 'lng', true) ?>], {icon: icon}).on('click', function(e) {
-        // console.log(e);
-        openModal(<?=$location->ID ?>);
+        $marker = $markers[0];
+        $marker_icon = get_post_meta($marker->ID, 'icon', true);
+        ?>
 
-      }).addTo(mymap);
+        var icon = L.divIcon({
+           className: 'map-marker',
+           iconSize:null,
+           html:'<div class="sp-map-marker marker-<?=$type ?>" title="<?=$location->post_title ?>"><img style="height:100%;width:auto;" src="<?=$marker_icon ?>"></div>'
+         });
 
-      <?PHP
+        L.marker([<?=get_post_meta($location->ID, 'lat', true) ?>, <?=get_post_meta($location->ID, 'lng', true) ?>], {icon: icon}).on('click', function(e) {
+          // console.log(e);
+          openModal(<?=$location->ID ?>);
+
+        }).addTo(mymap);
+
+        <?PHP
+      }
+
 
     }
 
