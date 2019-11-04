@@ -250,6 +250,23 @@ add_action( 'save_post_location', function ( $post_id, $post, $update ) {
 }, 10, 3 );
 
 /*
+  Remove activists data on save
+*/
+add_action( 'save_post_location', function ( $post_id, $post, $update ) {
+  if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
+    return;
+  }
+
+  if(isset($_POST['sp_remove_activist_data'])) {
+    delete_post_meta($post_id, 'contact_person');
+    delete_post_meta($post_id, 'email');
+    delete_post_meta($post_id, 'telephone');
+  }
+
+   // return $mydata;
+}, 10, 3 );
+
+/*
   Disable single view for custom post type in the frontend
 */
 add_action( 'template_redirect', function () {
@@ -297,7 +314,31 @@ add_action( 'add_meta_boxes', function () {
       wp_enqueue_script( 'leaflet', plugins_url( 'assets/libs/leaflet/leaflet.js', dirname(__FILE__ )) );
       echo Sp\View::render('backend_map', [
         'lat' => get_post_meta( $post->ID, 'lat', true ),
-        'lng' => get_post_meta( $post->ID, 'lng', true )
+        'lng' => get_post_meta( $post->ID, 'lng', true ),
+        'description' => get_post_meta( $post->ID, 'description', true ),
+        'solution' => get_post_meta( $post->ID, 'solution', true ),
+        'opening_hours' => get_post_meta( $post->ID, 'opening_hours', true ),
+        'street' => get_post_meta( $post->ID, 'street', true ),
+        'house_number' => get_post_meta( $post->ID, 'house_number', true ),
+        'suburb' => get_post_meta( $post->ID, 'suburb', true ),
+        'postcode' => get_post_meta( $post->ID, 'postcode', true ),
+        'place' => get_post_meta( $post->ID, 'place', true )
+      ]);
+    },
+		'location',
+		'normal',
+		'high'
+	);
+
+  add_meta_box(
+		'sp_marker_activist',
+		'Activist',
+		function () {
+      global $post;
+      echo Sp\View::render('backened_location_activist', [
+        'contact_person' => get_post_meta( $post->ID, 'contact_person', true ),
+        'email' => get_post_meta( $post->ID, 'email', true ),
+        'telephone' => get_post_meta( $post->ID, 'telephone', true )
       ]);
     },
 		'location',

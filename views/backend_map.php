@@ -1,5 +1,42 @@
 <div id="mymap" class="steampixel-marker-map" style="height:300px;"></div>
 
+<?PHP
+if($description) {
+  ?>
+  <p>
+    <strong>Description:</strong> <?=$description ?>
+  </p>
+  <?PHP
+}
+?>
+
+<?PHP
+if($solution) {
+  ?>
+  <p>
+    <strong>Solution:</strong> <?=$solution ?>
+  </p>
+  <?PHP
+}
+?>
+
+<?PHP
+if($opening_hours) {
+  ?>
+  <p>
+    <strong>Opening hours:</strong> <?=$opening_hours ?>
+  </p>
+  <?PHP
+}
+?>
+
+<p>
+  <strong>Adresse</strong><br>
+  <?=$street ?> <?=$house_number ?><br>
+  <?=$postcode ?> <?=$place ?><br>
+  <?=$suburb ?>
+</p>
+
 <script>
 
   document.addEventListener("DOMContentLoaded", function(event) {
