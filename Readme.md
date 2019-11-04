@@ -8,13 +8,13 @@ In Aktion kannst du das Plugin hier sehen: https://www.radentscheid-wuerzburg.de
 ## Features
 * Jede*r kann Problemstellen melden
 * Problemstellen werden auf einer Karte dargestellt
-* Jede*r kann Unterschriftenstellen registrieren
-* Unterschriftenstellen auf einer Karte darstellen
+* Marker können frei angelegt werden (Problemstellen, Unterschriftenstellen, Behobene Problemstellen, etc...)
 * Alle eingereichten Orte müssen vorher im Backend freigeschaltet werden, bevor diese auf der Karte sichtbar sind
 * Die Bilder liegen nicht im Medienmanager von Wordpress um diesen nicht zu "verstopfen".
 * Bilder können im Backend einfach gedreht werden, da meldende Menschen oft nicht auf die Orientierung achten.
 * Die Bilder können im Backend leicht getauscht werden, um beispielsweise Nummernschilder oder Gesichter schnell verdecken zu können.
 * Im Backend gibt es einen neuen Menupunkt "Locations"
+* Einfache Löschfunktion für Aktivistendaten
 
 ## Installation
 Das Plugin befindet sich (noch) nicht in der offiziellen Plugin-Datenbank von Wordpress. Bis dahin muss es manuell installiert werden.
