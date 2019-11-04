@@ -32,7 +32,7 @@ Mit diesem Shortcode bindest du das Melden-Formular ein:
 ```
 
 Parameter:
-* selected-type: "problem" oder "sign" Definiert, ob eine Problemstelle oder eine Unterschriftenstelle gemeldet werden soll
+* selected-type: Der Schlüssel des Markers, der gemeldet werden soll. Also zum Beispiel "problem", "sign", "solved" oder eigene Marker.
 * require-address: "true" oder "false" Ist die Angabe einer Adresse erforderlich?
 * show-description: "true" oder "false" Ist das Beschreibungsfeld sichtbar?
 * show-opening-hours: "true" oder "false" Öffnungszeiten-Feld anzeigen?
@@ -76,7 +76,7 @@ Mit diesem Shortcode kannst du die Anzahl der aktiven Meldungen ausgeben. So kan
 [steampixel-marker-count type="problem"]
 ```
 Parameter:
-* type: "problem" oder "sign"
+* type: Die Schlüssel der Marker, die gezählt werden sollen. Beispiel: "problem", "sign" oder multiple Marker mit Komma getrennt: "sign, problem"
 
 ## Informationen für Entwickler&#42;innen
 Dieses Plugin entstand in einer Nacht- und Nebelaktion und wurde zwischen Tür und Angel weiterentwickelt. Dementsprechend sehen auch einige Stellen im Code aus. Bitte schreckt nicht davor zurück Dinge zu korrigieren, Verbesserungen einzubauen und Pull-Requests zu senden. Es gibt bisher noch keine wirkliche Dokumentation. Daher hier erstmal ein paar grobe Zeilen:
