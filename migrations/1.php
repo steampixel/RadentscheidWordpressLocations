@@ -22,5 +22,5 @@ $post_id = wp_insert_post( [
   'post_type' => 'marker',
   'post_status' => 'publish'
 ]);
-add_post_meta($post_id, 'icon', '/wp-content/plugins/sp-locations/assets/img/marker.svg');
+add_post_meta($post_id, 'icon', '/wp-content/plugins/sp-locations/assets/img/marker_positiv.svg');
 add_post_meta($post_id, 'key', 'solved');
