@@ -15,6 +15,7 @@ In Aktion kannst du das Plugin hier sehen: https://www.radentscheid-wuerzburg.de
 * Die Bilder können im Backend leicht getauscht werden, um beispielsweise Nummernschilder oder Gesichter schnell verdecken zu können.
 * Im Backend gibt es einen neuen Menupunkt "Locations"
 * Einfache Löschfunktion für Aktivistendaten
+* Marker werden auf der Karte geklustert.
 
 ## Installation
 Das Plugin befindet sich (noch) nicht in der offiziellen Plugin-Datenbank von Wordpress. Bis dahin muss es manuell installiert werden.
