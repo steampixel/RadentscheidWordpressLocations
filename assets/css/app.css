@@ -186,6 +186,18 @@
   transform: translateX(-50%) translateY(-100%);
 }
 
+.sp-map-marker-cluster {
+  position:relative;
+}
+
+.sp-map-marker-info {
+  position:absolute;
+  display: flex;
+  justify-content: center;
+  top:9px;
+  font-size: 16px;
+}
+
 .sp-map-button {
   position: absolute;
   bottom: 16px;
@@ -200,6 +212,14 @@
   z-index: 999;
   background-color:#fff;
   padding:16px;
+}
+
+/*
+  Leaflet
+*/
+.leaflet-div-icon {
+  background: transparent;
+  border:0;
 }
 
 /*

@@ -20,6 +20,9 @@ add_shortcode( 'steampixel-marker-map', function($atts = [], $content = null, $t
 
   wp_enqueue_style( 'leaflet', plugins_url( 'assets/libs/leaflet/leaflet.css', dirname(__FILE__ )) );
   wp_enqueue_script( 'leaflet', plugins_url( 'assets/libs/leaflet/leaflet.js', dirname(__FILE__ )) );
+  wp_enqueue_style( 'leaflet.markercluster', plugins_url( 'assets/libs/leaflet.markercluster-1.4.1/MarkerCluster.css', dirname(__FILE__ )) );
+  wp_enqueue_style( 'leaflet.markercluster.default', plugins_url( 'assets/libs/leaflet.markercluster-1.4.1/MarkerCluster.Default.css', dirname(__FILE__ )) );
+  wp_enqueue_script( 'leaflet.markercluster', plugins_url( 'assets/libs/leaflet.markercluster-1.4.1/leaflet.markercluster.js', dirname(__FILE__ )) );
   wp_enqueue_script( 'steampixel-map-marker', plugins_url( 'assets/js/app.js', dirname(__FILE__ )) );
   wp_enqueue_style( 'steampixel-map-marker', plugins_url( 'assets/css/app.css', dirname(__FILE__ )) );
 

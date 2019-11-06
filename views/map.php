@@ -118,6 +118,16 @@ foreach($locations as $location){
 
     L.tileLayer('https://{s}.tile.osm.org/{z}/{x}/{y}.png', {}).addTo(mymap);
 
+    var markers = L.markerClusterGroup({
+    	spiderfyOnMaxZoom: true,
+    	showCoverageOnHover: false,
+    	zoomToBoundsOnClick: true,
+      removeOutsideVisibleBounds: true,
+      iconCreateFunction: function(cluster) {
+    		return L.divIcon({ html: '<div class="sp-map-marker sp-map-marker-cluster"><img style="height:100%;width:auto;" src="<?=plugin_dir_url(__DIR__).'assets/img/marker_cluster.svg'; ?>"><div class="sp-map-marker-info">' + cluster.getChildCount() + '</div></div>' });
+    	}
+    });
+
     <?PHP
 
     foreach($locations as $location){
@@ -144,14 +154,18 @@ foreach($locations as $location){
         var icon = L.divIcon({
            className: 'map-marker',
            iconSize:null,
-           html:'<div class="sp-map-marker marker-<?=$type ?>" title="<?=$location->post_title ?>"><img style="height:100%;width:auto;" src="<?=$marker_icon ?>"></div>'
+           html:'<div class="sp-map-marker sp-map-marker-<?=$type ?>" title="<?=$location->post_title ?>"><img style="height:100%;width:auto;" src="<?=$marker_icon ?>"></div>'
          });
 
-        L.marker([<?=get_post_meta($location->ID, 'lat', true) ?>, <?=get_post_meta($location->ID, 'lng', true) ?>], {icon: icon}).on('click', function(e) {
+        var marker = L.marker([<?=get_post_meta($location->ID, 'lat', true) ?>, <?=get_post_meta($location->ID, 'lng', true) ?>], {icon: icon}).on('click', function(e) {
           // console.log(e);
           openModal(<?=$location->ID ?>);
 
-        }).addTo(mymap);
+        });
+
+        markers.addLayer(marker);
+
+
 
         <?PHP
       }
@@ -160,6 +174,8 @@ foreach($locations as $location){
     }
 
     ?>
+
+    mymap.addLayer(markers);
 
   });
 
