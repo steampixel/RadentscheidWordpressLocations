@@ -88,5 +88,8 @@ Je nach dem, wie es erforderlich ist, kann ich die Doku hier noch etwas "aufhüb
 ## Grenzen des Plugins
 Momentan werden immer alle relevanten Punkte für eine Karte direkt geladen. Das macht natürlich nur dann Sinn, solange die Meldungen in einem gewissen Rahmen bleiben. Diese Karte unterstützt zur Zeit nicht das dynamische Laden von Koordinaten, je nach gezeigtem Kartenausschnitt. Für wirklich große Städte mit tausenden von Koordinaten ist das Plugin in der jetzigen Form daher noch ungeeignet und müsste etwas umgebaut werden.
 
+## Credits
+Map marker icons: https://github.com/mrmichalzik
+
 ## License
 This project is licensed under the MIT License. See LICENSE for further information.
