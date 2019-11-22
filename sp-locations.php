@@ -60,3 +60,14 @@ function spGetUploadUrl() {
     return WP_CONTENT_URL.'/uploads';
   }
 }
+
+/*
+  Helper function to trim a text
+*/
+function spTrimText($s, $max_length = 340) {
+  if (strlen($s) > $max_length) {
+      $offset = ($max_length - 3) - strlen($s);
+      $s = substr($s, 0, strrpos($s, ' ', $offset)) . '...';
+  }
+  return $s;
+}

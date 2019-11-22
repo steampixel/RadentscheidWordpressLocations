@@ -36,7 +36,7 @@ if($content){
       <?=$content ?>
 
       <br><br>
-      <input type="button" value="Alles klar" onclick="closeModal('modal')">
+      <input type="button" value="Alles klar" onclick="closeModalViaHash('modal')">
 
     </div>
   </div>
@@ -45,8 +45,6 @@ if($content){
 ?>
 
 <?PHP
-
-// http://xahlee.info/comp/unicode_office_icons.html
 
 foreach($locations as $location){
 
@@ -76,14 +74,16 @@ foreach($locations as $location){
       $solution = nl2br(get_post_meta($location->ID, 'solution', true));
       $opening_hours = nl2br(get_post_meta($location->ID, 'opening_hours', true));
 
-      if($description){
+      if($description) {
         ?>
         <p>
-          <strong>Beschreibung:</strong> <?=$description ?>
+          <strong>Beschreibung:</strong> <?=spTrimText($description) ?>
         </p>
         <?PHP
       }
       ?>
+
+      <a href="<?=get_permalink($location->ID) ?>">Details anzeigen</a>
 
       <?PHP
       if($opening_hours){
@@ -102,7 +102,7 @@ foreach($locations as $location){
         <!-- <?=get_post_meta($location->ID, 'suburb', true) ?> -->
       </p>
 
-      <input type="button" value="schließen" onclick="closeModal('<?=$location->ID; ?>')">
+      <input type="button" value="schließen" onclick="closeModalViaHash('<?=$location->ID; ?>')">
 
     </div>
   </div>
@@ -114,7 +114,53 @@ foreach($locations as $location){
 
   document.addEventListener("DOMContentLoaded", function(event) {
 
-    var mymap = L.map('mymap').setView([<?=$lat ?>, <?=$lng ?>], <?=$zoom ?>);
+    var mymap = L.map('mymap');
+
+    var initialLat = <?=$lat ?>;
+    var initialLng = <?=$lng ?>;
+    var initialZoom = <?=$zoom ?>;
+
+    // Check the hash manager for initial position data
+    if(myHashmanager.has('lat')){
+      initialLat = myHashmanager.get('lat');
+    }
+    if(myHashmanager.has('lng')){
+      initialLng = myHashmanager.get('lng');
+    }
+    if(myHashmanager.has('zoom')){
+      initialZoom = myHashmanager.get('zoom');
+    }
+
+    mymap.setView([initialLat, initialLng], initialZoom);
+
+    // Register hash change events
+    myHashmanager.on('lat', function(lat){
+      var center = mymap.getCenter();
+      center.lat = lat;
+      var zoom = mymap.getZoom();
+      mymap.setView(center, zoom);
+    });
+    myHashmanager.on('lng', function(lng){
+      var center = mymap.getCenter();
+      center.lng = lng;
+      var zoom = mymap.getZoom();
+      mymap.setView(center, zoom);
+    });
+    myHashmanager.on('zoom', function(zoom){
+      var center = mymap.getCenter();
+      mymap.setView(center, zoom);
+    });
+
+    // Store the current zoom and position in the hash
+    mymap.on('zoomend', function() {
+      myHashmanager.set('zoom', mymap.getZoom());
+    });
+
+    mymap.on('moveend', function(e) {
+      var center = mymap.getCenter();
+      myHashmanager.set('lat', center.lat);
+      myHashmanager.set('lng', center.lng);
+    });
 
     L.tileLayer('https://{s}.tile.osm.org/{z}/{x}/{y}.png', {}).addTo(mymap);
 
@@ -159,7 +205,7 @@ foreach($locations as $location){
 
         var marker = L.marker([<?=get_post_meta($location->ID, 'lat', true) ?>, <?=get_post_meta($location->ID, 'lng', true) ?>], {icon: icon}).on('click', function(e) {
           // console.log(e);
-          openModal(<?=$location->ID ?>);
+          openModalViaHash(<?=$location->ID ?>);
 
         });
 

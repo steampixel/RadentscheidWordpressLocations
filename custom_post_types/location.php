@@ -265,13 +265,38 @@ add_action( 'save_post_location', function ( $post_id, $post, $update ) {
 /*
   Disable single view for custom post type in the frontend
 */
-add_action( 'template_redirect', function () {
-  $queried_post_type = get_query_var('post_type');
-  if ( is_single() && 'location' ==  $queried_post_type ) {
-    wp_redirect( home_url(), 301 );
-    exit;
-  }
+// add_action( 'template_redirect', function () {
+//   $queried_post_type = get_query_var('post_type');
+//   if ( is_single() && 'location' ==  $queried_post_type ) {
+//     wp_redirect( home_url(), 301 );
+//     exit;
+//   }
+// } );
+
+/*
+  Add a filter that modifyes the content of our location post type.
+  Because a single view of this post type should not implemented using a custom file in the theme.
+  The custom post type single view should work out of the box.
+*/
+add_filter( 'the_content', function ( $content ) {
+
+    // Check if we're inside the main loop in a single post page.
+    // Also check the post type
+    if ( is_single() && in_the_loop() && is_main_query() && get_post_type()=='location') {
+      wp_enqueue_style( 'leaflet', plugins_url( 'assets/libs/leaflet/leaflet.css', dirname(__FILE__ )) );
+      wp_enqueue_script( 'leaflet', plugins_url( 'assets/libs/leaflet/leaflet.js', dirname(__FILE__ )) );
+      wp_enqueue_script( 'steampixel-map-marker', plugins_url( 'assets/js/app.js', dirname(__FILE__ )) );
+      wp_enqueue_style( 'steampixel-map-marker', plugins_url( 'assets/css/app.css', dirname(__FILE__ )) );
+      return $content . Sp\View::render('location_details', [
+        'post_id' => get_the_ID(),
+        'post_title' => get_the_title()
+      ]);
+    }
+
+    return $content;
 } );
+
+
 
 /*
   Exclude One Content Type From Yoast SEO Sitemap
