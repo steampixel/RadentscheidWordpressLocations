@@ -77,9 +77,14 @@ add_filter( 'manage_location_posts_columns', function ( $columns ) {
 add_action( 'manage_location_posts_custom_column', function ( $column, $post_id ) {
   // Image column
   if ( 'image' === $column ) {
+
+    $images = get_post_meta( $post_id, 'images', true );
+
+
+
     // Append random value to uncache the image in case of rotation
-    if(!empty(get_post_meta( $post_id, 'image', true ))){
-      echo '<img style="max-width:100%;height:auto;" src="'.spGetUploadUrl().'/sp-locations/thumbs/300/'.get_post_meta( $post_id, 'image', true ).'?rand='.rand( 0 , 9999 ).'">';
+    if($images) {
+      echo '<img style="max-width:100%;height:auto;" src="'.spGetUploadUrl().'/sp-locations/'.$post_id.'/300/'.$images[0]['src'].'?rand='.rand( 0 , 9999 ).'">';
     } else {
       echo 'Kein Bild';
     }
@@ -176,6 +181,43 @@ add_filter( 'parse_query', function ( $query ) {
 });
 
 /*
+  Add image remove function on save
+*/
+add_action( 'save_post_location', function ( $post_id, $post, $update ) {
+  if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
+    return;
+  }
+
+  // For each image in this post
+  $images = get_post_meta( $post_id, 'images', true );
+  if($images) {
+
+    $save_images = $images;
+
+    foreach($images as $key => $image) {
+
+      if(isset($_POST['sp_edit_image_remove_'.$key])) {
+
+        // Remove from array
+        unset($save_images[$key]);
+
+        // Unlink from filesystem
+        $uploads_dir = trailingslashit( wp_upload_dir()['basedir'] ) . 'sp-locations';
+        unlink($uploads_dir.'/'.$post_id.'/'.$image['src']);
+        unlink($uploads_dir.'/'.$post_id.'/300/'.$image['src']);
+        unlink($uploads_dir.'/'.$post_id.'/600/'.$image['src']);
+
+      }
+
+    }
+
+    update_post_meta($post_id, 'images', $save_images);
+
+  }
+
+}, 10, 3 );
+
+/*
   Add image rotation function on save
 */
 add_action( 'save_post_location', function ( $post_id, $post, $update ) {
@@ -183,49 +225,159 @@ add_action( 'save_post_location', function ( $post_id, $post, $update ) {
     return;
   }
 
-  if(isset($_POST['sp_rotate_image'])){
+  // For each image in this post
+  $images = get_post_meta( $post_id, 'images', true );
+  if($images) {
 
-    $rotation_steps = 1;
-    $uploads_dir = trailingslashit( wp_upload_dir()['basedir'] ) . 'sp-locations';
-    Sp\Thumbnail::rotate($uploads_dir.'/'.get_post_meta( $post_id, 'image', true ), $rotation_steps*-90);
-    Sp\Thumbnail::rotate($uploads_dir.'/thumbs/300/'.get_post_meta( $post_id, 'image', true ), $rotation_steps*-90);
-    Sp\Thumbnail::rotate($uploads_dir.'/thumbs/600/'.get_post_meta( $post_id, 'image', true ), $rotation_steps*-90);
+    foreach($images as $key => $image) {
+
+      if(isset($_POST['sp_edit_image_rotate_'.$key])) {
+
+        $rotation_steps = 1;
+        $uploads_dir = trailingslashit( wp_upload_dir()['basedir'] ) . 'sp-locations';
+        Sp\Thumbnail::rotate($uploads_dir.'/'.$post_id.'/'.$image['src'], $rotation_steps*-90);
+        Sp\Thumbnail::rotate($uploads_dir.'/'.$post_id.'/300/'.$image['src'], $rotation_steps*-90);
+        Sp\Thumbnail::rotate($uploads_dir.'/'.$post_id.'/600/'.$image['src'], $rotation_steps*-90);
+
+      }
+
+    }
 
   }
+
 
 }, 10, 3 );
 
 /*
-  Upload new image on save
+  Upload new images on save
 */
 add_action( 'save_post_location', function ( $post_id, $post, $update ) {
   if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
     return;
   }
 
-  if(isset($_FILES['sp_change_image'])) {
+  if(isset($_FILES['sp_create_image_src'])) {
 
-    if(file_exists($_FILES['sp_change_image']['tmp_name'])){
+    if(file_exists($_FILES['sp_create_image_src']['tmp_name'])){
 
       $uploads_dir = trailingslashit( wp_upload_dir()['basedir'] ) . 'sp-locations';
 
       // Get extension
-      $path_parts = pathinfo($_FILES['sp_change_image']['name']);
+      $path_parts = pathinfo($_FILES['sp_create_image_src']['name']);
       $ext = strtolower($path_parts['extension']);
 
+      // Create file name
+      $name = uniqid().'.'.$ext;
+
+      // Create image dirs
+      wp_mkdir_p( $uploads_dir.'/'.$post_id );
+      wp_mkdir_p( $uploads_dir.'/'.$post_id.'/300' );
+      wp_mkdir_p( $uploads_dir.'/'.$post_id.'/600' );
+
       // Move the file
-      if (move_uploaded_file($_FILES['sp_change_image']['tmp_name'], $uploads_dir.'/'.$post_id.'.'.$ext)) {
+      if (move_uploaded_file($_FILES['sp_create_image_src']['tmp_name'], $uploads_dir.'/'.$post_id.'/'.$name)) {
         // Create thumbs
-        Sp\Thumbnail::create($uploads_dir.'/'.$post_id.'.'.$ext, $uploads_dir.'/thumbs/600/'.$post_id.'.'.$ext, 600);
-        Sp\Thumbnail::create($uploads_dir.'/'.$post_id.'.'.$ext, $uploads_dir.'/thumbs/300/'.$post_id.'.'.$ext, 300);
-        // Create meta
-        update_post_meta($post_id, 'image', $post_id.'.'.$ext);
+        Sp\Thumbnail::create($uploads_dir.'/'.$post_id.'/'.$name, $uploads_dir.'/'.$post_id.'/300/'.$name, 300);
+        Sp\Thumbnail::create($uploads_dir.'/'.$post_id.'/'.$name, $uploads_dir.'/'.$post_id.'/600/'.$name, 600);
+
+        // Create or update images meta
+        $images = get_post_meta( $post_id, 'images', true );
+        if(!$images) {
+          $images = [];
+        }
+
+        array_push($images, [
+          'src' => $name,
+          'description' => $_REQUEST['sp_create_image_description']
+        ]);
+
+        update_post_meta($post_id, 'images', $images);
       }
     }
 
   }
 
-   // return $mydata;
+}, 10, 3 );
+
+/*
+  Replace images on save
+*/
+add_action( 'save_post_location', function ( $post_id, $post, $update ) {
+  if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
+    return;
+  }
+
+  // For each image in this post
+  $images = get_post_meta( $post_id, 'images', true );
+  if($images) {
+    foreach($images as $key => $image) {
+
+      if(isset($_FILES['sp_edit_image_src_'.$key])) {
+
+        if(file_exists($_FILES['sp_edit_image_src_'.$key]['tmp_name'])){
+
+          $uploads_dir = trailingslashit( wp_upload_dir()['basedir'] ) . 'sp-locations';
+
+          // Get extension
+          $path_parts = pathinfo($_FILES['sp_edit_image_src_'.$key]['name']);
+          $ext = strtolower($path_parts['extension']);
+
+          // Create file name
+          $name = uniqid().'.'.$ext;
+
+          // Move the file
+          if (move_uploaded_file($_FILES['sp_edit_image_src_'.$key]['tmp_name'], $uploads_dir.'/'.$post_id.'/'.$name)) {
+
+            // Delete the old images
+            unlink($uploads_dir.'/'.$post_id.'/'.$image['src']);
+            unlink($uploads_dir.'/'.$post_id.'/300/'.$image['src']);
+            unlink($uploads_dir.'/'.$post_id.'/600/'.$image['src']);
+
+            // Create thumbs
+            Sp\Thumbnail::create($uploads_dir.'/'.$post_id.'/'.$name, $uploads_dir.'/'.$post_id.'/300/'.$name, 300);
+            Sp\Thumbnail::create($uploads_dir.'/'.$post_id.'/'.$name, $uploads_dir.'/'.$post_id.'/600/'.$name, 600);
+
+            // Update the image in array
+            $images[$key] = [
+              'src' => $name,
+              'description' => $_REQUEST['sp_create_image_description']
+            ];
+
+            update_post_meta($post_id, 'images', $images);
+
+          }
+        }
+
+      }
+    }
+  }
+
+}, 10, 3 );
+
+/*
+  Replace image descriptions on save
+*/
+add_action( 'save_post_location', function ( $post_id, $post, $update ) {
+  if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
+    return;
+  }
+
+  // For each image in this post
+  $images = get_post_meta( $post_id, 'images', true );
+  if($images) {
+    foreach($images as $key => $image) {
+
+      if(isset($_REQUEST['sp_edit_image_description_'.$key])) {
+
+        // Update the image in array
+        $images[$key]['description'] = $_REQUEST['sp_edit_image_description_'.$key];
+
+        update_post_meta($post_id, 'images', $images);
+
+      }
+    }
+  }
+
 }, 10, 3 );
 
 /*
@@ -301,9 +453,9 @@ add_filter( 'the_content', function ( $content ) {
 /*
   Exclude One Content Type From Yoast SEO Sitemap
 */
-add_filter( 'wpseo_sitemap_exclude_post_type', function ( $value, $post_type ) {
-if ( $post_type == 'location' ) return true;
-}, 10, 2 );
+// add_filter( 'wpseo_sitemap_exclude_post_type', function ( $value, $post_type ) {
+// if ( $post_type == 'location' ) return true;
+// }, 10, 2 );
 
 /*
   Add Backend meta boxes
@@ -311,15 +463,17 @@ if ( $post_type == 'location' ) return true;
 add_action( 'add_meta_boxes', function () {
 
   add_meta_box(
-		'sp_marker_image',
-		'Uploaded Image',
+		'sp_marker_images',
+		'Uploaded Images',
 		function () {
       global $post;
-      echo Sp\View::render('backend_image', [
+      echo Sp\View::render('backend_images', ['post_id'=>$post->ID]);
+      //[
+        // 'imageIds' = get_post_meta( $post->ID, 'image' )
         // Add a random number to the url to uncache the image in case of rotaion
-        'src' => spGetUploadUrl().'/sp-locations/'.get_post_meta( $post->ID, 'image', true ).'?rand='.rand( 0 , 9999 ),
-        'hasImage' => !empty(get_post_meta( $post->ID, 'image', true ))
-      ]);
+        // 'src' => spGetUploadUrl().'/sp-locations/'.get_post_meta( $post->ID, 'image', true ).'?rand='.rand( 0 , 9999 ),
+        // 'hasImage' => !empty(get_post_meta( $post->ID, 'image', true ))
+      //]
     },
 		'location',
 		'normal',

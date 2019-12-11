@@ -72,14 +72,17 @@ function sp_location_add () {
       $path_parts = pathinfo($_FILES['image']['name']);
       $ext = strtolower($path_parts['extension']);
 
+      // Create new image name
+      $name = uniqid().'.'.$ext;
+
       // Create upload dir
       $uploads_dir = trailingslashit( wp_upload_dir()['basedir'] ) . 'sp-locations';
 
       // Crete thumbnail directorys
       wp_mkdir_p( $uploads_dir );
-      wp_mkdir_p( $uploads_dir.'/thumbs' );
-      wp_mkdir_p( $uploads_dir.'/thumbs/600' );
-      wp_mkdir_p( $uploads_dir.'/thumbs/300' );
+      wp_mkdir_p( $uploads_dir.'/'.$post_id );
+      wp_mkdir_p( $uploads_dir.'/'.$post_id.'/300' );
+      wp_mkdir_p( $uploads_dir.'/'.$post_id.'/600' );
 
       // Check file type
       if(file_exists($_FILES['image']['tmp_name'])) {
@@ -89,12 +92,20 @@ function sp_location_add () {
         if(in_array($image_type , array(IMAGETYPE_GIF , IMAGETYPE_JPEG ,IMAGETYPE_PNG , IMAGETYPE_BMP))) {
 
           // Move the file
-          if (move_uploaded_file($_FILES['image']['tmp_name'], $uploads_dir.'/'.$post_id.'.'.$ext)) {
+          if (move_uploaded_file($_FILES['image']['tmp_name'], $uploads_dir.'/'.$post_id.'/'.$name)) {
+
             // Create thumbs
-            Sp\Thumbnail::create($uploads_dir.'/'.$post_id.'.'.$ext, $uploads_dir.'/thumbs/600/'.$post_id.'.'.$ext, 600);
-            Sp\Thumbnail::create($uploads_dir.'/'.$post_id.'.'.$ext, $uploads_dir.'/thumbs/300/'.$post_id.'.'.$ext, 300);
-            // Create meta
-            add_post_meta($post_id, 'image', $post_id.'.'.$ext);
+            Sp\Thumbnail::create($uploads_dir.'/'.$post_id.'/'.$name, $uploads_dir.'/'.$post_id.'/300/'.$name, 300);
+            Sp\Thumbnail::create($uploads_dir.'/'.$post_id.'/'.$name, $uploads_dir.'/'.$post_id.'/600/'.$name, 600);
+
+            // Create image meta
+            add_post_meta($post_id, 'images', [
+              [
+                'src' => $name,
+                'description' => $_POST['description']
+              ]
+            ]);
+
           } else {
             echo json_encode([
               "status"  =>  "error",
@@ -155,9 +166,6 @@ function sp_location_add () {
     }
     if(isset($_POST['telephone'])){
       add_post_meta($post_id, 'telephone', $_POST['telephone']);
-    }
-    if(isset($_POST['description'])){
-      add_post_meta($post_id, 'description', $_POST['description']);
     }
     if(isset($_POST['solution'])){
       add_post_meta($post_id, 'solution', $_POST['solution']);

@@ -1,27 +1,111 @@
 <?PHP
-  if(get_post_meta( $post_id, 'image', true )){
+
+  $type = get_post_meta( $post_id, 'type', true );
+
+  if($type) {
+
+    $type_posts = get_posts( [
+      'numberposts' => -1,
+      'post_type' => 'marker',
+      'meta_query' => array(
+         array(
+           'key' => 'key',
+           'value' => $type,
+           'compare' => '='
+         )
+     )
+    ] );
+
+    if($type_posts) {
+      ?>
+      <?=$type_posts[0]->post_title ?>
+      <?PHP
+    }
+
+  }
+
+?>
+
+<?PHP
+
+  $images = get_post_meta( $post_id, 'images', true );
+
+  if($images) {
+
+    foreach($images as $key => $image) {
+
+      ?>
+
+      <div id="<?=$key; ?>" class="sp-modal">
+
+        <div class="sp-modal-content">
+
+          <div class="sp-modal-close" onclick="closeModal('<?=$key; ?>')">×</div>
+          <img class="sp-has-margin-bottom-2" src='<?=spGetUploadUrl().'/sp-locations/'.$post_id.'/600/'.$image['src'] ?>'>
+
+          <input type="button" value="schließen" onclick="closeModal('<?=$key; ?>')">
+
+        </div>
+      </div>
+
+      <?PHP
+
+    }
+
     ?>
-    <img class="sp-has-margin-bottom-2" src='<?=spGetUploadUrl().'/sp-locations/thumbs/600/'.get_post_meta( $post_id, 'image', true ) ?>'>
-    <?PHP
+
+      <div class="sp-cards">
+        <?php
+
+        foreach($images as $key => $image) {
+
+          ?>
+            <div class="sp-card">
+
+              <div class="sp-card-content">
+
+                <div class="sp-card-image-wrapper" onclick="openModal('<?=$key; ?>')">
+                  <div class="sp-card-image-background" style="background-image:url(<?=spGetUploadUrl().'/sp-locations/'.$post_id.'/600/'.$image['src'] ?>);"></div>
+                  <div class="sp-card-image" style="background-image:url(<?=spGetUploadUrl().'/sp-locations/'.$post_id.'/600/'.$image['src'] ?>);"></div>
+                </div>
+
+                <div class="sp-card-body">
+                  <?PHP
+                  if($image['description']) {
+                    ?>
+                    <?=$image['description'] ?>
+                    <?PHP
+                  }
+                  ?>
+                </div>
+              </div>
+            </div>
+          <?PHP
+        }
+        ?>
+      </div>
+    <?php
+
   }
 ?>
+
+<h2>Standort</h2>
 
 <div id="mymap" class="steampixel-marker-map" style="height:300px;"></div>
 
 <?PHP
 
-$description = nl2br(get_post_meta($post_id, 'description', true));
 $solution = nl2br(get_post_meta($post_id, 'solution', true));
 $opening_hours = nl2br(get_post_meta($post_id, 'opening_hours', true));
 
-if($description){
-  ?>
-  <p>
-    <strong>Beschreibung:</strong> <?=$description ?>
-  </p>
-  <?PHP
-}
 ?>
+
+<p>
+  <strong>Adresse</strong><br>
+  <?=get_post_meta($post_id, 'street', true) ?> <?=get_post_meta($post_id, 'house_number', true) ?><br>
+  <?=get_post_meta($post_id, 'postcode', true) ?> <?=get_post_meta($post_id, 'place', true) ?><br>
+  <!-- <?=get_post_meta($post_id, 'suburb', true) ?> -->
+</p>
 
 <?PHP
 if($opening_hours){
@@ -32,13 +116,6 @@ if($opening_hours){
   <?PHP
 }
 ?>
-
-<p>
-  <strong>Adresse</strong><br>
-  <?=get_post_meta($post_id, 'street', true) ?> <?=get_post_meta($post_id, 'house_number', true) ?><br>
-  <?=get_post_meta($post_id, 'postcode', true) ?> <?=get_post_meta($post_id, 'place', true) ?><br>
-  <!-- <?=get_post_meta($post_id, 'suburb', true) ?> -->
-</p>
 
 <script>
 

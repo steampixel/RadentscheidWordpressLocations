@@ -232,10 +232,22 @@ document.addEventListener('DOMContentLoaded', function () {
     // For each element
     $modals.forEach( function ($modal) {
 
+      // Check if the modal should use the hash manager to save its state
+      var useHashManager = false;
+      if(foundInitialHashModal&&$modal.classList.contains('sp-use-hash')){
+        useHashManager = true;
+      }
+
       // We found an initial active modal inside the dom
       // Add it to the hash if no modal was found inside the hash
-      if(!foundInitialHashModal&&$modal.classList.contains('sp-is-active')){
-        openModalViaHash($modal.id)
+      if(!foundInitialHashModal&&$modal.classList.contains('sp-is-active')) {
+
+        if(useHashManager) {
+          openModalViaHash($modal.id);
+        } else {
+          openModal($modal.id);
+        }
+
       }
 
       // Move the element to the body to avoid zindex problems
@@ -246,7 +258,11 @@ document.addEventListener('DOMContentLoaded', function () {
         $modal.addEventListener('click', function (event) {
 
           if(event.target == event.currentTarget) { // Ignore child clicks
-            closeModalViaHash($modal.id)
+            if(useHashManager) {
+              closeModalViaHash($modal.id);
+            } else {
+              closeModal($modal.id);
+            }
           }
 
         });
@@ -256,7 +272,11 @@ document.addEventListener('DOMContentLoaded', function () {
       var $close = $modal.querySelectorAll(".sp-modal-close")[0];
       (function($close){
         $close.addEventListener('click', function () {
-          closeModalViaHash($modal.id)
+          if(useHashManager) {
+            closeModalViaHash($modal.id);
+          } else {
+            closeModal($modal.id);
+          }
         });
       })($close);
 

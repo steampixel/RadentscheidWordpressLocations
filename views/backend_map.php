@@ -1,16 +1,6 @@
 <div id="mymap" class="steampixel-marker-map" style="height:300px;"></div>
 
 <?PHP
-if($description) {
-  ?>
-  <p>
-    <strong>Description:</strong> <?=$description ?>
-  </p>
-  <?PHP
-}
-?>
-
-<?PHP
 if($solution) {
   ?>
   <p>

@@ -29,7 +29,7 @@
 <?PHP
 if($content){
   ?>
-  <div id="welcome" class="sp-modal sp-is-active">
+  <div id="welcome" class="sp-modal sp-is-active sp-use-hash">
     <div class="sp-modal-content">
       <div class="sp-modal-close">×</div>
 
@@ -51,7 +51,7 @@ foreach($locations as $location){
   $type = get_post_meta($location->ID, 'type', true);
 
   ?>
-  <div id="<?=$location->ID; ?>" class="sp-modal">
+  <div id="<?=$location->ID; ?>" class="sp-modal sp-use-hash">
     <div class="sp-modal-content">
       <div class="sp-modal-close">×</div>
 
@@ -61,44 +61,69 @@ foreach($locations as $location){
       </h2>
 
       <?PHP
-        if(get_post_meta( $location->ID, 'image', true )){
+      $type = get_post_meta( $location->ID, 'type', true );
+
+      if($type) {
+
+        $type_posts = get_posts( [
+          'numberposts' => -1,
+          'post_type' => 'marker',
+          'meta_query' => array(
+             array(
+               'key' => 'key',
+               'value' => $type,
+               'compare' => '='
+             )
+         )
+        ] );
+
+      }
+      ?>
+
+      <?PHP
+        $images = get_post_meta( $location->ID, 'images', true );
+
+        if($images) {
           ?>
-          <img class="sp-has-margin-bottom-2" data-src='<?=spGetUploadUrl().'/sp-locations/thumbs/600/'.get_post_meta( $location->ID, 'image', true ) ?>'>
+          <img class="sp-has-margin-bottom-2" data-src='<?=spGetUploadUrl().'/sp-locations/'.$location->ID.'/600/'.$images[0]['src'] ?>'>
+
+          <p>
+
+            <?PHP
+            if($type_posts) {
+              ?>
+              <strong><?=$type_posts[0]->post_title ?>: </strong>
+              <?PHP
+            }
+
+            if($images[0]['description']) {
+              ?>
+
+              <?=spTrimText($images[0]['description']) ?>
+
+              <?PHP
+            }
+            ?>
+            <a href="<?=get_permalink($location->ID) ?>">Details anzeigen</a>
+          </p>
           <?PHP
+
         }
       ?>
 
       <?PHP
 
-      $description = nl2br(get_post_meta($location->ID, 'description', true));
       $solution = nl2br(get_post_meta($location->ID, 'solution', true));
       $opening_hours = nl2br(get_post_meta($location->ID, 'opening_hours', true));
 
-      if($description) {
-        ?>
-        <p>
-          <strong>Beschreibung:</strong> <?=spTrimText($description) ?>
-        </p>
-        <?PHP
-      }
       ?>
 
-      <a href="<?=get_permalink($location->ID) ?>">Details anzeigen</a>
 
-      <?PHP
-      if($opening_hours){
-        ?>
-        <p>
-          <strong>Öffnungszeiten:</strong> <?=$opening_hours ?>
-        </p>
-        <?PHP
-      }
-      ?>
 
       <p>
-        <strong>Adresse</strong><br>
-        <?=get_post_meta($location->ID, 'street', true) ?> <?=get_post_meta($location->ID, 'house_number', true) ?><br>
-        <?=get_post_meta($location->ID, 'postcode', true) ?> <?=get_post_meta($location->ID, 'place', true) ?><br>
+        <strong>Adresse:</strong>
+        <?=get_post_meta($location->ID, 'street', true) ?> <?=get_post_meta($location->ID, 'house_number', true) ?>,
+        <?=get_post_meta($location->ID, 'postcode', true) ?> <?=get_post_meta($location->ID, 'place', true) ?>
         <!-- <?=get_post_meta($location->ID, 'suburb', true) ?> -->
       </p>
 

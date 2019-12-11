@@ -267,7 +267,86 @@ body.sp-modal-is-active {
   right:16px;
   cursor:pointer;
   font-size: 4rem;
+  z-index: 100;
 }
 .sp-modal-close:hover {
   color:#000;
 }
+
+/*
+  images
+*/
+
+img.is-clickable {
+  cursor: pointer;
+}
+
+/*
+  Cards
+*/
+
+.sp-cards {
+  display: grid;
+  grid-gap:16px;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  /* margin:-16px !important; */
+}
+
+.sp-card {
+  display: flex;
+}
+
+.sp-card-content {
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+}
+
+/* .sp-card.is-full {
+  width:100%;
+} */
+
+.sp-card-image-wrapper {
+  cursor:pointer;
+  flex-grow: 0 0;
+  position: relative;
+  height:300px;
+  overflow: hidden;
+}
+
+.sp-card-image {
+  top:0;
+  left:0;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center center;
+}
+
+.sp-card-image-background {
+  position:relative;
+  filter: blur(4px) grayscale(100%);
+  height:100%;
+  width:100%;
+  background-repeat: no-repeat;
+  background-size: 200%;
+  background-position: center center;
+}
+
+.sp-card-body {
+  flex-grow: 1 1;
+  padding:16px;
+}
+/*
+@media (min-width:768px) {
+  .sp-card.is-half-tablet {
+    width:50%;
+  }
+  .sp-card.is-one-third-tablet {
+    width:33.3333333%;
+  }
+  .sp-card.is-two-third-tablet {
+    width:66.6666666%;
+  }
+} */

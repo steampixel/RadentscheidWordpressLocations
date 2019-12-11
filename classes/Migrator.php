@@ -1,5 +1,12 @@
 <?PHP
 
+namespace Sp;
+
+// The Migrator calss will help us to migrate our data to the next version of this plugin
+// Every migration will only run once
+// Every migration will only run, if the version of the migration file is higher than the last done migration
+// Furthermore a migration will only run if the current version of the software is the same as the migration or higher
+
 class Migrator {
 
   public static function migrate() {
@@ -15,8 +22,12 @@ class Migrator {
         $migration_file_number = basename($migration_file_name,'.php');
 
         // Execute migration
-        if($migration_file_number>$last_migration_number){
-          include(__DIR__.'/../migrations/'.$migration_file_name);
+        // If the migration was not already migrated
+        if($migration_file_number>$last_migration_number) {
+          // Migrate only if the current plugin version is the same or higher
+          if(version_compare(SP_LOCATIONS_VERSION, $migration_file_number)>=0) {
+            include(__DIR__.'/../migrations/'.$migration_file_name);
+          }
         }
 
       }
