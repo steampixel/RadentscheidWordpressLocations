@@ -185,3 +185,9 @@ function sp_location_add () {
   }
 
 }
+
+/*
+  Add locations endpoint
+*/
+add_action('wp_ajax_nopriv_splocationadd', 'sp_location_add');
+add_action('wp_ajax_splocationadd', 'sp_location_add');

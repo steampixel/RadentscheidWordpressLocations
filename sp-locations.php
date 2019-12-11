@@ -2,12 +2,12 @@
 /**
 * Plugin Name: Radentscheid Locations
 * Description: Wuhu! Dieses Plugin hilft uns verschiedene Locations für den Radentscheid zu tracken.
-* Version: 1.4.0
+* Version: 1.5.0
 * Author: Christoph Stitz
 * Author URI: https://steampixel.de
 **/
 
-define('SP_LOCATIONS_VERSION', '1.4.0');
+define('SP_LOCATIONS_VERSION', '1.5.0');
 
 // Debug
 // ini_set('display_errors', 1);
@@ -22,6 +22,7 @@ include('classes/Seeder.php');
 
 // Include API endpoints
 include('endpoints/sp_location_add.php');
+include('endpoints/sp_location_get.php');
 
 // Include shortcodes
 include('shortcodes/steampixel_marker_map.php');
@@ -32,12 +33,6 @@ include('shortcodes/steampixel_marker_form.php');
 include('custom_post_types/location.php');
 include('custom_post_types/marker.php');
 // include('custom_post_types/image.php');
-
-/*
-  Add locations endpoint
-*/
-add_action('wp_ajax_nopriv_splocationadd', 'sp_location_add');
-add_action('wp_ajax_splocationadd', 'sp_location_add');
 
 /*
   Enabble file upload in edit form
