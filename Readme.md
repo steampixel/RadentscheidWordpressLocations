@@ -10,19 +10,38 @@ In Aktion kannst du das Plugin hier sehen: https://www.radentscheid-wuerzburg.de
 * Problemstellen werden auf einer Karte dargestellt
 * Marker können frei angelegt werden (Problemstellen, Unterschriftenstellen, Behobene Problemstellen, etc...)
 * Alle eingereichten Orte müssen vorher im Backend freigeschaltet werden, bevor diese auf der Karte sichtbar sind
-* Die Bilder liegen nicht im Medienmanager von Wordpress um diesen nicht zu "verstopfen".
-* Bilder können im Backend einfach gedreht werden, da meldende Menschen oft nicht auf die Orientierung achten.
-* Die Bilder können im Backend leicht getauscht werden, um beispielsweise Nummernschilder oder Gesichter schnell verdecken zu können.
+* Die Bilder liegen nicht im Medienmanager von Wordpress um diesen nicht zu "verstopfen"
+* Bilder können im Backend einfach gedreht werden, da meldende Menschen oft nicht auf die Orientierung achten
+* Im Backend können mehrere Bilder zu einer Stelle gepflegt werden
+* Die Bilder können im Backend leicht getauscht werden, um beispielsweise Nummernschilder oder Gesichter schnell verdecken zu können
 * Im Backend gibt es einen neuen Menupunkt "Locations"
+* Der State der Karte wird im Hash der URL gespeichert. Somit können Kartenpositionen als Link verschickt werden
+* Alle Locations verfügen nun über eigene Detailseiten und werden so durch Suchmaschinen indexiert
 * Einfache Löschfunktion für Aktivistendaten
-* Marker werden auf der Karte geklustert.
+* Marker werden nun auf der Karte geklustert
+* Öffentliche JSON-Api, um der Öffentlichkeit Zugriff auf die Location-Daten zu gewähren
 
 ## Installation
-Das Plugin befindet sich (noch) nicht in der offiziellen Plugin-Datenbank von Wordpress. Bis dahin muss es manuell installiert werden.
+Das Plugin befindet sich (noch) nicht in der offiziellen Plugin-Datenbank von Wordpress. Bis dahin muss es manuell installiert werden. Es gibt zwei verschiedene Möglichkeiten für eine Installation.
+
+### Installation über ein ZIP-Archiv
+
+* Lade [hier](https://github.com/steampixel/RadentscheidWordpressLocations/tree/master/dist) das Plugin-Archiv in deiner wunsch-Version herunter und lade es über das Wordpress-Backend hoch. Achtung! Nutze nicht das Zip-Archiv, welches hier über den Button "Clone or download" bereitgestellt wird.
+* Aktiviere das Plugin im Backend deiner Wordpress-Installation
+* Binde die Shortcodes für Formulare und Karten auf deinen Seiten ein
+
+### Installation über FTP / SSH
 
 * Lade dieses Plugin herunter und kopiere es nach ```wp-content/plugins/sp-locations```
 * Aktiviere das Plugin im Backend deiner Wordpress-Installation
 * Binde die Shortcodes für Formulare und Karten auf deinen Seiten ein
+
+## Update
+
+Nutze zum Update entweder ZIP-Archive, wie bei der Installation oder überschreibe einfach alle Plugin-Dateien via FTP oder SSH.
+
+### Update auf Version 1.5.0
+Bei diesem Update werden automatisch Daten mirgriert. Alle Thumbnails werden beim ersten Aufrufen der Seite neu generiert. Dies kann dazu führen, dass die Seite sehr lange lädt. In Abhängigkeit von der Anzahl der Thumbnails und Locations kann es auch zu einer Fehlermeldung kommen, da die maximale Script-Laufzeit erreicht wurde. Lade in diesem Fall die Seite neu, damit die Migration fortgesetzt werden kann. Wenn es sehr viele Daten zum migrieren gibt, musst du die Seite evtl. öffter neu laden und kannst unter Umständen öfter einen Timeout-Fehler sehen. Sobald die Migration abgeschlossen ist, wird die Website wieder normal funktionieren. Die Migration löscht die alten Daten vorsichthalber nicht. Du kannst diese daher wenn du möchtest selbst löschen. Lösche dazu alle Bilder, die sich direkt in wp-content/uploads/sp-locations befinden. Lösche auch den Ordner thumbs in diesem Verzeichnis. Die Anderen numerischen Verzeichnisse sind die neue migrierten Daten. Diese sollen bitte bleiben.
 
 ## Shortcodes
 
@@ -85,6 +104,10 @@ Dieses Plugin entstand in einer Nacht- und Nebelaktion und wurde zwischen Tür u
 Um die Entwicklung des Plugins einer breiten Masse zu öffnen wurden die Standards sehr weit runtergeschraubt. Es gibt keine Abhängigkeiten bis auf Leaflet. Alles andere ist selbst gebaut. Kein jQuery, kein ES6, kein Bootstrap, keine fancy Frameworks.
 
 Je nach dem, wie es erforderlich ist, kann ich die Doku hier noch etwas "aufhübschen". Fragen bitte einfach in die Issues.
+
+## Öffentlich Api
+Alle Locations, die im Backend freigeschaltet werden, sind über eine einfache öffentliche API des Plugins im JSON-Format einsehbar. Das Plugin sorgt somit dafür, dass öffentliche Daten auch öffentlich zugänglich bleiben und durch andere Menschen frei nutzbar sind. Du erreichst die Daten unter https://www.deine-domain.de/api/locations.
+Hier kannst du ein Beipsiel sehen: https://www.radentscheid-wuerzburg.de/api/locations
 
 ## Grenzen des Plugins
 Momentan werden immer alle relevanten Punkte für eine Karte direkt geladen. Das macht natürlich nur dann Sinn, solange die Meldungen in einem gewissen Rahmen bleiben. Diese Karte unterstützt zur Zeit nicht das dynamische Laden von Koordinaten, je nach gezeigtem Kartenausschnitt. Für wirklich große Städte mit tausenden von Koordinaten ist das Plugin in der jetzigen Form daher noch ungeeignet und müsste etwas umgebaut werden.

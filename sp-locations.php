@@ -35,7 +35,7 @@ include('custom_post_types/marker.php');
 // include('custom_post_types/image.php');
 
 /*
-  Enabble file upload in edit form
+  Enable file upload in edit form
 */
 add_action('post_edit_form_tag', function () {
   echo ' enctype="multipart/form-data"';
