@@ -165,8 +165,11 @@
       <label class="sp-has-margin-bottom-2">
         <input type="checkbox" required id="privacy">
         <span class="sp-hint">
-          Ich bestätige hiermit, dass die von mir eingegebenen Daten zur Location auf der Website veröffentlicht werden dürfen. Meine persönlichen Kontaktinformationen wie Name, Mail und Telefonnummer dienen lediglich der Kontaktaufnahme durch das Radentscheid-Team.
-          Sie sind nicht öffentlich auf der Website einsehbar. Ich bestätige außerdem, dass ich die Rechte an dem evenuell hochgeladenen Bild besitze. Ich habe außerdem die Datenschutzbestimmungen gelesen und verstanden.
+          Ich bestätige hiermit, dass die von mir eingegebenen Daten zur Location auf der Website veröffentlicht werden dürfen.
+          Zudem werden die hochgeladenen Daten (Bilder, Adressen, Positionen und Beschreibungen) der Öffentlichkeit zur freien Verwendung über unsere Schnittstelle (API) angeboten.
+          Meine persönlichen Kontaktinformationen wie Name, Mail und Telefonnummer dienen lediglich der Kontaktaufnahme durch das Radentscheid-Team und sind nicht öffentlich einsehbar.
+          Ich bestätige außerdem, dass ich die Rechte an dem evenuell hochgeladenen Bild besitze.
+          Ich habe außerdem die Datenschutzbestimmungen gelesen und verstanden.
         </span>
         <div class="sp-hint sp-has-text-red sp-hidden" id="privacy_hint">Bitte bestätige die Datenschutzbestimmungen!</div>
       </label>
