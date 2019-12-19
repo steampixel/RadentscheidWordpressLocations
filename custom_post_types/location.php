@@ -510,10 +510,12 @@ add_action( 'add_meta_boxes', function () {
 		'Activist',
 		function () {
       global $post;
+      wp_enqueue_script( 'jsencrypt', plugins_url( 'assets/libs/jsencrypt/bin/jsencrypt.min.js', dirname(__FILE__ )) );
       echo Sp\View::render('backened_location_activist', [
         'contact_person' => get_post_meta( $post->ID, 'contact_person', true ),
         'email' => get_post_meta( $post->ID, 'email', true ),
-        'telephone' => get_post_meta( $post->ID, 'telephone', true )
+        'telephone' => get_post_meta( $post->ID, 'telephone', true ),
+        'rsa_public_key' => get_post_meta( $post->ID, 'rsa_public_key', true ),
       ]);
     },
 		'location',

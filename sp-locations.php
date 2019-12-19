@@ -71,3 +71,24 @@ function spTrimText($s, $max_length = 340) {
   }
   return $s;
 }
+
+/*
+  Register plugin options
+*/
+add_action( 'admin_init', function() {
+  add_option( 'sp-locations_rsa_public_key', '');
+  add_option( 'sp-locations_rsa_enable', true);
+  register_setting( 'sp-locations_options_group', 'sp-locations_rsa_public_key', 'myplugin_callback' );
+  register_setting( 'sp-locations_options_group', 'sp-locations_rsa_enable', 'myplugin_callback' );
+} );
+
+/*
+  Options page
+*/
+add_action('admin_menu', function() {
+  add_options_page('Location Options', 'Location Options', 'manage_options', 'sp-locations', function() {
+    echo Sp\View::render('options', [
+
+    ]);
+  });
+});

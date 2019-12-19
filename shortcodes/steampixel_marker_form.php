@@ -28,6 +28,7 @@ add_shortcode('steampixel-marker-form', function($atts = [], $content = null, $t
 
   wp_enqueue_style( 'leaflet', plugins_url( 'assets/libs/leaflet/leaflet.css', dirname(__FILE__ )) );
   wp_enqueue_script( 'leaflet', plugins_url( 'assets/libs/leaflet/leaflet.js', dirname(__FILE__ )) );
+  wp_enqueue_script( 'jsencrypt', plugins_url( 'assets/libs/jsencrypt/bin/jsencrypt.min.js', dirname(__FILE__ )) );
   wp_enqueue_script( 'steampixel-map-marker', plugins_url( 'assets/js/app.js', dirname(__FILE__ )) );
   wp_enqueue_style( 'steampixel-map-marker', plugins_url( 'assets/css/app.css', dirname(__FILE__ )) );
 

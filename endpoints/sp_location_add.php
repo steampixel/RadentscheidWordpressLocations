@@ -155,20 +155,25 @@ function sp_location_add () {
     if(isset($_POST['suburb'])){
       add_post_meta($post_id, 'suburb', $_POST['suburb']);
     }
-    if(isset($_POST['contact_person'])){
-      add_post_meta($post_id, 'contact_person', $_POST['contact_person']);
-    }
     if(isset($_POST['opening_hours'])){
       add_post_meta($post_id, 'opening_hours', $_POST['opening_hours']);
+    }
+    if(isset($_POST['solution'])){
+      add_post_meta($post_id, 'solution', $_POST['solution']);
+    }
+
+    // Add personal data
+    if(isset($_POST['rsa_public_key'])){
+      add_post_meta($post_id, 'rsa_public_key', $_POST['rsa_public_key']);
+    }
+    if(isset($_POST['contact_person'])){
+      add_post_meta($post_id, 'contact_person', $_POST['contact_person']);
     }
     if(isset($_POST['email'])){
       add_post_meta($post_id, 'email', $_POST['email']);
     }
     if(isset($_POST['telephone'])){
       add_post_meta($post_id, 'telephone', $_POST['telephone']);
-    }
-    if(isset($_POST['solution'])){
-      add_post_meta($post_id, 'solution', $_POST['solution']);
     }
 
     echo json_encode([

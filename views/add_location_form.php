@@ -201,7 +201,11 @@
   Danach schalten wir den Ort auf unserer interaktiven Karte frei.
 </div>
 
+<textarea style="display:none;" id="rsaPubKey"><?=get_option('sp-locations_rsa_public_key'); ?></textarea>
+
 <script>
+
+var rsaEnable = <?=(get_option('sp-locations_rsa_enable')? 'true':'false') ?>;
 
 var lat = null;
 var lng = null;
@@ -423,10 +427,21 @@ function submitForm () {
 
     formData.append('type', document.getElementById('type').value);
 
-    // Contact
-    formData.append('contact_person', document.getElementById('contact_person').value);
-    formData.append('email', document.getElementById('email').value);
-    formData.append('telephone', document.getElementById('telephone').value);
+    // Contact data
+    if(rsaEnable) {
+      // Encrypt with pub key
+      var encrypt = new JSEncrypt();
+      encrypt.setPublicKey(document.getElementById('rsaPubKey').value);
+      formData.append('rsa_public_key', document.getElementById('rsaPubKey').value);
+      formData.append('contact_person', encrypt.encrypt(document.getElementById('contact_person').value));
+      formData.append('email', encrypt.encrypt(document.getElementById('email').value));
+      formData.append('telephone', encrypt.encrypt(document.getElementById('telephone').value));
+    } else {
+      // Without pub key
+      formData.append('contact_person', document.getElementById('contact_person').value);
+      formData.append('email', document.getElementById('email').value);
+      formData.append('telephone', document.getElementById('telephone').value);
+    }
 
     // Coordinates
     formData.append('lat', lat);
