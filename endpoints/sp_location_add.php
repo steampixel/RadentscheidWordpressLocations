@@ -27,17 +27,21 @@ function sp_location_add () {
   if(isset($_POST['opening_hours'])){
     $_POST['opening_hours'] = filter_var ( $_POST['opening_hours'], FILTER_SANITIZE_STRING);
   }
-  if(isset($_POST['email'])){
-    $_POST['email'] = filter_var ( $_POST['email'], FILTER_SANITIZE_EMAIL);
-  }
-  if(isset($_POST['telephone'])){
-    $_POST['telephone'] = filter_var ( $_POST['telephone'], FILTER_SANITIZE_STRING);
-  }
-  if(isset($_POST['description'])){
-    $_POST['description'] = filter_var ( $_POST['description'], FILTER_SANITIZE_STRING);
-  }
   if(isset($_POST['solution'])){
     $_POST['solution'] = filter_var ( $_POST['solution'], FILTER_SANITIZE_STRING);
+  }
+
+  // Sanitize this data only if it is not encrypted
+  if(!isset($_POST['rsa_public_key'])) {
+    if(isset($_POST['email'])){
+      $_POST['email'] = filter_var ( $_POST['email'], FILTER_SANITIZE_EMAIL);
+    }
+    if(isset($_POST['telephone'])){
+      $_POST['telephone'] = filter_var ( $_POST['telephone'], FILTER_SANITIZE_STRING);
+    }
+    if(isset($_POST['description'])){
+      $_POST['description'] = filter_var ( $_POST['description'], FILTER_SANITIZE_STRING);
+    }
   }
 
   // Check nonce

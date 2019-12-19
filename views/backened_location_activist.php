@@ -8,7 +8,7 @@ if($contact_person||$email||$telephone) {
 
     <p>
       The contact data of this activist is encrypted.
-      Insert the private key here and click the "view" button to view its data.
+      Insert the private key here and click the "decrypt" button to view its data.
     </p>
 
     <div>
@@ -17,7 +17,7 @@ if($contact_person||$email||$telephone) {
       <textarea style="display:none;" id="contact_person"><?=$contact_person ?></textarea>
       <textarea style="display:none;" id="email"><?=$email ?></textarea>
       <textarea style="display:none;" id="telephone"><?=$telephone ?></textarea>
-      <input type="button" class="button" onclick="sp_rsa_decrypt()" value="view" />
+      <input type="button" class="button" onclick="sp_rsa_decrypt()" value="decrypt" />
     </div>
 
     <script>

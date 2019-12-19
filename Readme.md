@@ -20,6 +20,7 @@ In Aktion kannst du das Plugin hier sehen: https://www.radentscheid-wuerzburg.de
 * Einfache Löschfunktion für Aktivistendaten
 * Marker werden nun auf der Karte geklustert
 * Öffentliche JSON-Api, um der Öffentlichkeit Zugriff auf die Location-Daten zu gewähren
+* RSA-Verschlüsselung der kritischen Aktivist&#42;innen Daten (Name, Telefon, Email)
 
 ## Installation
 Das Plugin befindet sich (noch) nicht in der offiziellen Plugin-Datenbank von Wordpress. Bis dahin muss es manuell installiert werden. Es gibt zwei verschiedene Möglichkeiten für eine Installation.
@@ -98,16 +99,44 @@ Mit diesem Shortcode kannst du die Anzahl der aktiven Meldungen ausgeben. So kan
 Parameter:
 * type: Die Schlüssel der Marker, die gezählt werden sollen. Beispiel: "problem", "sign" oder multiple Marker mit Komma getrennt: "sign, problem"
 
+## Öffentlich Api
+Alle Locations, die im Backend freigeschaltet werden, sind über eine einfache öffentliche API des Plugins im JSON-Format einsehbar. Das Plugin sorgt somit dafür, dass öffentliche Daten auch öffentlich zugänglich bleiben und durch andere Menschen frei nutzbar sind. Du erreichst die Daten unter https://www.deine-domain.de/api/locations.
+Hier kannst du ein Beipsiel sehen: https://www.radentscheid-wuerzburg.de/api/locations
+
+## Aktivist&#42;innen Daten verschlüsseln
+Dieses Plugin bietet die Möglichkeit, die Kontaktdaten der Aktivist&#42;innen (Name, Telefonnummer, Email) verschlüsselt zu speichern. Dadurch sind diese Daten im Falle eines Angriffs oder Einbruchs sicher. Dieses Feature muss vorher jedoch explizit von dir aktiviert werden. Achtung! Solltest du den privaten Schlüssel verlieren, können die verschlüsselten Daten nicht wiederhergestellt werden! Sie sind dann für immer verloren! Bewahre deine Schlüssel daher an einem sicheren Ort auf und erstelle dir unbedingt ein Backup der Schlüssel. Zum Beispiel auf einem geheimen USB-Stick.
+
+Die Verschlüsselung funktioniert mittels OpenSSL und RSA. Dazu musst du ein Schlüsselpaar bestehend aus einem privaten und öffentlichen Schlüssel generieren. Wie das genau funktioniert ist weiter unten beschrieben. Der öffentliche Schlüssel wird im Backend von Wordpress hinterlegt. Dieser dient zum verschlüsseln der Daten und kann nicht zum entschlüsseln genutzt werden. Die Kontaktinformationen werden dann noch im Browser der Aktivist&#42;innen verschlüsselt und so sicher zum Server übertragen und dort gespeichert. Im Backend hast du dann die Möglichkeit einzelne Daten mit Hilfe deines privaten Schlüssels wieder zu entschlüsseln und so eine Kontaktaufnahme zu starten. Der private Schlüssel ist die einzige Möglichkeit die Daten zu entschlüsseln. Bewahre ihn gut auf und gib ihn NIE an andere Personen weiter.
+
+Die Generierung von Schlüsselpaaren und der Umgang damit kann etwas verwirrend sein, wenn du noch nie damit gearbeitet hast. Bitte darum andere Personen, die sich damit auskennen, dir im Zweifel zu helfen.
+
+### Erstelle ein neues Schlüsselpaar
+Öffne einen Terminal und nutze folgendes Kommando, um dir einen privaten Schlüssel zu erstellen:
+```
+openssl genrsa -out rsa_1024_priv.pem 1024
+```
+Nutze dann das folgende Kommando, um aus dem privaten Schlüssel einen öffentlichen Schlüssel zu erstellen:
+```
+openssl rsa -pubout -in rsa_1024_priv.pem -out rsa_1024_pub.pem
+```
+
+### Aktiviere die Verschlüsselung in Wordpress
+* Öffne das Backend und klicke auf "Settings" -> "Location Options"
+* Kopiere den Inhalt aus der Datei "rsa_1024_pub.pem" in das Textfeld "RSA public key"
+* Aktiviere die Verschlüsselung, indem du den Haken bei "Enable RSA encryption" setzt
+* Speichere die Einstellungen
+
+Die Daten werden von nun an verschlüsselt gespeichert. Bitte sei dir darüber im klaren, dass momentan keine Daten nachträglich verschlüsselt werden können. Die alten Daten sind weiterhin ganz normal im Backend an den jeweiligen Locations im Klartext lesbar.
+
+### Daten entschlüsseln
+Bei Locations, deren Aktivist&#42;innen Daten verschlüsselt hinterlegt wurden, erscheint nun eine Textbox. Damit du die dort hinterlegten Daten lesen kannst, musst du den Inhalt aus deiner privaten (geheimen) Schlüsseldatei (rsa_1024_priv.pem) in das Feld kopieren. Klicke dann auf "decrypt", um die Daten anzuzeigen.
+
 ## Informationen für Entwickler&#42;innen
 Dieses Plugin entstand in einer Nacht- und Nebelaktion und wurde zwischen Tür und Angel weiterentwickelt. Dementsprechend sehen auch einige Stellen im Code aus. Bitte schreckt nicht davor zurück Dinge zu korrigieren, Verbesserungen einzubauen und Pull-Requests zu senden. Es gibt bisher noch keine wirkliche Dokumentation. Daher hier erstmal ein paar grobe Zeilen:
 
 Um die Entwicklung des Plugins einer breiten Masse zu öffnen wurden die Standards sehr weit runtergeschraubt. Es gibt keine Abhängigkeiten bis auf Leaflet. Alles andere ist selbst gebaut. Kein jQuery, kein ES6, kein Bootstrap, keine fancy Frameworks.
 
 Je nach dem, wie es erforderlich ist, kann ich die Doku hier noch etwas "aufhübschen". Fragen bitte einfach in die Issues.
-
-## Öffentlich Api
-Alle Locations, die im Backend freigeschaltet werden, sind über eine einfache öffentliche API des Plugins im JSON-Format einsehbar. Das Plugin sorgt somit dafür, dass öffentliche Daten auch öffentlich zugänglich bleiben und durch andere Menschen frei nutzbar sind. Du erreichst die Daten unter https://www.deine-domain.de/api/locations.
-Hier kannst du ein Beipsiel sehen: https://www.radentscheid-wuerzburg.de/api/locations
 
 ## Grenzen des Plugins
 Momentan werden immer alle relevanten Punkte für eine Karte direkt geladen. Das macht natürlich nur dann Sinn, solange die Meldungen in einem gewissen Rahmen bleiben. Diese Karte unterstützt zur Zeit nicht das dynamische Laden von Koordinaten, je nach gezeigtem Kartenausschnitt. Für wirklich große Städte mit tausenden von Koordinaten ist das Plugin in der jetzigen Form daher noch ungeeignet und müsste etwas umgebaut werden.
