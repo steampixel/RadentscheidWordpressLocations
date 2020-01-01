@@ -141,6 +141,8 @@ foreach($locations as $location){
 
     var mymap = L.map('mymap');
 
+    mymap.attributionControl.addAttribution('&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors');
+
     var initialLat = <?=$lat ?>;
     var initialLng = <?=$lng ?>;
     var initialZoom = <?=$zoom ?>;

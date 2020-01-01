@@ -33,6 +33,8 @@ if($opening_hours) {
 
     var mymap = L.map('mymap').setView([<?=$lat ?>, <?=$lng ?>], 18);
 
+    mymap.attributionControl.addAttribution('&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors');
+
     L.tileLayer('https://{s}.tile.osm.org/{z}/{x}/{y}.png', {
 
     }).addTo(mymap);

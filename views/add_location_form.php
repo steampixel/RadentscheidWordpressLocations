@@ -495,6 +495,8 @@ document.addEventListener("DOMContentLoaded", function(event) {
   // Create the map
   mymap = L.map('submitmap');
 
+  mymap.attributionControl.addAttribution('&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors');
+
   // Default coordinates
   mymap.setView([<?=$lat ?>, <?=$lng ?>], <?=$zoom ?>);
 

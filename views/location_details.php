@@ -145,6 +145,8 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
   var mymap = L.map('mymap').setView([<?=get_post_meta($post_id, 'lat', true) ?>, <?=get_post_meta($post_id, 'lng', true) ?>], 18);
 
+  mymap.attributionControl.addAttribution('&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors');
+
   L.tileLayer('https://{s}.tile.osm.org/{z}/{x}/{y}.png', {
 
   }).addTo(mymap);
