@@ -145,4 +145,4 @@ Momentan werden immer alle relevanten Punkte für eine Karte direkt geladen. Das
 Map marker icons: https://github.com/mrmichalzik
 
 ## License
-This project is licensed under the MIT License. See LICENSE for further information.
+This project is licensed under the AGPLv3 License. See LICENSE for further information.
