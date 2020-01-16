@@ -36,7 +36,7 @@ if($content){
       <?=$content ?>
 
       <br><br>
-      <input type="button" value="Alles klar" onclick="closeModalViaHash('modal')">
+      <input type="button" value="Alles klar" onclick="closeModalViaHash('welcome')">
 
     </div>
   </div>
