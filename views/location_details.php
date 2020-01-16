@@ -26,6 +26,32 @@
 
 ?>
 
+<div id="mymap" class="steampixel-marker-map" style="height:300px;"></div>
+
+<?PHP
+
+$solution = nl2br(get_post_meta($post_id, 'solution', true));
+$opening_hours = nl2br(get_post_meta($post_id, 'opening_hours', true));
+
+?>
+
+<p>
+  <strong>Adresse</strong><br>
+  <?=get_post_meta($post_id, 'street', true) ?> <?=get_post_meta($post_id, 'house_number', true) ?><br>
+  <?=get_post_meta($post_id, 'postcode', true) ?> <?=get_post_meta($post_id, 'place', true) ?><br>
+  <!-- <?=get_post_meta($post_id, 'suburb', true) ?> -->
+</p>
+
+<?PHP
+if($opening_hours){
+  ?>
+  <p>
+    <strong>Öffnungszeiten:</strong> <?=$opening_hours ?>
+  </p>
+  <?PHP
+}
+?>
+
 <?PHP
 
   $images = get_post_meta( $post_id, 'images', true );
@@ -87,32 +113,6 @@
     <?php
 
   }
-?>
-
-<div id="mymap" class="steampixel-marker-map" style="height:300px;"></div>
-
-<?PHP
-
-$solution = nl2br(get_post_meta($post_id, 'solution', true));
-$opening_hours = nl2br(get_post_meta($post_id, 'opening_hours', true));
-
-?>
-
-<p>
-  <strong>Adresse</strong><br>
-  <?=get_post_meta($post_id, 'street', true) ?> <?=get_post_meta($post_id, 'house_number', true) ?><br>
-  <?=get_post_meta($post_id, 'postcode', true) ?> <?=get_post_meta($post_id, 'place', true) ?><br>
-  <!-- <?=get_post_meta($post_id, 'suburb', true) ?> -->
-</p>
-
-<?PHP
-if($opening_hours){
-  ?>
-  <p>
-    <strong>Öffnungszeiten:</strong> <?=$opening_hours ?>
-  </p>
-  <?PHP
-}
 ?>
 
 <a href="<?=get_site_url().'/location-print?location='.$post_id ?>" target="_blank">🖶 Druckansicht</a>
