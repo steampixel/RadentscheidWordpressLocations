@@ -89,8 +89,6 @@
   }
 ?>
 
-<h2>Standort</h2>
-
 <div id="mymap" class="steampixel-marker-map" style="height:300px;"></div>
 
 <?PHP
@@ -116,6 +114,8 @@ if($opening_hours){
   <?PHP
 }
 ?>
+
+<a href="<?=get_site_url().'/location-print?location='.$post_id ?>" target="_blank">🖶 Druckansicht</a>
 
 <script>
 

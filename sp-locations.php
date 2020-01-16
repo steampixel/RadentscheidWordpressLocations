@@ -23,6 +23,7 @@ include('classes/Seeder.php');
 // Include API endpoints
 include('endpoints/sp_location_add.php');
 include('endpoints/sp_location_get.php');
+include('endpoints/sp_location_print.php');
 
 // Include shortcodes
 include('shortcodes/steampixel_marker_map.php');
