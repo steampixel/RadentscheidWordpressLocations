@@ -21,6 +21,7 @@ In Aktion kannst du das Plugin hier sehen: https://www.radentscheid-wuerzburg.de
 * Marker werden nun auf der Karte geklustert
 * Öffentliche JSON-Api, um der Öffentlichkeit Zugriff auf die Location-Daten zu gewähren
 * RSA-Verschlüsselung der kritischen Aktivist&#42;innen Daten (Name, Telefon, Email)
+* Druckversion für die einzelnen Locations, um Behörden und Beamt*innen das Leben leichter zu machen ;-)
 
 ## Installation
 Das Plugin befindet sich (noch) nicht in der offiziellen Plugin-Datenbank von Wordpress. Bis dahin muss es manuell installiert werden. Es gibt zwei verschiedene Möglichkeiten für eine Installation.
