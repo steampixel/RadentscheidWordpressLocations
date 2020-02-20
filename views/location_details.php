@@ -115,7 +115,7 @@ if($opening_hours){
   }
 ?>
 
-<a href="<?=get_site_url().'/location-print?location='.$post_id ?>" target="_blank">🖶 Druckansicht</a>
+<a href="<?=get_site_url().'/location-print?location='.$post_id ?>" target="_blank">Druckansicht</a>
 
 <script>
 
