@@ -2,12 +2,12 @@
 /**
 * Plugin Name: Radentscheid Locations
 * Description: Wuhu! Dieses Plugin hilft uns verschiedene Locations für den Radentscheid zu tracken.
-* Version: 1.6.1
+* Version: 1.7.0
 * Author: Christoph Stitz
 * Author URI: https://steampixel.de
 **/
 
-define('SP_LOCATIONS_VERSION', '1.6.1');
+define('SP_LOCATIONS_VERSION', '1.7.0');
 
 // Debug
 // ini_set('display_errors', 1);
