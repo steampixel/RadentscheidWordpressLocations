@@ -13,7 +13,9 @@ if($_SERVER['REQUEST_URI']=='/api/locations') {
 
     foreach($locations as $location){
 
-      $push_data = [];
+      $push_data = [
+        'title' => $location->post_title
+      ];
 
       $type = get_post_meta( $location->ID, 'type', true );
       $images = get_post_meta( $location->ID, 'images', true );
@@ -42,7 +44,8 @@ if($_SERVER['REQUEST_URI']=='/api/locations') {
         $push_data['images'] = $images;
       }
 
-      array_push($data, $push_data);
+      // Add the data by id
+      $data[$location->ID] = $push_data;
 
     }
 
