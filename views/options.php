@@ -8,6 +8,16 @@
   <table style="width:100%;" cellspacing="16">
     <tr valign="top">
       <td scope="row" style="width:200px;text-align:right;">
+        <label for="sp-locations_notify_email">
+          <strong>Email für die Benachrichtigung bei neu eingereichten Locations</strong><br>
+        </label>
+      </td>
+      <td>
+        <input id="sp-locations_notify_email" type="text" name="sp-locations_notify_email" value="<?php echo get_option('sp-locations_notify_email'); ?>" />
+      </td>
+    </tr>
+    <tr valign="top">
+      <td scope="row" style="width:200px;text-align:right;">
         <label for="sp-locations_rsa_enable">
           <strong>Enable RSA encryption</strong><br>
           <sub>Enable encryption of the personal activist data (name, email, telephone)</sub>

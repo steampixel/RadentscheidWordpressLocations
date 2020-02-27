@@ -180,6 +180,16 @@ function sp_location_add () {
       add_post_meta($post_id, 'telephone', $_POST['telephone']);
     }
 
+    // Send mail
+    $email = get_option('sp-locations_notify_email');
+    if(!empty($email)) {
+      $site = get_bloginfo('name');
+      $message = "Hey! Aktivisti haben soeben eine neue Location auf deiner Website '".$site."' gemeldet.\r\n";
+      $message.= "Name der Location: ".$_POST['title']."\r\n";
+      $message.= "Melde dich an, um die Location zu prüfen und freizuschalten.\r\n";
+      wp_mail( $email, 'Neue Location auf '.$site, $message);
+    }
+
     echo json_encode([
       "status"  =>  "success"
     ]);
