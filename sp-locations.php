@@ -55,11 +55,11 @@ add_action( 'init', function () {
   This function makes this plugin multisite compatible
 */
 function spGetUploadUrl() {
-  if(is_multisite()) {
-    return WP_CONTENT_URL.'/uploads/sites/'.get_current_blog_id();
-  } else {
+  // if(is_multisite()) {
+  //   return WP_CONTENT_URL.'/uploads/sites/'.get_current_blog_id();
+  // } else {
     return WP_CONTENT_URL.'/uploads';
-  }
+  //}
 }
 
 /*
