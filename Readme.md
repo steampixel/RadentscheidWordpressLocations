@@ -1,24 +1,27 @@
-# Radentscheid Wordpress Locations 🚲🗺📌
-Dieses Wordpress-Plugin soll den Radaktivismus in Deutschland unterstützen und Radentscheide voran bringen. Ziel ist es, interessierten Bürger*innen ein Bild der Radinfrastruktur vor Ort zu vermitteln. Über ein Melden-Formular können Aktivist&#42;innen ganz einfach problematische Stellen mit Koordinaten und Bild melden. Administrator&#42;innen können diese dann auf einer interaktiven Karte für alle Menschen sichtbar freischalten. Zudem ist es möglich Unterschriftenstellen auf einer separaten Karte darzustellen.
+# Verkehrswende Wordpress Locations 🚲🗺📌
+Dieses Wordpress-Plugin soll die Verkehrswende und vor allem den Radaktivismus in Deutschland unterstützen und Radentscheide sowie Verkehrswenden voran bringen. Ziel ist es, interessierten Bürger*innen ein Bild der Rad- oder Gehweg-Infrastruktur vor Ort zu vermitteln. Über ein Melden-Formular können Aktivist&#42;innen ganz einfach problematische Stellen mit Koordinaten und Bild melden. Administrator&#42;innen können diese dann auf einer interaktiven Karte für alle Menschen sichtbar freischalten.
 
 Benutzt dieses Plugin einfach als Grundlage, verändert es und passt es euren Bedürfnissen an.
 
-In Aktion kannst du das Plugin hier sehen: https://www.radentscheid-wuerzburg.de/problemstellen/
+In Aktion kannst du das Plugin hier sehen:
+* https://www.radentscheid-wuerzburg.de/problemstellen/
+* https://zweirat-stuttgart.de/projekte/schwachstellen-karte/
+* https://www.fahrradfreundliches-falkensee.de/schwachstellen-karte/
 
 ## Features
 * Jede*r kann Problemstellen melden
 * Problemstellen werden auf einer Karte dargestellt
-* Marker können frei angelegt werden (Problemstellen, Unterschriftenstellen, Behobene Problemstellen, etc...)
+* Marker können frei angelegt werden (Problemstellen für Radverkehr, Problemstellen für Fußverkehr, Unterschriftenstellen, behobene Problemstellen, etc...)
 * Alle eingereichten Orte müssen vorher im Backend freigeschaltet werden, bevor diese auf der Karte sichtbar sind
 * Die Bilder liegen nicht im Medienmanager von Wordpress um diesen nicht zu "verstopfen"
 * Bilder können im Backend einfach gedreht werden, da meldende Menschen oft nicht auf die Orientierung achten
 * Im Backend können mehrere Bilder zu einer Stelle gepflegt werden
 * Die Bilder können im Backend leicht getauscht werden, um beispielsweise Nummernschilder oder Gesichter schnell verdecken zu können
-* Im Backend gibt es einen neuen Menupunkt "Locations"
-* Der State der Karte wird im Hash der URL gespeichert. Somit können Kartenpositionen als Link verschickt werden
+* Im Backend gibt es einen neuen Menupunkt "Locations" unter dem sich alles verwalten lässt
+* Der Status der Karte wird im Hash der URL gespeichert. Somit können Kartenpositionen als Link verschickt werden
 * Alle Locations verfügen nun über eigene Detailseiten und werden so durch Suchmaschinen indexiert
-* Einfache Löschfunktion für Aktivistendaten
-* Marker werden nun auf der Karte geklustert
+* Einfache Löschfunktion für einzelne Aktivistendaten
+* Marker werden auf der Karte geklustert dargestellt
 * Öffentliche JSON-Api, um der Öffentlichkeit Zugriff auf die Location-Daten zu gewähren
 * RSA-Verschlüsselung der kritischen Aktivist&#42;innen Daten (Name, Telefon, Email)
 * Druckversion für die einzelnen Locations, um Behörden und Beamt*innen das Leben leichter zu machen ;-)
@@ -28,19 +31,16 @@ In Aktion kannst du das Plugin hier sehen: https://www.radentscheid-wuerzburg.de
 Das Plugin befindet sich (noch) nicht in der offiziellen Plugin-Datenbank von Wordpress. Bis dahin muss es manuell installiert werden. Es gibt zwei verschiedene Möglichkeiten für eine Installation.
 
 ### Installation über ein ZIP-Archiv
-
 * Lade [hier](https://github.com/steampixel/RadentscheidWordpressLocations/tree/master/dist) das Plugin-Archiv in deiner wunsch-Version herunter und lade es über das Wordpress-Backend hoch. Achtung! Nutze nicht das Zip-Archiv, welches hier über den Button "Clone or download" bereitgestellt wird.
 * Aktiviere das Plugin im Backend deiner Wordpress-Installation
 * Binde die Shortcodes für Formulare und Karten auf deinen Seiten ein
 
 ### Installation über FTP / SSH
-
 * Lade dieses Plugin herunter und kopiere es nach ```wp-content/plugins/sp-locations```
 * Aktiviere das Plugin im Backend deiner Wordpress-Installation
 * Binde die Shortcodes für Formulare und Karten auf deinen Seiten ein
 
 ## Update
-
 Nutze zum Update entweder ZIP-Archive, wie bei der Installation oder überschreibe einfach alle Plugin-Dateien via FTP oder SSH. Erstelle vor jedem Update unbedingt ein Backup deiner Website!
 
 ### Update auf Version 1.5.0
@@ -55,7 +55,7 @@ Mit diesem Shortcode bindest du das Melden-Formular ein:
 ```
 
 Parameter:
-* selected-type: Der Schlüssel des Markers, der gemeldet werden soll. Also zum Beispiel "problem", "sign", "solved" oder eigene Marker.
+* selected-type: Der Schlüssel des Markers, der gemeldet werden soll. Also zum Beispiel "problem", "sign", "solved" oder eigene Marker-Schlüssel.
 * require-address: "true" oder "false" Ist die Angabe einer Adresse erforderlich?
 * show-description: "true" oder "false" Ist das Beschreibungsfeld sichtbar?
 * show-opening-hours: "true" oder "false" Öffnungszeiten-Feld anzeigen?
@@ -109,7 +109,7 @@ Das Plugin kann dir automatisch bei neuen Meldungen eine Email senden. Diese Fun
 Bitte beachte, dass das erfolgreiche Versenden von Mails von vielen Faktoren abhängig ist. Das Plugin nutzt die interne Mail-Funktion von Wordpress. Daher kannst du zum Beispiel auch SMTP-Plugins nutzen, um die Mails über einen SMTP-Server zu versenden.
 
 ## Öffentlich Api
-Alle Locations, die im Backend freigeschaltet werden, sind über eine einfache öffentliche API des Plugins im JSON-Format einsehbar. Das Plugin sorgt somit dafür, dass öffentliche Daten auch öffentlich zugänglich bleiben und durch andere Menschen frei nutzbar sind. Du erreichst die Daten unter https://www.deine-domain.de/api/locations.
+Alle Locations, die im Backend freigeschaltet werden, sind über eine einfache öffentliche API im JSON-Format einsehbar. Das Plugin sorgt somit dafür, dass öffentliche Daten auch öffentlich zugänglich bleiben und durch andere Menschen frei nutzbar sind. Du erreichst die Daten unter https://www.deine-domain.de/api/locations.
 Hier kannst du ein Beipsiel sehen: https://www.radentscheid-wuerzburg.de/api/locations
 
 ## Aktivist&#42;innen Daten verschlüsseln

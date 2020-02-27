@@ -1,7 +1,7 @@
 <?php
 /**
-* Plugin Name: Radentscheid Locations
-* Description: Wuhu! Dieses Plugin hilft uns verschiedene Locations für den Radentscheid zu tracken.
+* Plugin Name: Verkehrswende Locations
+* Description: Dieses Plugin hilft uns verschiedene Problemstellen für den Rad- und Fußverkehr zu tracken.
 * Version: 1.7.2
 * Author: Christoph Stitz
 * Author URI: https://steampixel.de
@@ -91,7 +91,7 @@ add_action( 'admin_init', function() {
 add_action('admin_menu', function() {
   add_options_page('Location Options', 'Location Options', 'manage_options', 'sp-locations', function() {
     echo Sp\View::render('options', [
-
+      
     ]);
   });
 });
