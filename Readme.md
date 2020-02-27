@@ -40,7 +40,7 @@ Das Plugin befindet sich (noch) nicht in der offiziellen Plugin-Datenbank von Wo
 
 ## Update
 
-Nutze zum Update entweder ZIP-Archive, wie bei der Installation oder überschreibe einfach alle Plugin-Dateien via FTP oder SSH.
+Nutze zum Update entweder ZIP-Archive, wie bei der Installation oder überschreibe einfach alle Plugin-Dateien via FTP oder SSH. Erstelle vor jedem Update unbedingt ein Backup deiner Website!
 
 ### Update auf Version 1.5.0
 Bei diesem Update werden automatisch Daten mirgriert. Alle Thumbnails werden beim ersten Aufrufen der Seite neu generiert. Dies kann dazu führen, dass die Seite sehr lange lädt. In Abhängigkeit von der Anzahl der Thumbnails und Locations kann es auch zu einer Fehlermeldung kommen, da die maximale Script-Laufzeit erreicht wurde. Lade in diesem Fall die Seite neu, damit die Migration fortgesetzt werden kann. Wenn es sehr viele Daten zum migrieren gibt, musst du die Seite evtl. öffter neu laden und kannst unter Umständen öfter einen Timeout-Fehler sehen. Sobald die Migration abgeschlossen ist, wird die Website wieder normal funktionieren. Die Migration löscht die alten Daten vorsichthalber nicht. Du kannst diese daher wenn du möchtest selbst löschen. Lösche dazu alle Bilder, die sich direkt in wp-content/uploads/sp-locations befinden. Lösche auch den Ordner thumbs in diesem Verzeichnis. Die Anderen numerischen Verzeichnisse sind die neue migrierten Daten. Diese sollen bitte bleiben.
