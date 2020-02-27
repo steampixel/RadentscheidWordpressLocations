@@ -11,10 +11,12 @@ if($_SERVER['REQUEST_URI']=='/api/locations') {
 
   if($locations) {
 
-    foreach($locations as $location){
+    foreach($locations as $location) {
 
       $push_data = [
-        'title' => $location->post_title
+        'id' => $location->ID,
+        'title' => $location->post_title,
+        'date' => $location->post_date
       ];
 
       $type = get_post_meta( $location->ID, 'type', true );
