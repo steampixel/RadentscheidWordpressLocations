@@ -78,7 +78,7 @@ function spTrimText($s, $max_length = 340) {
 */
 add_action( 'admin_init', function() {
   add_option( 'sp-locations_rsa_public_key', '');
-  add_option( 'sp-locations_rsa_enable', true);
+  add_option( 'sp-locations_rsa_enable', false);
   register_setting( 'sp-locations_options_group', 'sp-locations_rsa_public_key', 'myplugin_callback' );
   register_setting( 'sp-locations_options_group', 'sp-locations_rsa_enable', 'myplugin_callback' );
 } );
