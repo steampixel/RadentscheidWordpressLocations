@@ -22,6 +22,7 @@ In Aktion kannst du das Plugin hier sehen: https://www.radentscheid-wuerzburg.de
 * Öffentliche JSON-Api, um der Öffentlichkeit Zugriff auf die Location-Daten zu gewähren
 * RSA-Verschlüsselung der kritischen Aktivist&#42;innen Daten (Name, Telefon, Email)
 * Druckversion für die einzelnen Locations, um Behörden und Beamt*innen das Leben leichter zu machen ;-)
+* Automatisch E-Mail Benachrichtigung, wenn neue Meldungen eintreffen
 
 ## Installation
 Das Plugin befindet sich (noch) nicht in der offiziellen Plugin-Datenbank von Wordpress. Bis dahin muss es manuell installiert werden. Es gibt zwei verschiedene Möglichkeiten für eine Installation.
@@ -99,6 +100,13 @@ Mit diesem Shortcode kannst du die Anzahl der aktiven Meldungen ausgeben. So kan
 ```
 Parameter:
 * type: Die Schlüssel der Marker, die gezählt werden sollen. Beispiel: "problem", "sign" oder multiple Marker mit Komma getrennt: "sign, problem"
+
+## E-Mail Benachrichtigungen aktivieren
+Das Plugin kann dir automatisch bei neuen Meldungen eine Email senden. Diese Funktion kannst du folgendermaßen aktivieren:
+* Öffne das Backend und klicke auf "Settings" -> "Location Options"
+* Dort kannst du eine Mailadresse hinterlegen
+
+Bitte beachte, dass das erfolgreiche Versenden von Mails von vielen Faktoren abhängig ist. Das Plugin nutzt die interne Mail-Funktion von Wordpress. Daher kannst du zum Beispiel auch SMTP-Plugins nutzen, um die Mails über einen SMTP-Server zu versenden.
 
 ## Öffentlich Api
 Alle Locations, die im Backend freigeschaltet werden, sind über eine einfache öffentliche API des Plugins im JSON-Format einsehbar. Das Plugin sorgt somit dafür, dass öffentliche Daten auch öffentlich zugänglich bleiben und durch andere Menschen frei nutzbar sind. Du erreichst die Daten unter https://www.deine-domain.de/api/locations.
