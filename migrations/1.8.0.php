@@ -29,8 +29,6 @@ foreach($locations as $location) {
         update_post_meta($location->ID, 'images', $images);
       }
 
-
-
     }
 
   }
