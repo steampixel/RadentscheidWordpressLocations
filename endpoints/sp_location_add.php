@@ -106,7 +106,7 @@ function sp_location_add () {
             add_post_meta($post_id, 'images', [
               [
                 'src' => $name,
-                'description' => $_POST['description']
+                'description' => ''
               ]
             ]);
 
@@ -161,6 +161,9 @@ function sp_location_add () {
     }
     if(isset($_POST['opening_hours'])){
       add_post_meta($post_id, 'opening_hours', $_POST['opening_hours']);
+    }
+    if(isset($_POST['description'])){
+      add_post_meta($post_id, 'description', $_POST['description']);
     }
     if(isset($_POST['solution'])){
       add_post_meta($post_id, 'solution', $_POST['solution']);

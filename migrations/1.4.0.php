@@ -10,14 +10,14 @@ $uploads_dir = trailingslashit( wp_upload_dir()['basedir'] ) . 'sp-locations';
 $locations = get_posts( [
   'numberposts' => -1,
   'post_type' => 'location',
-  'post_status' => array('publish', 'pending', 'draft', 'auto-draft', 'future', 'private', 'inherit', 'trash') 
+  'post_status' => array('publish', 'pending', 'draft', 'auto-draft', 'future', 'private', 'inherit', 'trash')
 ] );
 
 foreach($locations as $location) {
 
   // Get the old image and description fields from this location
   $image = get_post_meta( $location->ID, 'image', true );
-  $description = get_post_meta($location->ID, 'description', true);
+  // $description = get_post_meta($location->ID, 'description', true);
   $images = get_post_meta( $location->ID, 'images', true );
 
   if(!$images) {
@@ -49,7 +49,7 @@ foreach($locations as $location) {
       add_post_meta($location->ID, 'images', [
         [
           'src' => $name,
-          'description' => $description
+          'description' => ''
         ]
       ]);
 

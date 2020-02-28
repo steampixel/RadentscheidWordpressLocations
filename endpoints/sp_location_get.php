@@ -24,6 +24,7 @@ if($_SERVER['REQUEST_URI']=='/api/locations') {
       $street = get_post_meta($location->ID, 'street', true);
       $house_number = get_post_meta($location->ID, 'house_number', true);
       $postcode = get_post_meta($location->ID, 'postcode', true);
+      $description = get_post_meta($location->ID, 'description', true);
       $place = get_post_meta($location->ID, 'place', true);
       $suburb = get_post_meta($location->ID, 'suburb', true);
       $lng = get_post_meta($location->ID, 'lng', true);
@@ -34,6 +35,7 @@ if($_SERVER['REQUEST_URI']=='/api/locations') {
       if($lat) { $push_data['lat'] = $lat; }
       if($place) { $push_data['place'] = $place; }
       if($postcode) { $push_data['postcode'] = $postcode; }
+      if($description) { $push_data['description'] = $description; }
       if($house_number) { $push_data['house_number'] = $house_number; }
       if($street) { $push_data['street'] = $street; }
       if($suburb) { $push_data['suburb'] = $suburb; }

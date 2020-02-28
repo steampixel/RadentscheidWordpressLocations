@@ -43,6 +43,14 @@ $opening_hours = nl2br(get_post_meta($post_id, 'opening_hours', true));
 </p>
 
 <?PHP
+$description = get_post_meta($post_id, 'description', true);
+?>
+
+<p>
+  <?=nl2br($description) ?>
+</p>
+
+<?PHP
 if($opening_hours){
   ?>
   <p>
@@ -99,7 +107,7 @@ if($opening_hours){
                   <?PHP
                   if($image['description']) {
                     ?>
-                    <?=$image['description'] ?>
+                    <?=nl2br($image['description']) ?>
                     <?PHP
                   }
                   ?>

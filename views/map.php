@@ -60,7 +60,8 @@ foreach($locations as $location){
         <?=$location->post_title ?>
       </h2>
 
-      <?PHP
+      <?php
+
       $type = get_post_meta( $location->ID, 'type', true );
 
       if($type) {
@@ -86,30 +87,30 @@ foreach($locations as $location){
         if($images) {
           ?>
           <img class="sp-has-margin-bottom-2" data-src='<?=spGetUploadUrl().'/sp-locations/'.$location->ID.'/600/'.$images[0]['src'] ?>'>
-
-          <p>
-
-            <?PHP
-            if($type_posts) {
-              ?>
-              <strong><?=$type_posts[0]->post_title ?>: </strong>
-              <?PHP
-            }
-
-            if($images[0]['description']) {
-              ?>
-
-              <?=spTrimText($images[0]['description']) ?>
-
-              <?PHP
-            }
-            ?>
-            <a href="<?=get_permalink($location->ID) ?>">Details anzeigen</a>
-          </p>
           <?PHP
-
         }
       ?>
+      <p>
+
+        <?PHP
+        if($type_posts) {
+          ?>
+          <strong><?=$type_posts[0]->post_title ?>: </strong>
+          <?PHP
+        }
+
+        ?>
+
+        <?PHP
+        $description = get_post_meta($location->ID, 'description', true);
+        ?>
+
+        <?=spTrimText($description) ?>
+
+
+        <a href="<?=get_permalink($location->ID) ?>">Details anzeigen</a>
+      </p>
+
 
       <?PHP
 

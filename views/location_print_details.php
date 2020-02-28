@@ -36,6 +36,14 @@
 </p>
 
 <?PHP
+$description = get_post_meta($post_id, 'description', true);
+?>
+
+<p>
+  <?=nl2br($description) ?>
+</p>
+
+<?PHP
 $opening_hours = nl2br(get_post_meta($post_id, 'opening_hours', true));
 
 if($opening_hours){
