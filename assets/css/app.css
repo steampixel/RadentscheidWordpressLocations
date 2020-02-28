@@ -310,6 +310,7 @@ img.is-clickable {
   flex-grow: 0 0;
   position: relative;
   height:300px;
+  min-width: 300px;
   overflow: hidden;
 }
 
