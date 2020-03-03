@@ -51,7 +51,7 @@ Bei diesem Update werden automatisch Daten mirgriert. Alle Thumbnails werden bei
 ### Melden-Formular
 Mit diesem Shortcode bindest du das Melden-Formular ein:
 ```
-[steampixel-marker-form selected-type="problem" require-address="false" show-opening-hours="false" require-image="true" name-label="Name der Problemstelle" name-placeholder="Bsp: Radweg in schlechtem Zustand" file-placeholder="Lade ein Bild der Problemstelle hoch. Bitte nimm uns etwas Arbeit ab und schwärze ggf. Kennzeichen und Gesichter." submit-value="Problemstelle melden" require-personal-data="false"]
+[steampixel-marker-form selected-type="problem" require-address="false" show-opening-hours="false" require-image="true" name-label="Name der Problemstelle" name-placeholder="Bsp: Radweg in schlechtem Zustand" file-placeholder="Lade ein Bild der Problemstelle hoch. Bitte nimm uns etwas Arbeit ab und schwärze ggf. Kennzeichen und Gesichter." submit-value="Problemstelle melden" require-personal-data="false" lat="49.78" lng="9.94"]
 ```
 
 Parameter:
@@ -75,7 +75,7 @@ Bitte denke daran, dass derzeit immer nur ein Shortcode pro Seite eingebunden we
 ### Interaktive Karte einbinden
 Mit diesem Shortcode erstellst du eine interaktive Karte:
 ```
-[steampixel-marker-map height="100vh" type="problem" button-label="Problemstelle melden" button-link="https://verkehrswende-wuerzburg.de/radentscheid/mitmachen/problemstellen-melden/"]
+[steampixel-marker-map height="100vh" type="problem" button-label="Problemstelle melden" button-link="https://verkehrswende-wuerzburg.de/radentscheid/mitmachen/problemstellen-melden/" lat="49.78" lng="9.94"]
 <h2>Problemstellen in Würzburg</h2>
 Auf dieser interaktiven Karte kannst du dich über die Situation der Radinfrastruktur in Würzburg informieren. Wir haben zahlreiche Problemstellen dokumentiert. Wenn du selbst problematische Orte melden möchtest, kannst du das <a href="https://verkehrswende-wuerzburg.de/radentscheid/mitmachen/problemstellen-melden/">auf dieser Seite</a> tun.
 [/steampixel-marker-map]
