@@ -25,7 +25,7 @@
         </label>
       </td>
       <td>
-        <input id="sp-locations_map_post_url" type="text" name="sp-locations_map_post_url" value="<?php echo get_option('sp-locations_map_post_url'); ?>" />
+        <input id="sp-locations_map_post_url" placeholder="https://" type="text" name="sp-locations_map_post_url" value="<?php echo get_option('sp-locations_map_post_url'); ?>" />
       </td>
     </tr>
 
@@ -36,7 +36,7 @@
         </label>
       </td>
       <td>
-        <input id="sp-locations_form_post_url" type="text" name="sp-locations_form_post_url" value="<?php echo get_option('sp-locations_form_post_url'); ?>" />
+        <input id="sp-locations_form_post_url" placeholder="https://" type="text" name="sp-locations_form_post_url" value="<?php echo get_option('sp-locations_form_post_url'); ?>" />
       </td>
     </tr>
 
