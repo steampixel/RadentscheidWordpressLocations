@@ -14,7 +14,7 @@
         </label>
       </td>
       <td>
-        <input id="sp-locations_notify_email" type="text" name="sp-locations_notify_email" value="<?php echo get_option('sp-locations_notify_email'); ?>" />
+        <input id="sp-locations_notify_email" type="email" name="sp-locations_notify_email" value="<?php echo get_option('sp-locations_notify_email'); ?>" />
       </td>
     </tr>
 
