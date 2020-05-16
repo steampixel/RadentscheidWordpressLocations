@@ -123,6 +123,24 @@ if($opening_hours){
   }
 ?>
 
+<?PHP
+$map_post_url = get_option('sp-locations_map_post_url');
+if(!empty($map_post_url)) {
+  ?>
+  <a href="<?=$map_post_url ?>">Zurück zur Karte</a><br>
+  <?PHP
+}
+?>
+
+<?PHP
+$form_post_url = get_option('sp-locations_form_post_url');
+if(!empty($form_post_url)) {
+  ?>
+  <a href="<?=$form_post_url ?>">Location melden</a><br>
+  <?PHP
+}
+?>
+
 <a href="<?=get_site_url().'/location-print?location='.$post_id ?>" target="_blank">Druckansicht</a>
 
 <script>

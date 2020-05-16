@@ -78,9 +78,13 @@ function spTrimText($s, $max_length = 340) {
 */
 add_action( 'admin_init', function() {
   add_option( 'sp-locations_notify_email', '');
+  add_option( 'sp-locations_map_post_url', '');
+  add_option( 'sp-locations_form_post_url', '');
   add_option( 'sp-locations_rsa_public_key', '');
   add_option( 'sp-locations_rsa_enable', false);
   register_setting( 'sp-locations_options_group', 'sp-locations_notify_email', 'myplugin_callback' );
+  register_setting( 'sp-locations_options_group', 'sp-locations_map_post_url', 'myplugin_callback' );
+  register_setting( 'sp-locations_options_group', 'sp-locations_form_post_url', 'myplugin_callback' );
   register_setting( 'sp-locations_options_group', 'sp-locations_rsa_public_key', 'myplugin_callback' );
   register_setting( 'sp-locations_options_group', 'sp-locations_rsa_enable', 'myplugin_callback' );
 } );
@@ -91,7 +95,7 @@ add_action( 'admin_init', function() {
 add_action('admin_menu', function() {
   add_options_page('Location Options', 'Location Options', 'manage_options', 'sp-locations', function() {
     echo Sp\View::render('options', [
-      
+
     ]);
   });
 });
