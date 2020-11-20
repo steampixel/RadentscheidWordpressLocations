@@ -5,6 +5,7 @@ Du kannst das Plugin hier in Aktion sehen:
 * https://www.verkehrswende-wuerzburg.de/problemstellen/
 * https://zweirat-stuttgart.de/projekte/schwachstellen-karte/
 * https://www.fahrradfreundliches-falkensee.de/schwachstellen-karte/
+* https://www.radentscheid-schwerin.de/?page_id=90
 
 ## Features
 * Jede:r kann Problemstellen melden
