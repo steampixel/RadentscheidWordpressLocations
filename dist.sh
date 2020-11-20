@@ -4,7 +4,7 @@ read -p "Enter the new package version: "  version
 echo The new version is $version
 
 # Promt for confirmation
-read -p "Is that correct? " -n 1 -r
+read -p "Is that correct? (Type Y) " -n 1 -r
 echo    # (optional) move to a new line
 if [[ ! $REPLY =~ ^[Yy]$ ]]
 then
@@ -27,3 +27,7 @@ git add dist
 
 # Commit
 git commit -m "Moved to version $version"
+
+# Tag
+git tag $version master
+git push --follow-tags

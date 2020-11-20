@@ -83,6 +83,7 @@ if($contact_person||$email||$telephone) {
     You should therefore delete the data of the activists when you no longer need them.
     The worst case would be if unprivileged have access to this data.
   </sub>
+  <br>
   <input type="submit" class="button" style="color:red;" value="Permanently destroy this contact data" name="sp_remove_activist_data">
 
   <?PHP

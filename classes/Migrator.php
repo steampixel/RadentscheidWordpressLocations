@@ -2,7 +2,7 @@
 
 namespace Sp;
 
-// The Migrator calss will help us to migrate our data to the next version of this plugin
+// The Migrator class will help us to migrate our data to the next version of this plugin
 // Every migration will only run once
 // Every migration will only run, if the version of the migration file is higher than the last done migration
 // Furthermore a migration will only run if the current version of the software is the same as the migration or higher

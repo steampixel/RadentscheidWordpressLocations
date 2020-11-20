@@ -7,29 +7,29 @@ add_action( 'init', function () {
 
   // Set UI labels for Custom Post Type
   $labels = array(
-    'name'                => _x( 'Locations', 'Post Type General Name', 'twentythirteen' ),
-    'singular_name'       => _x( 'Location', 'Post Type Singular Name', 'twentythirteen' ),
-    'menu_name'           => __( 'Locations', 'twentythirteen' ),
-    'parent_item_colon'   => __( 'Parent Location', 'twentythirteen' ),
-    'all_items'           => __( 'All Locations', 'twentythirteen' ),
-    'view_item'           => __( 'View Location', 'twentythirteen' ),
-    'add_new_item'        => __( 'Add New Location', 'twentythirteen' ),
-    'add_new'             => __( 'Add New', 'twentythirteen' ),
-    'edit_item'           => __( 'Edit Location', 'twentythirteen' ),
-    'update_item'         => __( 'Update Location', 'twentythirteen' ),
-    'search_items'        => __( 'Search Location', 'twentythirteen' ),
-    'not_found'           => __( 'Not Found', 'twentythirteen' ),
-    'not_found_in_trash'  => __( 'Not found in Trash', 'twentythirteen' ),
+    'name'                => 'Locations',
+    'singular_name'       => 'Location',
+    'menu_name'           => 'Locations',
+    'parent_item_colon'   => 'Parent Location',
+    'all_items'           => 'All Locations',
+    'view_item'           => 'View Location',
+    'add_new_item'        => 'Add New Location',
+    'add_new'             => 'Add New',
+    'edit_item'           => 'Edit Location',
+    'update_item'         => 'Update Location',
+    'search_items'        => 'Search Location',
+    'not_found'           => 'Not Found',
+    'not_found_in_trash'  => 'Not found in Trash',
   );
 
   // Set other options for Custom Post Type
 
   $args = array(
-    'label'               => __( 'locations', 'twentythirteen' ),
-    'description'         => __( 'Location news and reviews', 'twentythirteen' ),
+    'label'               => 'locations',
+    'description'         => 'Location news and reviews',
     'labels'              => $labels,
     // Features this CPT supports in Post Editor
-    'supports'            => array( 'title', 'revisions', 'custom-fields', ), // 'editor', 'excerpt', 'author', 'thumbnail', 'comments',
+    'supports'            => array( 'title', 'revisions', 'custom-fields', 'comments' ), // 'editor', 'excerpt', 'author', 'thumbnail', 'comments',
     // You can associate this CPT with a taxonomy or custom taxonomy.
     // 'taxonomies'          => array( 'genres' ),
     /* A hierarchical CPT is like Pages and can have

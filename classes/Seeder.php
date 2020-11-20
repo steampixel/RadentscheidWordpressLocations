@@ -29,7 +29,7 @@ class Seeder {
       }
     }
 
-    // Remember migrations
+    // Remember seeds
     update_option('steampixel_locations_last_seeds', $last_seeds);
 
   }

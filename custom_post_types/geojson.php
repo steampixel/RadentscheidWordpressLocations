@@ -7,17 +7,17 @@ add_action( 'init', function () {
 
   // Set UI labels for Custom Post Type
   $labels = array(
-    'name'                => 'Markers',
-    'singular_name'       => 'Marker',
-    'menu_name'           => 'Markers',
-    'parent_item_colon'   => 'Parent Marker',
-    'all_items'           => 'All Markers',
-    'view_item'           => 'View Markers',
-    'add_new_item'        => 'Add New Marker',
+    'name'                => 'GeoJSONs',
+    'singular_name'       => 'GeoJSON',
+    'menu_name'           => 'GeoJSONs',
+    'parent_item_colon'   => 'Parent GeoJSON',
+    'all_items'           => 'All GeoJSONs',
+    'view_item'           => 'View GeoJSONs',
+    'add_new_item'        => 'Add New GeoJSON',
     'add_new'             => 'Add New',
-    'edit_item'           => 'Edit Marker',
-    'update_item'         => 'Update Marker',
-    'search_items'        => 'Search Marker',
+    'edit_item'           => 'Edit GeoJSON',
+    'update_item'         => 'Update GeoJSON',
+    'search_items'        => 'Search GeoJSON',
     'not_found'           => 'Not Found',
     'not_found_in_trash'  => 'Not found in Trash'
   );
@@ -25,11 +25,11 @@ add_action( 'init', function () {
   // Set other options for Custom Post Type
 
   $args = array(
-    'label'               => 'markers',
-    'description'         => 'Marker news and reviews',
+    'label'               => 'geojson',
+    'description'         => 'GeoJSON news and reviews',
     'labels'              => $labels,
     // Features this CPT supports in Post Editor
-    'supports'            => array( 'title', 'revisions', 'custom-fields', ), // 'editor', 'excerpt', 'author', 'thumbnail', 'comments',
+    'supports'            => array( 'title', 'revisions', 'custom-fields' ), // 'editor', 'excerpt', 'author', 'thumbnail', 'comments',
     // You can associate this CPT with a taxonomy or custom taxonomy.
     // 'taxonomies'          => array( 'genres' ),
     /* A hierarchical CPT is like Pages and can have
@@ -52,7 +52,7 @@ add_action( 'init', function () {
   );
 
   // Registering your Custom Post Type
-  register_post_type( 'marker', $args );
+  register_post_type( 'geojson', $args );
 
 }, 0 );
 
@@ -61,7 +61,7 @@ add_action( 'init', function () {
 */
 add_action( 'template_redirect', function () {
   $queried_post_type = get_query_var('post_type');
-  if ( is_single() && 'marker' ==  $queried_post_type ) {
+  if ( is_single() && 'geojson' ==  $queried_post_type ) {
     wp_redirect( home_url(), 301 );
     exit;
   }
@@ -71,5 +71,5 @@ add_action( 'template_redirect', function () {
   Exclude One Content Type From Yoast SEO Sitemap
 */
 add_filter( 'wpseo_sitemap_exclude_post_type', function ( $value, $post_type ) {
-if ( $post_type == 'marker' ) return true;
+if ( $post_type == 'geojson' ) return true;
 }, 10, 2 );

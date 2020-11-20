@@ -32,9 +32,27 @@
 
       }
 
+			$markers = get_posts( [
+				'post_type' => 'marker',
+				'meta_query' => array(
+					 array(
+						 'key' => 'key',
+						 'value' => trim(get_post_meta($post_id, 'type', true)),
+						 'compare' => '='
+					 )
+			 )
+			] );
+
+			if($markers) {
+
+				$marker = $markers[0];
+				$marker_icon = get_post_meta($marker->ID, 'icon', true);
+
+			}
+
     ?>
 
-    <div id="mymap" style="height:500px;width:1000px;"></div>
+		<div class="sp-mini-map" data-zoom="18" data-icon="<?=$marker_icon ?>" data-lat="<?=get_post_meta($post_id, 'lat', true) ?>" data-lng="<?=get_post_meta($post_id, 'lng', true) ?>" data-title="<?=get_post_meta($post_id, 'title', true) ?>" data-type="<?=get_post_meta($post_id, 'type', true) ?>"></div>
 
     <p>
       <strong>Adresse</strong><br>
@@ -110,52 +128,6 @@
     <script type='text/javascript' src="<?=plugins_url( 'assets/js/app.js', dirname(__FILE__ )) ?>"></script>
     <link rel='stylesheet' type='text/css' media='all' href="<?=plugins_url( 'assets/css/app.css', dirname(__FILE__ )) ?>" />
 
-    <script>
-
-    <?PHP
-
-    $markers = get_posts( [
-      'post_type' => 'marker',
-      'meta_query' => array(
-         array(
-           'key' => 'key',
-           'value' => trim(get_post_meta($post_id, 'type', true)),
-           'compare' => '='
-         )
-     )
-    ] );
-
-    if($markers) {
-
-      $marker = $markers[0];
-      $marker_icon = get_post_meta($marker->ID, 'icon', true);
-
-    }
-
-    ?>
-
-    document.addEventListener("DOMContentLoaded", function(event) {
-
-      var mymap = L.map('mymap').setView([<?=get_post_meta($post_id, 'lat', true) ?>, <?=get_post_meta($post_id, 'lng', true) ?>], 18);
-
-      mymap.attributionControl.addAttribution('&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors');
-
-      L.tileLayer('https://{s}.tile.osm.org/{z}/{x}/{y}.png', {
-
-      }).addTo(mymap);
-
-      var icon = L.divIcon({
-         className: 'map-marker',
-         iconSize:null,
-         html:'<div class="sp-map-marker sp-map-marker-<?=get_post_meta($post_id, 'type', true) ?>" title="<?=$post_title ?>"><img style="height:100%;width:auto;" src="<?=$marker_icon ?>"></div>'
-       });
-
-      // Add marker
-      mymarker = L.marker([<?=get_post_meta($post_id, 'lat', true) ?>, <?=get_post_meta($post_id, 'lng', true) ?>], {icon: icon}).addTo(mymap);
-
-    });
-
-    </script>
 
   </body>
 

@@ -1,256 +1,138 @@
-<div id="mymap" style="height:<?=$height ?>;">
 
-  <!-- <div class="sp-map-button">
-    <input type="button" value="Beschreibung öffnen" onclick="openModal('modal-welcome')">
-  </div> -->
+<div
+  class="sp-map"
+  data-lat="<?=$lat ?>"
+  data-lng="<?=$lng ?>"
+  data-zoom="<?=$zoom ?>"
+  data-cluster-icon="<?=plugin_dir_url(__DIR__).'assets/img/marker_cluster.svg'; ?>"
+  >
+
+  <div class="sp-map-leaflet" style="height:<?=$height ?>;"></div>
+
+  <div class="sp-map-navigation">
+
+    <?PHP
+    if($layers) {
+    ?>
+      <div class="sp-map-button sp-map-filter-button">
+        <span class="sp-map-button-icon">✔</span>
+        <span class="sp-map-button-label sp-hidden md:sp-block">Ebenen filtern</span>
+      </div>
+    <?PHP
+    }
+    ?>
+
+    <?PHP
+    // Draw custom map button
+    if($button_label) {
+      ?>
+        <a class="sp-map-button" href="<?=$button_link ?>">
+          <span class="sp-map-button-icon">🔔</span>
+          <span class="sp-map-button-label sp-hidden md:sp-block"><?=$button_label ?></span>
+        </a>
+      <?PHP
+    }
+    ?>
+
+  </div>
 
   <?PHP
-  if($button_label){
+
+  // Draw marker filters
+  if($layers) {
+
     ?>
-    <div class="sp-map-button">
-      <a href="<?=$button_link ?>"><input type="button" value="<?=$button_label ?>"></a>
+
+    <div class="sp-map-filters">
+
+        <?PHP
+
+        foreach($layers as $category => $category_layers) {
+
+          ?>
+
+          <div class="sp-map-filter-category">
+
+            <div class="sp-map-filter-category-header"><?=$category ?></div>
+
+            <div class="sp-map-filter-category-body">
+
+            <?PHP
+
+            foreach($category_layers as $layer) {
+
+              if($layer['type'] == 'marker') {
+                ?>
+
+                <label class="sp-map-filter">
+                  <div class="sp-map-filter-icon">
+                    <img class="sp-map-filter-image" src="<?=$layer['filter_icon'] ?>">
+                    <input type="checkbox" class="sp-map-filter-checkbox sp-map-filter-checkbox-marker" data-type="marker" data-key="<?=$layer['key'] ?>" checked>
+                  </div>
+                  <div class="sp-map-filter-label"><?=$layer['title'] ?></div>
+                </label>
+
+                <?PHP
+              }
+
+              if($layer['type'] == 'geojson') {
+
+                ?>
+
+                <label class="sp-map-filter">
+                  <div class="sp-map-filter-icon">
+                    <div class="sp-map-filter-color" style="background-color:<?=$layer['color'] ?>;opacity:<?=$layer['opacity'] ?>;"></div>
+                    <input type="checkbox" class="sp-map-filter-checkbox sp-map-filter-checkbox-geojson" data-type="geojson" data-key="<?=$layer['key'] ?>" checked>
+                  </div>
+                  <div class="sp-map-filter-label"><?=$layer['title'] ?></div>
+                </label>
+
+                <?PHP
+              }
+
+            }
+
+            ?>
+
+            </div>
+
+          </div>
+
+          <?PHP
+
+        }
+
+        ?>
+
+      <div class="sp-map-button sp-map-filter-close">
+        <span class="sp-map-button-icon">×</span>
+        <span class="sp-map-button-label">Schließen</span>
+      </div>
+
     </div>
     <?PHP
-  }
-  ?>
 
-  <!-- <div class="sp-map-filter">
-    <label>
-      <input type="checkbox" checked onclick="toggleDisplay('.marker-sign')">📋 Sammelstellen anzeigen
-    </label>
-    <br>
-    <label>
-      <input type="checkbox" checked onclick="toggleDisplay('.marker-problem')">⚡ Problemstellen anzeigen
-    </label>
-  </div> -->
+  }
+
+  ?>
 
 </div>
 
 <?PHP
-if($content){
+// Create a welcome modal
+if($content) {
   ?>
-  <div id="welcome" class="sp-modal sp-is-active sp-use-hash">
+  <div class="sp-modal sp-modal-welcome">
     <div class="sp-modal-content">
-      <div class="sp-modal-close">×</div>
+      <div class="sp-modal-close sp-modal-close-trigger">×</div>
 
       <?=$content ?>
 
       <br><br>
-      <input type="button" value="Alles klar" onclick="closeModalViaHash('welcome')">
+      <input type="button" class="sp-modal-close-trigger" value="Alles klar">
 
     </div>
   </div>
   <?PHP
 }
 ?>
-
-<?PHP
-
-foreach($locations as $location){
-
-  $type = get_post_meta($location->ID, 'type', true);
-
-  ?>
-  <div id="<?=$location->ID; ?>" class="sp-modal sp-use-hash">
-    <div class="sp-modal-content">
-      <div class="sp-modal-close">×</div>
-
-      <h2>
-        <?PHP /*<img style="height:40px;width:auto;margin-right:16px;" src="<?=plugins_url().'/sp-locations/assets/img/marker.svg' ?>"> */ ?>
-        <?=$location->post_title ?>
-      </h2>
-
-      <?php
-
-      $type = get_post_meta( $location->ID, 'type', true );
-
-      if($type) {
-
-        $type_posts = get_posts( [
-          'numberposts' => -1,
-          'post_type' => 'marker',
-          'meta_query' => array(
-             array(
-               'key' => 'key',
-               'value' => $type,
-               'compare' => '='
-             )
-         )
-        ] );
-
-      }
-      ?>
-
-      <?PHP
-        $images = get_post_meta( $location->ID, 'images', true );
-
-        if($images) {
-          ?>
-          <img class="sp-has-margin-bottom-2" data-src='<?=spGetUploadUrl().'/sp-locations/'.$location->ID.'/600/'.$images[0]['src'] ?>'>
-          <?PHP
-        }
-      ?>
-      <p>
-
-        <?PHP
-        if($type_posts) {
-          ?>
-          <strong><?=$type_posts[0]->post_title ?>: </strong>
-          <?PHP
-        }
-
-        ?>
-
-        <?PHP
-        $description = get_post_meta($location->ID, 'description', true);
-        ?>
-
-        <?=spTrimText($description) ?>
-
-
-        <a href="<?=get_permalink($location->ID) ?>">Details anzeigen</a>
-      </p>
-
-
-      <?PHP
-
-      $solution = nl2br(get_post_meta($location->ID, 'solution', true));
-      $opening_hours = nl2br(get_post_meta($location->ID, 'opening_hours', true));
-
-      ?>
-
-
-
-      <p>
-        <strong>Adresse:</strong>
-        <?=get_post_meta($location->ID, 'street', true) ?> <?=get_post_meta($location->ID, 'house_number', true) ?>,
-        <?=get_post_meta($location->ID, 'postcode', true) ?> <?=get_post_meta($location->ID, 'place', true) ?>
-        <!-- <?=get_post_meta($location->ID, 'suburb', true) ?> -->
-      </p>
-
-      <input type="button" value="schließen" onclick="closeModalViaHash('<?=$location->ID; ?>')">
-
-    </div>
-  </div>
-<?PHP
-}
-?>
-
-<script>
-
-  document.addEventListener("DOMContentLoaded", function(event) {
-
-    var mymap = L.map('mymap');
-
-    mymap.attributionControl.addAttribution('&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors');
-
-    var initialLat = <?=$lat ?>;
-    var initialLng = <?=$lng ?>;
-    var initialZoom = <?=$zoom ?>;
-
-    // Check the hash manager for initial position data
-    if(myHashmanager.has('lat')){
-      initialLat = myHashmanager.get('lat');
-    }
-    if(myHashmanager.has('lng')){
-      initialLng = myHashmanager.get('lng');
-    }
-    if(myHashmanager.has('zoom')){
-      initialZoom = myHashmanager.get('zoom');
-    }
-
-    mymap.setView([initialLat, initialLng], initialZoom);
-
-    // Register hash change events
-    myHashmanager.on('lat', function(lat){
-      var center = mymap.getCenter();
-      center.lat = lat;
-      var zoom = mymap.getZoom();
-      mymap.setView(center, zoom);
-    });
-    myHashmanager.on('lng', function(lng){
-      var center = mymap.getCenter();
-      center.lng = lng;
-      var zoom = mymap.getZoom();
-      mymap.setView(center, zoom);
-    });
-    myHashmanager.on('zoom', function(zoom){
-      var center = mymap.getCenter();
-      mymap.setView(center, zoom);
-    });
-
-    // Store the current zoom and position in the hash
-    mymap.on('zoomend', function() {
-      myHashmanager.set('zoom', mymap.getZoom());
-    });
-
-    mymap.on('moveend', function(e) {
-      var center = mymap.getCenter();
-      myHashmanager.set('lat', center.lat);
-      myHashmanager.set('lng', center.lng);
-    });
-
-    L.tileLayer('https://{s}.tile.osm.org/{z}/{x}/{y}.png', {}).addTo(mymap);
-
-    var markers = L.markerClusterGroup({
-    	spiderfyOnMaxZoom: true,
-    	showCoverageOnHover: false,
-    	zoomToBoundsOnClick: true,
-      removeOutsideVisibleBounds: true,
-      iconCreateFunction: function(cluster) {
-    		return L.divIcon({ html: '<div class="sp-map-marker sp-map-marker-cluster"><img style="height:100%;width:auto;" src="<?=plugin_dir_url(__DIR__).'assets/img/marker_cluster.svg'; ?>"><div class="sp-map-marker-info">' + cluster.getChildCount() + '</div></div>' });
-    	}
-    });
-
-    <?PHP
-
-    foreach($locations as $location){
-
-      $type = get_post_meta($location->ID, 'type', true);
-
-      $markers = get_posts( [
-        'post_type' => 'marker',
-        'meta_query' => array(
-           array(
-             'key' => 'key',
-             'value' => trim($type),
-             'compare' => '='
-           )
-       )
-      ] );
-
-      if($markers){
-
-        $marker = $markers[0];
-        $marker_icon = get_post_meta($marker->ID, 'icon', true);
-        ?>
-
-        var icon = L.divIcon({
-           className: 'map-marker',
-           iconSize:null,
-           html:'<div class="sp-map-marker sp-map-marker-<?=$type ?>" title="<?=$location->post_title ?>"><img style="height:100%;width:auto;" src="<?=$marker_icon ?>"></div>'
-         });
-
-        var marker = L.marker([<?=get_post_meta($location->ID, 'lat', true) ?>, <?=get_post_meta($location->ID, 'lng', true) ?>], {icon: icon}).on('click', function(e) {
-          // console.log(e);
-          openModalViaHash(<?=$location->ID ?>);
-
-        });
-
-        markers.addLayer(marker);
-
-
-
-        <?PHP
-      }
-
-
-    }
-
-    ?>
-
-    mymap.addLayer(markers);
-
-  });
-
-</script>

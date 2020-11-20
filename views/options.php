@@ -10,11 +10,11 @@
     <tr valign="top">
       <td scope="row" style="width:200px;text-align:right;">
         <label for="sp-locations_notify_email">
-          <strong>Email für die Benachrichtigung bei neu eingereichten Locations</strong><br>
+          <strong>Benachrichtigungen bei neu eingereichten Locations an folgende Mailadressen senden (Eine Mailadresse pro Zeile)</strong><br>
         </label>
       </td>
       <td>
-        <input id="sp-locations_notify_email" type="email" name="sp-locations_notify_email" value="<?php echo get_option('sp-locations_notify_email'); ?>" />
+        <textarea style="height:200px;width:100%;" id="sp-locations_notify_email" name="sp-locations_notify_email" ><?php echo get_option('sp-locations_notify_email'); ?></textarea>
       </td>
     </tr>
 
