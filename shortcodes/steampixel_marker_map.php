@@ -31,7 +31,10 @@ add_shortcode( 'steampixel-marker-map', function($atts = [], $content = null, $t
   // Get the markers
   $query = [
     'numberposts' => -1,
-    'post_type' => 'marker'
+    'post_type' => 'marker',
+    'orderby'   => 'meta_value_num',
+    'meta_key'  => 'order',
+    'order'   => 'ASC'
   ];
 
   if($attributes['type']) {
@@ -55,7 +58,10 @@ add_shortcode( 'steampixel-marker-map', function($atts = [], $content = null, $t
   // Get the geoJSONs
   $query = [
     'numberposts' => -1,
-    'post_type' => 'geojson'
+    'post_type' => 'geojson',
+    'orderby'   => 'meta_value_num',
+    'meta_key'  => 'order',
+    'order'   => 'ASC'
   ];
 
   if($attributes['geojson']) {
@@ -89,9 +95,10 @@ add_shortcode( 'steampixel-marker-map', function($atts = [], $content = null, $t
       $category = get_cat_name($categories[0]);
     }
 
-    // Get some dato for this layer
+    // Get some data for this layer
     $marker_key = get_post_meta($marker->ID, 'key', true);
     $marker_filter_icon = get_post_meta($marker->ID, 'filter_icon', true);
+    $marker_order = get_post_meta($marker->ID, 'order', true);
     $marker_title = $marker->post_title;
 
     // Create category in array
@@ -105,7 +112,8 @@ add_shortcode( 'steampixel-marker-map', function($atts = [], $content = null, $t
       'category' => $category,
       'key' => $marker_key,
       'filter_icon' => $marker_filter_icon,
-      'title' => $marker_title
+      'title' => $marker_title,
+      'order' => $marker_order
     ]);
 
   }
@@ -124,6 +132,7 @@ add_shortcode( 'steampixel-marker-map', function($atts = [], $content = null, $t
     $geojson_key = get_post_meta($geojson->ID, 'key', true);
     $geojson_color = get_post_meta($geojson->ID, 'color', true);
     $geojson_opacity = get_post_meta($geojson->ID, 'opacity', true);
+    $geojson_order = get_post_meta($geojson->ID, 'order', true);
     // $geojson_icon = get_post_meta($geojson->ID, 'icon', true);
     $geojson_title = $geojson->post_title;
 
@@ -139,9 +148,19 @@ add_shortcode( 'steampixel-marker-map', function($atts = [], $content = null, $t
       'key' => $geojson_key,
       'title' => $geojson_title,
       'color' => $geojson_color,
-      'opacity' => $geojson_opacity
+      'opacity' => $geojson_opacity,
+      'order' => $geojson_order
     ]);
 
+  }
+
+  // Sort the items inside the categoryes by order
+  foreach($layers as &$category) {
+    usort($category, function ($a, $b) {
+      echo ':'.$a['order'];
+      echo ':'.$b['order'];
+      return $a['order']>$b['order'];
+    });
   }
 
   // print_r($layers);

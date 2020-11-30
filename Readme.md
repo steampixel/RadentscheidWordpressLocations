@@ -94,15 +94,21 @@ Parameter:
 * type: Die Schlüssel der Marker, die gezählt werden sollen. Beispiel: "problem_side_walk", "solved_bike" oder multiple Marker mit Komma getrennt: "solved_side_walk, solved_bike"
 
 ## Neue Marker-Typen anlegen oder ändern
-Du kannst neue Marker-Typen anlegen. Sie dir dazu einen bereits vorhandenen Marker an. Jeder Marker benötigt die dort hinterlegten Felder, um korrekt zu funktionieren. Bitte achte darauf, dass der Schlüssel (Key) zusammengeschrieben werden muss und keine Sonderzeichen enthalten sollte. Dieser Punkt des Plugins ist momentan leider noch etwas rudimentär.
+Du kannst neue Marker-Typen anlegen. Sie dir dazu einen bereits vorhandenen Marker an. Jeder Marker benötigt die dort hinterlegten Custom-Felder, um korrekt zu funktionieren. Folgende Felder werden benötigt:
+* key: Der interne Schlüssel des Markers. Zum Beispiel "problem_bike". Bitte zusammen schreiben sowie auf Sonderzeichen verzichten.
+* order: Die Reihenfolge als ganze Zahl, die dieser Marker im Filter einnimmt.
+* icon: Der relative Pfad zu einem Icon, welches auf der Karte angezeigt wird.
+* filter_icon: Der relative Pfad zu einem Icon, welches im Filter angezeigt wird.
 
 ## Eigene GeoJSONs in die Karte einbetten
 Du kannst unter dem Punkt GeoJSONs neue Einträge anlegen und damit Strukturen auf den Karten anzeigen. Mit diesem Plugin kannst du nicht selbst GeoJSONs erstellen. Dazu kannst du zum Beispiel Services wie https://umap.openstreetmap.fr/de/ verwenden und deine Strukturen dort als GeoJSON exportieren und in das Plugin einfügen. Damit die Strukturen richtig angezeigt werden, musst du folgende Custom-Felder in den Einträgen der GeoJSONs anlegen:
+* key: Den Schlüssel der Struktur zur Verwendung im Karten-Shortcode zum Beispiel "my_new_structure" (Bitte zusammenschreiben und auf Sonderzeichen verzichten)
 * color: Die Farbe der Struktur als Hexadezimalwert zum Beispiel "#ffcccc"
 * geojson: Hier wird das komplette GeoJSON als Text eingefügt
-* key: Den Schlüssel der Struktur zur Verwendung im Karten-Shortcode zum Beispiel "my_new_structure" (Bitte zusammenschreiben und auf Sonderzeichen verzichten)
 * opacity: Transparenz der Struktur zum Beispiel "0.5"
 * weight: Die Stärke der Struktur, zum Beispiel "10"
+* order: Die Reihenfolge als ganze Zahl, die dieser Marker im Filter einnimmt.
+* description: Ein kleiner Text, der beim Klick auf die Struktur auf der Karte angezeigt wird.
 
 Die veröffentlichten GeoJSONs werden dann auf der Karte und in den Kartenfiltern angezeigt und sind auch in der API verfügbar. Auch die Pflege der GeoJSONs ist leider momentan noch etwas rudimentär.
 
