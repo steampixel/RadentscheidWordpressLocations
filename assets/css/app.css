@@ -277,9 +277,10 @@
   width:100%;
 }
 
-@media (min-width:1024px) {
+@media (min-width:768px) {
   .sp-map-filters {
-    max-width: 50%;
+    width:auto;
+    max-width:50%;
   }
 }
 
