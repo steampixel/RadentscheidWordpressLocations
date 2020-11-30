@@ -109,8 +109,9 @@ Du kannst unter dem Punkt GeoJSONs neue Einträge anlegen und damit Strukturen a
 * weight: Die Stärke der Struktur, zum Beispiel "10"
 * order: Die Reihenfolge als ganze Zahl, die dieser Marker im Filter einnimmt.
 * description: Ein kleiner Text, der beim Klick auf die Struktur auf der Karte angezeigt wird.
+* url: Link zu einer Seite mit mehr Informationen zu der Struktur.
 
-Die veröffentlichten GeoJSONs werden dann auf der Karte und in den Kartenfiltern angezeigt und sind auch in der API verfügbar. Auch die Pflege der GeoJSONs ist leider momentan noch etwas rudimentär.
+Die veröffentlichten GeoJSONs werden dann auf der Karte und in den Kartenfiltern angezeigt und sind auch in der API verfügbar.
 
 ## E-Mail Benachrichtigungen aktivieren
 Das Plugin kann automatisch bei neuen Meldungen Emails an ein oder mehrere Empfänger:innen senden. Diese Funktion kannst du folgendermaßen aktivieren:
