@@ -945,27 +945,31 @@ function spXhrForm(formElement) {
 
         // Verify the data
         var hint = formElement.querySelector(".sp-xhr-form-hint[data-input='"+formInput.name+"']");
+        var verified = true;
         if(hint) {
           if(!formInput.checkValidity()){
             hint.classList.remove('sp-hidden');
+            verified = false;
           } else {
             hint.classList.add('sp-hidden');
+            verified = true;
           }
         }
 
-
-        if(formInput.type=='file') {
-          // Add files
-          formData.append(formInput.name, formInput.files[0], formInput.files[0].name);
-        } else {
-          // Add other form fields
-          // Encrypt the data
-          if(enableRsa&&formInput.dataset.encrypt != undefined) {
-            // Encrypt the data and append it
-            formData.append(formInput.name, encrypt.encrypt(formInput.value));
+        if(verified) {
+          if(formInput.type=='file') {
+            // Add files
+            formData.append(formInput.name, formInput.files[0], formInput.files[0].name);
           } else {
-            // Simply append the data without encryption
-            formData.append(formInput.name, formInput.value);
+            // Add other form fields
+            // Encrypt the data
+            if(enableRsa&&formInput.dataset.encrypt != undefined) {
+              // Encrypt the data and append it
+              formData.append(formInput.name, encrypt.encrypt(formInput.value));
+            } else {
+              // Simply append the data without encryption
+              formData.append(formInput.name, formInput.value);
+            }
           }
         }
 

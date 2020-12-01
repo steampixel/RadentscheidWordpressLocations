@@ -42,7 +42,7 @@
             </span>
             <img class="sp-file-uploader-image">
           </label>
-          <div class="sp-xhr-form-hint sp-has-text-red sp-hidden" data-input="file">Bitte wähle ein Bild aus!</div>
+          <div class="sp-xhr-form-hint sp-has-text-red sp-hidden" data-input="image">Bitte wähle ein Bild aus!</div>
         </div>
       </div>
     </div>
