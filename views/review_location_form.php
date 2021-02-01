@@ -13,7 +13,7 @@ if ($action) {
         if ($post->post_status != 'publish') {
             $post->post_status = 'publish';
             wp_update_post( $post );
-            ?> <h2>Approved <?=$post->post_title ?> </h2> <?PHP
+            ?> <div class="sp-xhr-form-success sp-has-text-green">Post "<?=$post->post_title ?>" freigegeben.</div> <?PHP
             $next = 1;
         }
         else {
@@ -29,7 +29,7 @@ if ($action) {
             if ($_GET['street']) update_post_meta( $post_id, 'street', $_GET['street']);
             if ($_GET['$house_number']) update_post_meta( $post_id, '$house_number', $_GET['$house_number']);
             wp_update_post( $post );
-            ?> <h2>Approved <?=$post->post_title ?> </h2> <?PHP
+            ?> <div class="sp-xhr-form-success sp-has-text-green">Post "<?=$post->post_title ?>" mit neuer Position freigegeben.</div> <?PHP
             $next = 1;
         ?> 
         <h2>Update <?=$post_id ?> </h2>
@@ -47,8 +47,8 @@ if ($action) {
 if ($next) {
     $query = new WP_Query ( array ( 'post_type' => 'location', 'post_status' => 'draft', 'posts_per_page' => -1));
     $pending = array_reverse($query->posts);
-    ?> <h2><?=count($pending) ?> reviews pending.</h2> <?PHP
     if (count($pending) > 0) {
+        ?> <h2><?=count($pending) ?> reviews pending.</h2> <?PHP
         $i = 0;
         for (; $i < count($pending); $i++) {
             if ($pending[$i]->ID > $post_id) break;
