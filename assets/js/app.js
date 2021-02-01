@@ -621,7 +621,6 @@ spReady(function() {
       }
 
       var mapFilterButton = mapElement.querySelector(".sp-map-filter-button");
-      var mapFilterClose = mapElement.querySelector(".sp-map-filter-close");
       var mapFilters = mapElement.querySelector(".sp-map-filters");
 
       // Add filter button
@@ -631,7 +630,7 @@ spReady(function() {
       });
 
       // Add click to filter close button
-      mapFilterClose.addEventListener('click', function () {
+      mapFilters.addEventListener('mouseleave', function () {
         mapFilters.classList.remove('active');
         mapFilterButton.classList.add('active');
       });
@@ -788,17 +787,24 @@ function spLocationPicker(locationPickerElement) {
     updateAddressFromCoordinates(lat, lng);
   });
 
-  // Auto get coordinates from browser
-  spGetGeolocation(function (position) {
-    var lat = position.coords.latitude;
-    var lng = position.coords.longitude;
-    mymap.setView([lat, lng], 13)
+  if (inputLatElement.value == '') {
+    // Auto get coordinates from browser
+    spGetGeolocation(function (position) {
+      var lat = position.coords.latitude;
+      var lng = position.coords.longitude;
+      mymap.setView([lat, lng], 13)
+      mymarker.setLatLng([lat, lng]);
+      updateAddressFromCoordinates(lat, lng);
+    }, function (error) {
+      mapHintElement.classList.add('sp-is-active');
+    })
+  }
+  else {
+    var lat = inputLatElement.value;
+    var lng = inputLngElement.value;
+    mymap.setView([lat, lng]);
     mymarker.setLatLng([lat, lng]);
-    updateAddressFromCoordinates(lat, lng);
-  }, function (error) {
-    mapHintElement.classList.add('sp-is-active');
-  })
-
+  }
 }
 spReady(function () {
 
