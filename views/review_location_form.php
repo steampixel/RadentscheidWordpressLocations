@@ -76,9 +76,17 @@ $place = get_post_meta( $post_id, 'place', true );
 $street = get_post_meta( $post_id, 'street', true );
 $house_number = get_post_meta( $post_id, 'house_number', true );
 $images = get_post_meta( $post_id, 'images', true );
+
+if ($post->post_type != 'location' ) {
+    ?> <div class="sp-xhr-form-success sp-has-text-red">Unexpected post type "<?=$post->post_type ?>".</div> <?PHP
+    return;
+}
+if ($post->post_status == 'publish' ) {
+    ?> <div class="sp-xhr-form-success">Location ist bereits &ouml;ffentlich.</div> <?PHP
+}
 ?>
 
-<form method="get" action="/review" autocomplete="off">
+<form method="get" action="/review" autocomplete="off" onsubmit="return spOnReviewSubmit('<?=get_option('sp-locations_form_review_url').'?id='.$post_id; ?>');" >
 
   <input id="id" type='hidden' name='id' value="<?=$post_id ?>">
 

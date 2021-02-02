@@ -1120,3 +1120,10 @@ spReady(function () {
   }
 
 });
+// Avoid passing unnecessary form fields
+function spOnReviewSubmit(path) {
+    var action = document.getElementById("action").value;
+    if (action == 'update') return true;
+    window.location.href = path + '&action=' + action;
+    return false;
+}

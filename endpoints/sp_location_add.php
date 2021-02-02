@@ -195,7 +195,7 @@ function sp_location_add () {
       $message = "Hey! Aktivisti haben soeben eine neue Location auf deiner Website '".$site."' gemeldet.\r\n";
       $message.= "Name der Location: ".$_POST['title']."\r\n";
       $message.= "Melde dich an, um die Location zu prüfen und freizuschalten.\r\n";
-      $message.= "https://schwabach-bewegen.de/review?id=".$post_id."\r\n";
+      $message.= get_option('sp-locations_form_review_url').'?id='.$post_id."\r\n";
       foreach($email_addresses as $email_address) {
         wp_mail( $email_address, 'Neue Location auf '.$site, $message);
       }
