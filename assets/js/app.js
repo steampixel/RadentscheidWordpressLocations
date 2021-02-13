@@ -347,40 +347,6 @@ function spTruncate( str, n, useWordBoundary ){
 // }
 
 /*
-  Welcome modal
-*/
-spReady(function() {
-
-  var elements = document.querySelectorAll(".sp-modal-welcome");
-
-  for (var i = 0; i < elements.length; ++i) {
-
-    // Isolate the element scope
-    (function(element) {
-
-      // Close triggers
-      var closeTriggers = element.getElementsByClassName("sp-modal-close-trigger");
-      for (var c = 0; c < closeTriggers.length; ++c) {
-        (function(closeTrigger) {
-          closeTrigger.addEventListener("click", function () {
-            element.classList.remove('sp-is-active');
-          });
-        })(closeTriggers[c]);
-      }
-
-      // Open the element one time
-      if(!localStorage.getItem('welcome_modal_shown')) {
-        element.classList.add('sp-is-active');
-        localStorage.setItem('welcome_modal_shown', true);
-      }
-
-    })(elements[i]);
-
-  }
-
-});
-
-/*
   Location Map
 */
 spReady(function() {
