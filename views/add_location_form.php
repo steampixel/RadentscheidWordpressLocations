@@ -1,5 +1,5 @@
 
-<form class="sp-xhr-form" method="post" action="/wp-admin/admin-ajax.php?action=splocationadd" <?=(get_option('sp-locations_rsa_enable')? 'data-enable-rsa-encryption="true" data-rsa-public-key="'.get_option('sp-locations_rsa_public_key').'"':'') ?>>
+<form class="sp-xhr-form" method="post" action="/wp/main/wp-admin/admin-ajax.php?action=splocationadd" <?=(get_option('sp-locations_rsa_enable')? 'data-enable-rsa-encryption="true" data-rsa-public-key="'.get_option('sp-locations_rsa_public_key').'"':'') ?>>
 
   <div class="sp-xhr-form-fields">
 
@@ -13,8 +13,9 @@
         </div>
 
         <div class="sp-has-margin-bottom-2">
-          <label for="type">Was möchtest du melden?</label>
+          <label for="type">Bitte wähle eine Kategorie!</label>
           <select required class="sp-xhr-form-data sp-xhr-form-input" name="type" id="type">
+            <option disabled selected value=""/>
             <?PHP
             foreach($available_types as $available_type) {
               $marker_key = get_post_meta($available_type->ID, 'key', true);
@@ -24,7 +25,6 @@
             }
             ?>
           </select>
-          <div class="sp-xhr-form-hint sp-has-text-red sp-hidden" data-input="type">Bitte wähle aus, was du melden möchtest!</div>
         </div>
 
         <div class="sp-has-margin-bottom-2">
@@ -129,16 +129,20 @@
 
     <div class="sp-columns">
       <div class="sp-column is-full">
+        <div class="sp-has-margin-bottom-2">
+          <label for="contact_person">Name<?=($require_personal_data?'':' (optional)') ?></label>
+          <input <?=($require_personal_data?'required':'') ?> data-encrypt="true" minlength="1" maxlength="200" placeholder="Name" class="sp-xhr-form-data sp-xhr-form-input" type="text" name="contact_person" id="contact_person">
+          <div class="sp-xhr-form-hint sp-has-text-red sp-hidden" data-input="contact_person">Bitte gib den Namen einer Kontaktperson an!</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="sp-columns">
+      <div class="sp-column is-full">
 
         <div class="sp-has-margin-bottom-2">
           Bitte gib an, wen wir bezüglich weiterer Fragen zu diesem Ort kontaktieren können
           <span class="sp-xhr-form-hint">(Diese Daten sind nicht öffentlich<?=(get_option('sp-locations_rsa_enable')?' und speziell durch Ende-Zu-Ende Verschlüsselung geschützt':'') ?>)</span>
-        </div>
-
-        <div class="sp-has-margin-bottom-2">
-          <label for="contact_person">Name<?=($require_personal_data?'':' (optional)') ?></label>
-          <input <?=($require_personal_data?'required':'') ?> data-encrypt="true" minlength="1" maxlength="200" placeholder="Name und Nachname" class="sp-xhr-form-data sp-xhr-form-input" type="text" name="contact_person" id="contact_person">
-          <div class="sp-xhr-form-hint sp-has-text-red sp-hidden" data-input="contact_person">Bitte gib den Namen einer Kontaktperson an!</div>
         </div>
 
       </div>

@@ -4,7 +4,7 @@ $type = get_post_meta( $post_id, 'type', true );
 $images = get_post_meta( $post_id, 'images', true );
 $solution = nl2br(get_post_meta($post_id, 'solution', true));
 $description = nl2br(get_post_meta($post_id, 'description', true));
-$opening_hours = nl2br(get_post_meta($post_id, 'opening_hours', true));
+$name = get_post_meta($post_id, 'contact_person', true);
 
 if($type) {
 
@@ -22,7 +22,7 @@ if($type) {
 
   if($type_posts) {
     ?>
-    <?=$type_posts[0]->post_title ?>
+    <div>Kategorie <?=$type_posts[0]->post_title ?></div>
     <?PHP
   }
 
@@ -71,17 +71,6 @@ if($description) {
 }
 ?>
 
-<?PHP
-if($opening_hours){
-  ?>
-  <p>
-    <strong>Öffnungszeiten:</strong> <?=$opening_hours ?>
-  </p>
-  <?PHP
-}
-?>
-
-<strong>Adresse</strong>
 <div class="sp-mini-map" data-zoom="18" data-icon="<?=$marker_icon ?>" data-lat="<?=get_post_meta($post_id, 'lat', true) ?>" data-lng="<?=get_post_meta($post_id, 'lng', true) ?>" data-title="<?=get_post_meta($post_id, 'title', true) ?>" data-type="<?=get_post_meta($post_id, 'type', true) ?>"></div>
 
 <p>
@@ -96,7 +85,7 @@ if($opening_hours){
   if(count($images)>1) {
 
     ?>
-    <strong>Weitere Bilder</strong>
+    <div>Weitere Bilder</div>
 
     <div class="sp-cards">
       <?php
@@ -136,13 +125,26 @@ if($opening_hours){
     <?php
 
   }
-?>
 
+?>
+<?PHP
+if($solution){
+  ?>
+  <div>
+    <div for="solution">Lösungsvorschlag <?= $name ? 'von '.$name : ''?></div>
+    <div style='margin-left:20px;'>
+      <?=nl2br($solution) ?>
+    </div>
+  </div>
+  <?PHP
+}
+?>
+<div>
 <?PHP
 $map_post_url = get_option('sp-locations_map_post_url');
-if(!empty($map_post_url)) {
+if(!empty($map_post_url)) { // close when triggered from map, otherwise navigate to map
   ?>
-  <a href="<?=$map_post_url ?>">Zurück zur Karte</a><br>
+  <input class="sp-xhr-form-submit" style='margin-right:30px;' type="button" onClick="self.close(); window.location.href='<?=$map_post_url ?>'" value='Zur&uuml;ck zur Karte'>
   <?PHP
 }
 ?>
@@ -151,9 +153,8 @@ if(!empty($map_post_url)) {
 $form_post_url = get_option('sp-locations_form_post_url');
 if(!empty($form_post_url)) {
   ?>
-  <a href="<?=$form_post_url ?>">Location melden</a><br>
+  <input class="sp-xhr-form-submit" type="button" onClick="window.location.href='<?=$form_post_url ?>'" value='Weiteren Vorschlag einbringen'>
   <?PHP
 }
 ?>
-
-<a href="<?=get_site_url().'/location-print?location='.$post_id ?>" target="_blank">Druckansicht</a>
+</div>

@@ -76,6 +76,10 @@ $place = get_post_meta( $post_id, 'place', true );
 $street = get_post_meta( $post_id, 'street', true );
 $house_number = get_post_meta( $post_id, 'house_number', true );
 $images = get_post_meta( $post_id, 'images', true );
+$contact = get_post_meta($post_id, 'contact_person', true);
+$email = get_post_meta($post_id, 'email', true);
+$phone = get_post_meta($post_id, 'telephone', true);
+
 
 if ($post->post_type != 'location' ) {
     ?> <div class="sp-xhr-form-success sp-has-text-red">Unexpected post type "<?=$post->post_type ?>".</div> <?PHP
@@ -214,7 +218,7 @@ if ($post->post_status == 'publish' ) {
 
         <div class="sp-has-margin-bottom-2">
           <label for="contact_person">Name</label>
-          <input data-encrypt="true" minlength="1" maxlength="200" lass="sp-xhr-form-data sp-xhr-form-input" type="text" name="contact_person" id="contact_person">
+          <input data-encrypt="true" minlength="1" maxlength="200" lass="sp-xhr-form-data sp-xhr-form-input" type="text" name="contact_person" id="contact_person" value="<?=$contact ?>">
         </div>
 
       </div>
@@ -225,14 +229,14 @@ if ($post->post_status == 'publish' ) {
       <div class="sp-column is-full is-half-tablet sp-has-padding-right-1-tablet">
         <div class="sp-has-margin-bottom-2">
           <label for="email">Email</label>
-          <input data-encrypt="true" minlength="1" maxlength="200" class="sp-xhr-form-data sp-xhr-form-input" type="email" name="email" id="email">
+          <input data-encrypt="true" minlength="1" maxlength="200" class="sp-xhr-form-data sp-xhr-form-input" type="email" name="email" id="email" value="<?=$email ?>">
         </div>
       </div>
 
       <div class="sp-column is-full is-half-tablet sp-has-padding-left-1-tablet">
         <div class="sp-has-margin-bottom-2">
           <label for="telephone">Telefonnummer</label>
-          <input data-encrypt="true" minlength="1" maxlength="200" class="sp-xhr-form-data sp-xhr-form-input" type="text" name="telephone" id="telephone">
+          <input data-encrypt="true" minlength="1" maxlength="200" class="sp-xhr-form-data sp-xhr-form-input" type="text" name="telephone" id="telephone" value="<?=$phone ?>">
         </div>
       </div>
 
@@ -248,7 +252,7 @@ if ($post->post_status == 'publish' ) {
         <option value='delete'>L&ouml;schen</option>
       </select>
     </div>
-    <div>
+    <div class="sp-columns">
       <input type="submit" value="Ausf&uuml;hren">
     </div>
 
