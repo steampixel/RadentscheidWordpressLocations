@@ -356,8 +356,9 @@ spReady(function() {
 
     var layer = new L.LayerGroup();
 
-    // Get all the locations from the API endpoint
-    spRequestJSON('/api/locations?type='+key, {}, function (locations) {
+
+    $now = Math.floor((Date.now() / 60000) % (60 * 24 * 356));      // minutes per year
+    spRequestJSON('/api/locations?type='+key+'&r='+$now, {}, function (locations) {
 
       // Now add the requested markers to the map
       for (var key in locations) {
