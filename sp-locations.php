@@ -2,12 +2,12 @@
 /**
 * Plugin Name: Verkehrswende Locations
 * Description: Dieses Plugin hilft uns verschiedene Problemstellen für den Rad- und Fußverkehr zu tracken.
-* Version: 1.11.0
+* Version: 1.11.1
 * Author: Christoph Stitz
 * Author URI: https://steampixel.de
 **/
 
-define('SP_LOCATIONS_VERSION', '1.11.0');
+define('SP_LOCATIONS_VERSION', '1.11.1');
 
 // Debug
 // ini_set('display_errors', 1);
