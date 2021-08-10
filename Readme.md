@@ -33,12 +33,12 @@ Du kannst das Plugin hier in Aktion sehen:
 Das Plugin befindet sich (noch) nicht in der offiziellen Plugin-Datenbank von Wordpress. Bis dahin muss es manuell installiert werden. Es gibt zwei verschiedene Möglichkeiten für eine Installation.
 
 ### Installation über ein ZIP-Archiv
-* Lade [hier](https://github.com/steampixel/RadentscheidWordpressLocations/tree/master/dist) das Plugin-Archiv in deiner wunsch-Version herunter und lade es über das Wordpress-Backend hoch. Achtung! Nutze nicht das Zip-Archiv, welches hier über den Button "Clone or download" bereitgestellt wird.
+* Lade [hier](https://github.com/steampixel/RadentscheidWordpressLocations/tree/master/dist) das Plugin-Archiv aus dem "dist"-Verzeichnis in deiner wunsch-Version herunter und lade es über das Wordpress-Backend hoch. Achtung! Nutze nicht das Zip-Archiv, welches hier über den Button "Clone or download" bereitgestellt wird.
 * Aktiviere das Plugin im Backend deiner Wordpress-Installation
 * Binde die Shortcodes für Formulare und Karten auf deinen Seiten ein
 
 ### Installation über FTP / SSH
-* Lade dieses Plugin herunter und kopiere es nach ```wp-content/plugins/sp-locations```
+* Lade [hier](https://github.com/steampixel/RadentscheidWordpressLocations/tree/master/dist) dieses Plugin herunter und kopiere es nach ```wp-content/plugins/sp-locations```
 * Aktiviere das Plugin im Backend deiner Wordpress-Installation
 * Binde die Shortcodes für Formulare und Karten auf deinen Seiten ein
 
