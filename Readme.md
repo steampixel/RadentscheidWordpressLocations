@@ -8,6 +8,8 @@ Du kannst das Plugin hier in Aktion sehen:
 * https://www.radentscheid-schwerin.de/?page_id=90
 * https://radentscheid-essen.de/ideenmelder/
 
+![Preview](https://raw.githubusercontent.com/steampixel/RadentscheidWordpressLocations/master/media/preview.png)
+
 ## Features
 * Jede:r kann Problemstellen melden
 * Problemstellen werden auf einer interaktiven Karte dargestellt
