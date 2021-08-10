@@ -959,7 +959,9 @@ function spXhrForm(formElement) {
         if(verified) {
           if(formInput.type=='file') {
             // Add files
-            formData.append(formInput.name, formInput.files[0], formInput.files[0].name);
+            if(formInput.files.length) {
+              formData.append(formInput.name, formInput.files[0], formInput.files[0].name);
+            }
           } else {
             // Add other form fields
             // Encrypt the data
