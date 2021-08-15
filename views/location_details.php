@@ -64,12 +64,26 @@ if($images) {
 <?PHP
 if($description) {
   ?>
-  <P>
+<h4>Kurzbeschreibung</h4>
+  <p>
     <?=nl2br($description) ?>
   </p>
   <?PHP
 }
 ?>
+
+<?PHP
+if($solution) {
+  ?>
+<h4>Lösungsvorschlag</h4>
+  <p>
+    <?=nl2br($solution) ?>
+  </p>
+  <?PHP
+}
+?>
+
+
 
 <?PHP
 if($opening_hours){
@@ -157,3 +171,4 @@ if(!empty($form_post_url)) {
 ?>
 
 <a href="<?=get_site_url().'/location-print?location='.$post_id ?>" target="_blank">Druckansicht</a>
+
