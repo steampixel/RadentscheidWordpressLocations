@@ -55,12 +55,24 @@
     <tr valign="top">
       <td scope="row" style="width:200px;text-align:right;">
         <label for="sp-locations_rsa_public_key">
-          <strong>RSA public key</label></strong><br>
+          <strong>RSA public key</strong><br>
           <sub>This key is used to encrypt the personal data (name, email, telephone) of the activists. Attention! Do not put the private key in here!</sub>
         </label>
       </td>
       <td>
         <textarea style="height:200px;width:100%;" id="sp-locations_rsa_public_key" name="sp-locations_rsa_public_key" ><?php echo get_option('sp-locations_rsa_public_key'); ?></textarea>
+      </td>
+    </tr>
+
+    <tr valign="top">
+      <td scope="row" style="width:200px;text-align:right;">
+        <label for="sp-show_solutions_on_detail_page">
+          <strong>Show solution proposals on the location detail page</strong><br>
+          <sub></sub>
+        </label>
+      </td>
+      <td>
+        <input id="sp-show_solutions_on_detail_page" type="checkbox" name="sp-show_solutions_on_detail_page" <?=(get_option('sp-show_solutions_on_detail_page')? 'checked':'') ?> />
       </td>
     </tr>
 

@@ -24,6 +24,13 @@
 }
 
 /*
+  Font Sizes
+*/
+.sp-text-md {
+  font-size: 1.5rem;
+}
+
+/*
   Columns
 */
 .sp-columns {

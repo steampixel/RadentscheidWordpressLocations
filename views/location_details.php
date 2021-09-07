@@ -64,7 +64,7 @@ if($images) {
 <?PHP
 if($description) {
   ?>
-<h4>Kurzbeschreibung</h4>
+  <h2 class="sp-text-md">Kurzbeschreibung</h2>
   <p>
     <?=nl2br($description) ?>
   </p>
@@ -73,13 +73,16 @@ if($description) {
 ?>
 
 <?PHP
-if($solution) {
-  ?>
-<h4>Lösungsvorschlag</h4>
-  <p>
-    <?=nl2br($solution) ?>
-  </p>
-  <?PHP
+$show_solutions_on_detail_page = get_option('sp-show_solutions_on_detail_page');
+if($show_solutions_on_detail_page ) {
+  if($solution) {
+    ?>
+    <h2 class="sp-text-md">Lösungsvorschlag</h2>
+    <p>
+      <?=nl2br($solution) ?>
+    </p>
+    <?PHP
+  }
 }
 ?>
 
@@ -171,4 +174,3 @@ if(!empty($form_post_url)) {
 ?>
 
 <a href="<?=get_site_url().'/location-print?location='.$post_id ?>" target="_blank">Druckansicht</a>
-

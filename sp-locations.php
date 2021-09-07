@@ -104,11 +104,13 @@ add_action( 'admin_init', function() {
   add_option( 'sp-locations_form_post_url', '');
   add_option( 'sp-locations_rsa_public_key', '');
   add_option( 'sp-locations_rsa_enable', false);
+  add_option( 'sp-show_solutions_on_detail_page', false);
   register_setting( 'sp-locations_options_group', 'sp-locations_notify_email', 'myplugin_callback' );
   register_setting( 'sp-locations_options_group', 'sp-locations_map_post_url', 'myplugin_callback' );
   register_setting( 'sp-locations_options_group', 'sp-locations_form_post_url', 'myplugin_callback' );
   register_setting( 'sp-locations_options_group', 'sp-locations_rsa_public_key', 'myplugin_callback' );
   register_setting( 'sp-locations_options_group', 'sp-locations_rsa_enable', 'myplugin_callback' );
+  register_setting( 'sp-locations_options_group', 'sp-show_solutions_on_detail_page', 'myplugin_callback' );
 } );
 
 /*
