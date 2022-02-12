@@ -1,5 +1,9 @@
-<div id="mymap" class="steampixel-marker-map" style="height:300px;"></div>
-
+<div class="sp-location-picker sp-has-margin-bottom-2" data-lat="<?=$lat ?>" data-lng="<?=$lng ?>" data-zoom="<?=$zoom ?>" data-marker-icon="<?=plugin_dir_url(__DIR__).'assets/img/marker.svg'; ?>">
+  <div id="mymap" class="sp-location-picker-map" style="height:300px;"></div>
+<!--  <input class="sp-xhr-form-data sp-xhr-form-input sp-location-picker-input-lat" name='lat'>
+  <input class="sp-xhr-form-data sp-xhr-form-input sp-location-picker-input-lat" name='lng'>
+-->
+</div>
 <?PHP
 if($solution) {
   ?>

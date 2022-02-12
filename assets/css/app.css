@@ -165,8 +165,8 @@
 */
 .sp-map-navigation {
   position: absolute;
-  bottom: 16px;
-  right: 16px;
+  left: 12px;
+  top: 100px;
   z-index: 999;
   display: flex;
   flex-direction: row;
@@ -182,9 +182,9 @@
   Map Buttons
 */
 .sp-map-button {
-  background-color: #49bcc4;
+  background-color: #ffffff;
   color: #fff !important;
-  border: 1px solid #49bcc4;
+  border: 1px solid #808080;
   transition: all 0.2s ease-in-out;
   display: flex;
   align-items: center;
@@ -200,7 +200,7 @@
 }
 
 .sp-map-button-icon {
-  padding: 10px;
+  padding: 4px;
 }
 
 .sp-map-button-label {
@@ -251,7 +251,6 @@
 }
 
 .sp-map-filter-category-header {
-  font-weight:bold;
   cursor:pointer;
   background-color: #49bcc4;
   color: #fff;
@@ -268,8 +267,8 @@
 .sp-map-filters {
   display:none;
   position: absolute;
-  bottom: 0px;
-  right: 0px;
+  top: 100px;
+  left: 48px;
   z-index: 9999;
   background-color:#fff;
   max-height: 100%;
@@ -309,6 +308,7 @@
 }
 
 .sp-map-filter-label {
+  font-weight: normal;
   line-height: normal;
 }
 

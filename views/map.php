@@ -100,3 +100,21 @@
 
 </div>
 
+<?PHP
+// Create a welcome modal
+if($content) {
+  ?>
+  <div class="sp-modal sp-modal-welcome">
+    <div class="sp-modal-content">
+      <div class="sp-modal-close sp-modal-close-trigger">×</div>
+
+      <?=$content ?>
+
+      <br><br>
+      <input type="button" class="sp-modal-close-trigger" value="Alles klar">
+
+    </div>
+  </div>
+  <?PHP
+}
+?>

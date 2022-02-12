@@ -25,7 +25,7 @@
         </label>
       </td>
       <td>
-        <input id="sp-locations_map_post_url" placeholder="https://" type="text" name="sp-locations_map_post_url" value="<?php echo get_option('sp-locations_map_post_url'); ?>" />
+        <input id="sp-locations_map_post_url" placeholder="https://" type="text" name="sp-locations_map_post_url" size='40' value="<?php echo get_option('sp-locations_map_post_url'); ?>" />
       </td>
     </tr>
 
@@ -36,9 +36,21 @@
         </label>
       </td>
       <td>
-        <input id="sp-locations_form_post_url" placeholder="https://" type="text" name="sp-locations_form_post_url" value="<?php echo get_option('sp-locations_form_post_url'); ?>" />
+        <input id="sp-locations_form_post_url" placeholder="https://" type="text" name="sp-locations_form_post_url" size='40' value="<?php echo get_option('sp-locations_form_post_url'); ?>" />
       </td>
     </tr>
+
+    <tr valign="top">
+      <td scope="row" style="width:200px;text-align:right;">
+        <label for="sp-locations_form_post_url">
+          <strong>URL zum Review-Formular</strong><br>
+        </label>
+      </td>
+      <td>
+        <input id="sp-locations_form_review_url" placeholder="https://" type="text" name="sp-locations_form_review_url" size='40' value="<?php echo get_option('sp-locations_form_review_url'); ?>" />
+      </td>
+    </tr>
+
 
     <tr valign="top">
       <td scope="row" style="width:200px;text-align:right;">

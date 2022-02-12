@@ -50,6 +50,7 @@ add_action( 'wp_loaded', function() {
         $opacity = get_post_meta( $geojson->ID, 'opacity', true );
         $weight = get_post_meta( $geojson->ID, 'weight', true );
         $description = get_post_meta( $geojson->ID, 'description', true );
+        $visible = get_post_meta( $geojson->ID, 'visible', true );
         $url = get_post_meta( $geojson->ID, 'url', true );
         $geojson_data = json_decode(get_post_meta( $geojson->ID, 'geojson', true ));
 
@@ -59,6 +60,7 @@ add_action( 'wp_loaded', function() {
         if($opacity) { $push_data['opacity'] = $opacity; }
         if($weight) { $push_data['weight'] = $weight; }
         if($description) { $push_data['description'] = $description; }
+        if($visible) { $push_data['visible'] = $visible; }
         if($url) { $push_data['url'] = $url; }
         if($geojson_data) { $push_data['geojson'] = $geojson_data; }
 

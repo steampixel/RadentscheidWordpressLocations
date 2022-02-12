@@ -89,7 +89,7 @@ add_shortcode( 'steampixel-marker-map', function($atts = [], $content = null, $t
   foreach($markers as $marker) {
 
     // Get the category
-    $category = 'Andere Ebenen';
+    $category = 'Ebenenauswahl';
     $categories = wp_get_post_categories($marker->ID);
     if(count($categories)) {
       $category = get_cat_name($categories[0]);
@@ -122,7 +122,7 @@ add_shortcode( 'steampixel-marker-map', function($atts = [], $content = null, $t
   foreach($geojsons as $geojson) {
 
     // Get the category
-    $category = 'Andere Ebenen';
+    $category = 'Ebenenauswahl';
     $categories = wp_get_post_categories($geojson->ID);
     if(count($categories)) {
       $category = get_cat_name($categories[0]);

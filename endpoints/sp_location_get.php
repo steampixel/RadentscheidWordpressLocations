@@ -51,6 +51,7 @@ add_action( 'wp_loaded', function() {
         $house_number = get_post_meta($location->ID, 'house_number', true);
         $postcode = get_post_meta($location->ID, 'postcode', true);
         $description = get_post_meta($location->ID, 'description', true);
+        $solution = get_post_meta($location->ID, 'solution', true);
         $place = get_post_meta($location->ID, 'place', true);
         $suburb = get_post_meta($location->ID, 'suburb', true);
         $lng = get_post_meta($location->ID, 'lng', true);
@@ -62,6 +63,7 @@ add_action( 'wp_loaded', function() {
         if($place) { $push_data['place'] = $place; }
         if($postcode) { $push_data['postcode'] = $postcode; }
         if($description) { $push_data['description'] = $description; }
+        if($solution) { $push_data['solution'] = $solution; }
         if($house_number) { $push_data['house_number'] = $house_number; }
         if($street) { $push_data['street'] = $street; }
         if($suburb) { $push_data['suburb'] = $suburb; }
