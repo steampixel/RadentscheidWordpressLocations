@@ -381,7 +381,7 @@ spReady(function() {
             // Add the first image to bubble
             if(locations[key]['images'] != undefined) {
               if(locations[key]['images'][0] != undefined) {
-                bubbleHtml+= '<img class="" src='+locations[key]['images'][0]['thumbnails'][300]+'><br>';
+                bubbleHtml+= '<a href="'+locations[key]['url']+'"><img class="" src='+locations[key]['images'][0]['thumbnails'][300]+'></a><br>';
               }
             }
             if(locations[key]['description'] != undefined) {
