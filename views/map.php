@@ -4,7 +4,7 @@
   data-lat="<?=$lat ?>"
   data-lng="<?=$lng ?>"
   data-zoom="<?=$zoom ?>"
-  data-cluster-icon="<?=plugin_dir_url(__DIR__).'assets/img/marker_cluster.svg'; ?>"
+  data-cluster-icon="<?=plugin_dir_url(__DIR__).'assets/img/marker_cluster'; ?>"
   >
 
   <div class="sp-map-leaflet" style="height:<?=$height ?>;"></div>

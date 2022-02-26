@@ -48,7 +48,7 @@ add_shortcode( 'steampixel-marker-map', function($atts = [], $content = null, $t
       array_push($query['meta_query'], [
         'key' => 'key',
         'value' => trim($type_key),
-        'compare' => '='
+        'compare' => 'LIKE'
       ]);
     }
   }
@@ -87,7 +87,6 @@ add_shortcode( 'steampixel-marker-map', function($atts = [], $content = null, $t
 
   // Add category data to each layer item
   foreach($markers as $marker) {
-
     // Get the category
     $category = 'Ebenenauswahl';
     $categories = wp_get_post_categories($marker->ID);
@@ -100,7 +99,9 @@ add_shortcode( 'steampixel-marker-map', function($atts = [], $content = null, $t
     $marker_filter_icon = get_post_meta($marker->ID, 'filter_icon', true);
     $marker_order = get_post_meta($marker->ID, 'order', true);
     $marker_title = $marker->post_title;
-
+	if (strncmp($marker_key, 'problem_', 8)) continue;
+	$marker_key = substr($marker_key, 8);
+	
     // Create category in array
     if(!array_key_exists($category, $layers)) {
       $layers[$category] = [];

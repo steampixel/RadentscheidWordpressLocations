@@ -390,6 +390,7 @@ spReady(function() {
             bubbleHtml+= ' <a href="'+locations[key]['url']+'" target="_blank">Details</a><br>';
 
             marker.bindPopup(bubbleHtml);
+			marker.type = locations[key]['type'];
 
             // Add marker to layer
             layer.addLayer(marker);
@@ -483,7 +484,20 @@ spReady(function() {
       	zoomToBoundsOnClick: true,
         removeOutsideVisibleBounds: true,
         iconCreateFunction: function(cluster) {
-      		return L.divIcon({ html: '<div class="sp-map-marker sp-map-marker-cluster"><img style="height:100%;width:auto;" src="'+clusterIcon+'"><div class="sp-map-marker-info">' + cluster.getChildCount() + '</div></div>' });
+			var markers = cluster.getAllChildMarkers();
+			var orange=0, green=0;
+			for (var m = 0; m < markers.length; ++m) {
+				var marker = markers[m];
+				if (marker.type.startsWith("solved")) green++;
+				else orange++;
+			}
+			var icon = clusterIcon;
+			if (orange > 0 && green > 0) {
+				var level = 1 + Math.floor(green * 4 / (green + orange));
+				if (level > 3) level = 3;
+				icon += level;
+			}
+      		return L.divIcon({ html: '<div class="sp-map-marker sp-map-marker-cluster"><img style="height:100%;width:auto;" src="'+icon+'.svg"><div class="sp-map-marker-info">' + cluster.getChildCount() + '</div></div>' });
       	}
       });
 

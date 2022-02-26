@@ -5,6 +5,13 @@ $images = get_post_meta( $post_id, 'images', true );
 $solution = nl2br(get_post_meta($post_id, 'solution', true));
 $description = nl2br(get_post_meta($post_id, 'description', true));
 $name = get_post_meta($post_id, 'contact_person', true);
+$updates = array();
+for ($i=0; $i<10; $i++) {
+	$ext=$i == 0 ? "" : $i;
+	$update = get_post_meta($post_id, 'update'.$ext, true);
+	if (!$update) break;
+	array_push($updates, $update);
+}
 
 if($type) {
 
@@ -80,25 +87,40 @@ if($description) {
 </p>
 
 <?PHP
-
+if($solution){
+  ?>
+  <div>
+    <div for="solution">Lösungsvorschlag <?= $name ? 'von '.$name : ''?></div>
+    <div style='margin-left:20px;'>
+      <?=nl2br($solution) ?>
+    </div>
+  </div>
+  <?PHP
+}
+foreach($updates as $update) {
+	$parts = explode(':', $update);
+	$text = count($parts) > 1 ? $parts[1] : $update;
+	$date = count($parts) > 1 ? $parts[0] : '- ohne Datum';
+  ?>
+  <div>
+    <div style='margin-top: var(--global--spacing-vertical);'for="solution"><h3>Update <?=$date?></h3></div>
+    <div style='margin-left:20px; margin-top: var(--global--spacing-vertical);'>
+      <?=nl2br($text) ?>
+    </div>
+  </div>
+<?PHP
+}
   // Draw all other images
   if(count($images)>1) {
-
     ?>
-    <div>Weitere Bilder</div>
-
     <div class="sp-cards">
       <?php
 
       foreach($images as $key => $image) {
-
         if($key>0) {
-
           ?>
             <div class="sp-card enlarge-on-click" data-enlarge-src="<?=spGetUploadUrl().'/sp-locations/'.$post_id.'/600/'.$image['src'] ?>">
-
               <div class="sp-card-content">
-
                 <div class="sp-card-image-wrapper" onclick="openModal('<?=$key; ?>')">
                   <div class="sp-card-image-background" style="background-image:url(<?=spGetUploadUrl().'/sp-locations/'.$post_id.'/600/'.$image['src'] ?>);"></div>
                   <div class="sp-card-image" style="background-image:url(<?=spGetUploadUrl().'/sp-locations/'.$post_id.'/600/'.$image['src'] ?>);"></div>
@@ -116,28 +138,13 @@ if($description) {
               </div>
             </div>
           <?PHP
-
         }
-
       }
       ?>
     </div>
     <?php
-
   }
 
-?>
-<?PHP
-if($solution){
-  ?>
-  <div>
-    <div for="solution">Lösungsvorschlag <?= $name ? 'von '.$name : ''?></div>
-    <div style='margin-left:20px;'>
-      <?=nl2br($solution) ?>
-    </div>
-  </div>
-  <?PHP
-}
 ?>
 <div>
 <?PHP
