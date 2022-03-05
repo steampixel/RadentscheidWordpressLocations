@@ -55,6 +55,7 @@ add_action( 'wp_loaded', function() {
         $suburb = get_post_meta($location->ID, 'suburb', true);
         $lng = get_post_meta($location->ID, 'lng', true);
         $lat = get_post_meta($location->ID, 'lat', true);
+        $blog = get_post_meta($location->ID, 'blog', true);
 
         if($type) { $push_data['type'] = $type; }
         if($lng) { $push_data['lng'] = $lng; }
@@ -65,6 +66,7 @@ add_action( 'wp_loaded', function() {
         if($house_number) { $push_data['house_number'] = $house_number; }
         if($street) { $push_data['street'] = $street; }
         if($suburb) { $push_data['suburb'] = $suburb; }
+        if($blog) { $push_data['blog'] = '<a href="'.get_permalink($blog).'">'.get_the_title($blog).'</a>'; }
 
         // Add images and thumbnails
         if($images) {
