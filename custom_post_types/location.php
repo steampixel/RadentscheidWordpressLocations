@@ -461,6 +461,7 @@ add_action( 'wp_head', function () {
     $post_url = get_permalink();
     $post_images = get_post_meta( $post_id, 'images', true );
 
+    echo '<meta name="twitter:card" content="summary" />'."\n";
     echo '<meta property="og:type" content="article" />'."\n";
     echo '<meta property="og:title" content="'.htmlentities($post_title).'" />'."\n";
     echo '<meta property="og:description" content="'.htmlentities($post_description).'" />'."\n";
