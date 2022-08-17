@@ -80,8 +80,6 @@ add_action( 'manage_location_posts_custom_column', function ( $column, $post_id 
 
     $images = get_post_meta( $post_id, 'images', true );
 
-
-
     // Append random value to uncache the image in case of rotation
     if($images) {
       echo '<img style="max-width:100%;height:auto;" src="'.spGetUploadUrl().'/sp-locations/'.$post_id.'/300/'.$images[0]['src'].'?rand='.rand( 0 , 9999 ).'">';
@@ -448,7 +446,34 @@ add_filter( 'the_content', function ( $content ) {
     return $content;
 } );
 
+/*
+  Add meta data to location detail pages
+*/
+add_action( 'wp_head', function () {
 
+  // Check is we are in author archive
+  // https://developer.wordpress.org/reference/functions/is_author/
+  if ( is_single() && get_post_type()=='location') {
+
+    $post_id = get_the_ID();
+    $post_description = get_post_meta( $post_id, 'description', true );
+    $post_title = get_the_title();
+    $post_url = get_permalink();
+    $post_images = get_post_meta( $post_id, 'images', true );
+
+    echo '<meta property="og:type" content="article" />'."\n";
+    echo '<meta property="og:title" content="'.htmlentities($post_title).'" />'."\n";
+    echo '<meta property="og:description" content="'.htmlentities($post_description).'" />'."\n";
+    echo '<meta property="og:url" content="'.$post_url.'" />'."\n";
+
+    // Append random value to uncache the image in case of rotation
+    if($post_images) {
+      echo '<meta property="og:image" content="'.spGetUploadUrl().'/sp-locations/'.$post_id.'/600/'.$post_images[0]['src'].'" />'."\n";
+    }
+
+  }
+
+} );
 
 /*
   Exclude One Content Type From Yoast SEO Sitemap
