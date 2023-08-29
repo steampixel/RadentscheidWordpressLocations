@@ -154,10 +154,10 @@ add_shortcode( 'steampixel-marker-map', function($atts = [], $content = null, $t
 
   }
 
-  // Sort the items inside the categoryes by order
+  // Sort the items inside the categories by order
   foreach($layers as &$category) {
     usort($category, function ($a, $b) {
-      return $a['order']>$b['order'];
+      return $a['order']-$b['order'];
     });
   }
 
