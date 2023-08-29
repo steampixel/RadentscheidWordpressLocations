@@ -38,11 +38,13 @@ Das Plugin befindet sich (noch) nicht in der offiziellen Plugin-Datenbank von Wo
 * Lade [hier](https://github.com/steampixel/RadentscheidWordpressLocations/tree/master/dist) das Plugin-Archiv aus dem "dist"-Verzeichnis in deiner wunsch-Version herunter und lade es über das Wordpress-Backend hoch. Achtung! Nutze nicht das Zip-Archiv, welches hier über den Button "Clone or download" bereitgestellt wird.
 * Aktiviere das Plugin im Backend deiner Wordpress-Installation
 * Binde die Shortcodes für Formulare und Karten auf deinen Seiten ein
+* Regeneriere die Permalinks, indem du unter Einstellungen -> Permalinks auf den Speichern-Button klickst. Erfolgt dies nicht können Detailseiten einzelner Locations evtl. nicht aufgerufen werden und es erscheint ein 404-Fehler.
 
 ### Installation über FTP / SSH
 * Lade [hier](https://github.com/steampixel/RadentscheidWordpressLocations/tree/master/dist) dieses Plugin herunter und kopiere es nach ```wp-content/plugins/sp-locations```
 * Aktiviere das Plugin im Backend deiner Wordpress-Installation
 * Binde die Shortcodes für Formulare und Karten auf deinen Seiten ein
+* Regeneriere die Permalinks, indem du unter Einstellungen -> Permalinks auf den Speichern-Button klickst. Erfolgt dies nicht können Detailseiten einzelner Locations evtl. nicht aufgerufen werden und es erscheint ein 404-Fehler.
 
 ## Shortcodes
 
